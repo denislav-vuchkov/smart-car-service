@@ -1,0 +1,248 @@
+<html>
+<head>
+    <title>HTML to PDF</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+<div id="applicationForm" style="padding: 20px; position: relative; font-family: Lato, sans-serif">
+    <h2 style="font-size: 20px; color: rgb(0, 0, 0); font-weight: bold; margin: 5px 0px; text-align: center;">
+        TDDV SMART GARAGE
+    </h2>
+    <h2 style="font-size: 20px; color: rgb(0, 0, 0); font-weight: bold;margin: 5px 0px;text-align: center;">
+        VISIT REPORT
+    </h2>
+    <h2 style="font-size: 20px;color: rgb(0, 0, 0);font-weight: bold;margin: 20px 0px;text-align: center;">
+        ENTER DATE HERE
+    </h2>
+
+
+    <h4 style="padding: 20px 0px 20px 10px; font-size: 20px; color: rgb(255, 255, 255); background: grey; margin-top: 30px;">
+        General Details
+    </h4>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            Visits included
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER VISITS NUMBER
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            Total cost
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER TOTAL COST
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            Currency
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER SELECTED CURRENCY
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            Username
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER USERNAME
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            Email
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER EMAIL
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            Phone number
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER PHONE NUMBER
+        </p>
+    </div>
+
+
+
+
+    <p style="padding: 20px 0px 20px 10px; font-size: 20px; color: rgb(255, 255, 255); background: grey; margin-top: 30px; page-break-before: auto">
+        Visit ID: ENTER VISIT ID
+    </p>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            Owner username
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER OWNER USERNAME
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            Owner email
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER OWNER EMAIL
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            Owner phone number
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER OWNER PHONE NUMBER
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            License plate
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER LICENSE PLATE
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            Vehicle Identification Number
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER VIN
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            Brand
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER BRAND
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            Model
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER MODEL
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            Year of manufacture
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER YEAR OF MANUFACTURE
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            Start date
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER START DATE
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            End date
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER END DATE
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            Status
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER STATUS
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            Services
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER SERVICES
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; text-align: start;
+            margin-left: 0px; margin-right: 0px; border-bottom: 1px solid rgb(0, 0, 0);">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 50%; margin-top: 10px; margin-bottom: 10px;">
+            Cost for visit
+        </p>
+        <p style="font-size: 16px; color: rgb(140, 140, 140); margin-top: 10px; margin-bottom: 10px;">
+            ENTER COST FOR VISIT + CURRENCY
+        </p>
+    </div>
+
+
+
+    <div style="display: flex; align-items: stretch; text-align: center; margin-left: 0px; margin-right: 0px;
+            margin-top: 20px; flex-flow: row; place-content: flex-end;">
+        <p style="font-size: 16px; font-weight: 600; margin-left: 10px; width: 41.6667%; margin-top: 75px;">
+            SIGNATURE OF CHIEF EXECUTIVE
+        </p>
+    </div>
+</div>
+</body>
+</html>

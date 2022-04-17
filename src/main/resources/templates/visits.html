@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Visits</title>
+
+    <!--Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- Favicons -->
+    <link th:href="@{/assets/img/favicon.png}" href="../static/assets/img/favicon.png" rel="icon">
+    <link th:href="@{/assets/img/apple-touch-icon.png}" href="../static/assets/img/apple-touch-icon.png"
+          rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{/assets/vendor/aos/aos.css}" href="../static/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}"
+          href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}"
+          href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link th:href="@{/assets/vendor/boxicons/css/boxicons.min.css}"
+          href="../static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link th:href="@{/assets/vendor/glightbox/css/glightbox.min.css}"
+          href="../static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link th:href="@{/assets/vendor/remixicon/remixicon.css}" href="../static/assets/vendor/remixicon/remixicon.css"
+          rel="stylesheet">
+    <link th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}"
+          href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{/assets/css/style.css}" href="../static/assets/css/style.css" rel="stylesheet">
+
+    <!--jQuery and Data Tables-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+    <!-- For multiple select -->
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+
+    <!--Date Picker-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <!--Drop Downs-->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<nav th:replace="index.html :: navbar"></nav>
+
+<main class="inner-page-content">
+
+    <br>
+    <div style="float: left; margin-left: 1%; margin-right: 5%">
+        <h1 style="margin-left: 21%; margin-bottom: -4%"><b>Search Visits</b></h1>
+
+        <form class="formBox" th:action="${currentUser.getRole().getId() == 3 ? '/visits/customer' : '/visits/'}"
+              th:object="${visitFilterDTO}" method="post">
+
+            <hr style="margin-bottom: 4% ; width: 140%">
+
+            <div class="mb-3" style="width: 300px; float: left; margin-right: 10px !important;">
+            </div>
+
+            <div style="width: 230px; margin-right: 10px; margin-top: 15px">
+                <div class="input-group-append">
+                <span style="background-color: #ffc107; border-color: black" id="dateRange" class="input-group-text"><i
+                        style="margin-right: 5px"
+                        class="ri-calendar-2-line"></i><h6 style="margin-top: 2px; margin-bottom: 0px"><b>Date Range</b></h6></span>
+                    <input style="width: 112px; margin-top: -0.8px; margin-right: 0.5px" name="dateFrom"
+                           th:field="*{dateFrom}"/>
+                    <input style="width: 112px; margin-top: -0.8px; margin-left: 0.5px" name="dateTo"
+                           th:field="*{dateTo}"/>
+                </div>
+            </div>
+
+            <br th:if="${currentUser.getRole().getId() == 2}" style="width: 230px">
+
+            <div th:if="${currentUser.getRole().getId() == 2}" style="width: 230px">
+                <h6><b>Owner</b></h6>
+                <div class="form-row-total">
+                    <div class="form-row">
+                        <select th:field="*{ownerFilter}"
+                                data-placeholder="Type in a name or contact..." multiple class="chosen-select"
+                                name="test" style="width: 100%">
+                            <option th:each="entry : ${users}"
+                                    th:value="${entry.getId()}"
+                                    th:text="${entry.getUsername()} + ' - ' +
+                                    ${entry.getEmail()} + ' - ' +
+                                    ${entry.getPhoneNumber()}"
+                                    th:selected="${visitFilterDTO.getOwnerFilter() != null &&
+                                    visitFilterDTO.getOwnerFilter().contains(entry.getId())}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div style="width: 230px">
+                <h6><b>Vehicle</b></h6>
+                <div class="form-row-total">
+                    <div class="form-row">
+                        <select th:field="*{vehicleFilter}"
+                                data-placeholder="Type in a license or brand..." multiple class="chosen-select"
+                                name="test" style="width: 100%">
+                            <option th:each="entry : ${vehicles}"
+                                    th:value="${entry.getId()}"
+                                    th:text="${entry.getLicense()} + ' - ' +  ${entry.getModel().getMake().getName()} + ' ' +  ${entry.getModel().getName()}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div style="width: 230px; margin-right: 10px">
+                <h6><b>Status</b></h6>
+                <select th:field="*{statusFilter}" class="form-select dropdown-toggle">
+                    <option selected value="">(Select status)</option>
+                    <option th:each="s : ${status}"
+                            th:value="${s.getId()}"
+                            th:text="${s.getName()}">
+                    </option>
+                </select>
+            </div>
+
+            <br>
+
+            <div style="width: 230px; margin-right: 10px">
+                <h6><b>Sorting</b></h6>
+                <select th:field="*{sorting}" class="form-select dropdown-toggle">
+                    <option selected value="">(Default)</option>
+                    <option value="status">Status</option>
+                    <option value="start_date">Start Date</option>
+                    <option value="end_date">End Date</option>
+                </select>
+            </div>
+
+            <div style="width: 230px; margin-right: 10px; margin-top: 12%">
+                <h6><b>Order</b></h6>
+                <select th:field="*{order}" class="form-select dropdown-toggle">
+                    <option selected value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-warning btn-block" style="width: 230px; border-color: black">
+                <b>Apply</b></button>
+
+        </form>
+    </div>
+
+    <div style="float: left; margin-top: -1.3%">
+
+        <div th:if="${currentUser.getRole().getId() == 2}" style="margin-bottom: 6.5%">
+
+            <a href="visit-form.html" th:href="@{/visits/new}">
+                <button type="submit" class="btn btn-warning"
+                        style="float: left; width: 47.1%; margin-right: 0.7%;  border-color: black">
+                    <div style="float: left; margin-left: 26%">
+                        <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,w_37/v1649363820/SmartGarage/add-new_zzvu76.png">
+                    </div>
+                    <div style="float: left; margin-top: 5px; margin-left: 10px"><b>Add Visit for Existing Customer</b>
+                    </div>
+                </button>
+            </a>
+
+            <a href="visit-new-customer.html" th:href="@{/visits/new-customer}">
+                <button type="submit" class="btn btn-warning"
+                        style="float: left; width: 47.1%; border-color: black">
+                    <div style="float: left; margin-left: 26%">
+                        <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,w_37/v1649363820/SmartGarage/add-new_zzvu76.png">
+                    </div>
+                    <div style="float: left; margin-top: 5px; margin-left: 10px"><b>Add Visit for New Customer</b></div>
+                </button>
+            </a>
+        </div>
+        <div>
+
+            <div th:if="${currentUser.getRole().getId() == 2}" style="padding-top: 10px"></div>
+
+            <form class="form-detail" th:action="@{/visits/generate-report}" method="post">
+
+                <div style="float: left; margin-right: 3px;margin-top: 3px"><b><h4 class="ri-mail-send-line"></h4></b>
+                </div>
+
+                <div style="float: left; margin-right: 10px; margin-top: 8px"><h6><b>Generate Email Report:</b></h6>
+                </div>
+
+                <div style="float: left; margin-right: 10px; width: 54.5%;margin-top: 4px" class="form-row-total">
+                    <div class="form-row">
+                        <select required th:name="selectedVisits"
+                                data-placeholder="Select visit(s)..."
+                                multiple class="chosen-select"
+                                name="test" style="width: 100%">
+                            <option th:each="visit : ${visits}"
+                                    th:value="${visit.getId()}"
+                                    th:text="${'ID:' + visit.getId() + ' - Owner: ' + visit.getUser().getUsername() + ' - License: ' + visit.getVehicle().getLicense()}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="float: left; margin-left: -65px" class="form-row-total">
+                    <div class="form-row">
+                        <div style="float: left; margin-right: 10px;margin-top: 8px"><h6><b>Currency:</b></h6></div>
+                        <div style="float: left; margin-right: 10px">
+                            <select th:name="selectedCurrency" class="form-select" aria-label="Default select example">
+                                <option th:each="currency : ${currencies}"
+                                        th:value="${currency.name()}"
+                                        th:text="${currency.name()}">
+                                </option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+                <button th:if="${currentUser.getRole().getId() == 2}" type="submit" class="btn btn-light"
+                        style="width: 230px; height: 38px; border-color: black; float: left; margin-top: 0">
+                    <b style="margin-left: 70px">Send</b><h5
+                        style="float: right;margin-right: 60px; margin-bottom: 0">
+                    <b class="ri-send-plane-line"></b></h5></button>
+
+                <button th:if="${currentUser.getRole().getId() == 3}" type="submit" class="btn btn-light"
+                        style="width: 157px; height: 38px; border-color: black; float: left; margin-top: 0">
+                    <b style="margin-left: 30px">Send</b><h5
+                        style="float: right;margin-right: 28px; margin-bottom: 0">
+                    <b class="ri-send-plane-line"></b></h5></button>
+
+            </form>
+        </div>
+
+        <div class="table" id="tableDiv" style="width: 95%">
+            <table class="table table-fluid display cell-border" id="myTable" style="border: ridge">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th style="width: 200px" scope="col">Vehicle</th>
+                    <th style="width: 80px" scope="col">License</th>
+                    <th th:if="${currentUser.getRole().getId() == 2}" style="width: 100px" scope="col">Service</th>
+                    <th th:if="${currentUser.getRole().getId() == 2}" style="width: 100px" scope="col">Owner</th>
+                    <th style="width: 150px" scope="col">Status</th>
+                    <th style="width: 110px" scope="col">Start Date</th>
+                    <th style="width: 110px" scope="col">End Date</th>
+                    <th th:if="${currentUser.getRole().getId() == 2}" scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="visit : ${visits}">
+                    <td><h6 style="margin-top: 18px" th:text="${visit.getId()}">ID</h6></td>
+                    <td>
+                        <h6 style="margin-top: 18px"><b th:text="${visit.getVehicle().getModel().getMake().getName()}
+                         + ' ' +  ${visit.getVehicle().getModel().getName()}">
+                            Make & Model</b></h6>
+                    </td>
+
+                    <td>
+                        <h6 style="margin-top: 15px"><b style="background-color: #ffc107;
+                                width: 95px;
+                               border: none;
+                               color: black;
+                               font-family: monospace;
+                               padding: 2px 6px;
+                               text-align: center;
+                               text-decoration: none;
+                               display: inline-block;
+                               margin: 4px 2px;
+                               border-radius: 16px;"
+                                                        th:text="${visit.getVehicle().getLicense()}">(License)</b></h6>
+                    </td>
+
+                    <td th:if="${currentUser.getRole().getId() == 2}">
+                        <button style="width: 150px; margin-top: 9px; margin-bottom: 0" type="button"
+                                class="btn btn-outline-dark btn-sm dropdown-toggle dropdown-toggle-split"
+                                data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            <b style="font-size: 14px">Services</b><span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div style="border: ridge" class="dropdown-menu">
+                            <h6 class="dropdown-item" th:each="entry : ${visit.displayServices()}"><i
+                                    class="ri-tools-line"></i>
+                                </i><b th:text="${entry.getServiceName()}"></b></h6>
+                        </div>
+                    </td>
+
+                    <td th:if="${currentUser.getRole().getId() == 2}">
+                        <a th:href="@{/users/{id}(id=${visit.getUser().getId()})}">
+                            <button style="width: 150px; margin-top: 9px; margin-bottom: 0" type="button"
+                                    class="btn btn-outline-dark btn-sm"><b th:text="${visit.getUser().getUsername()}"
+                                                                           style="font-size: 14px; text-align: left !important">Username</b>
+                            </button>
+                        </a>
+                    </td>
+
+                    <td><h6 style="margin-top: 18px" th:text="${visit.getStatus().getName()}">Status</h6></td>
+                    <td><h6 style="margin-top: 18px" th:text="${visit.getStartDate()}">Date</h6></td>
+                    <td><h6 style="margin-top: 18px" th:text="${visit.displayEndDate()}">Date</h6></td>
+
+                    <td th:if="${currentUser.getRole().getId() == 3}">
+                        <button class="btn btn-warning dropdown-toggle dropdown-toggle-split"
+                                style="margin: 0; border-color: black;width: 180px"
+                                data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            <h3 style="float: left; margin-bottom: 0; margin-top: 5px; padding-bottom: -5px; margin-right: 115px"
+                                class="ri-coin-line"></h3>
+                            <h6 style=" float: left; margin-left: 35px; margin-top: -30px; margin-right: 5px">
+                                <b th:text="${visit.getTotalCost()} + '.00 BGN'">1500.00 BGN</b></h6>
+                            <div style="border: ridge" class="dropdown-menu">
+                                <h6 class="dropdown-item" th:each="entry : ${visit.displayServices()}"><i
+                                        class="ri-tools-line"></i>
+                                    </i>
+                                    <b th:text="${entry.getServiceName()} + ': '
+                                     + ${entry.getServicePriceBGN()} + '.00 BGN'"></b>
+                                </h6>
+                            </div>
+                        </button>
+                    </td>
+
+
+                    <td th:if="${currentUser.getRole().getId() == 3}">
+                        <a th:href="@{~/visits/{id}(id=${visit.getId()})}">
+                            <button class="btn btn-warning" style="margin: 0; border-color: black; width: 180px">
+                                <div><img style="float: left"
+                                          src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,h_37/v1649793543/SmartGarage/view-details-3_ls8vxa.png">
+                                    <h6 style="float: left; margin-left: 38px; margin-top:-28px; width: 120px"><b>View
+                                        Details...</b></h6>
+                                </div>
+                            </button>
+                        </a>
+                    </td>
+
+                    <td th:if="${currentUser.getRole().getId() == 2}">
+                        <a th:href="@{~/visits/{id}(id=${visit.getId()})}">
+                            <button class="btn btn-warning" style="margin: 0; border-color: black">
+                                <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,h_37/v1649793543/SmartGarage/view-details-3_ls8vxa.png">
+                            </button>
+                        </a>
+                    </td>
+
+
+                    <td th:if="${currentUser.getRole().getId() == 2}">
+                        <a th:href="@{~/visits/{id}/update(id=${visit.getId()})}">
+                            <button class="btn btn-warning" style="margin: 0; border-color: black">
+                                <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_fit,w_37/v1648736003/SmartGarage/update-service_cb70u5.png">
+                            </button>
+                        </a>
+                    </td>
+
+                    <td th:if="${currentUser.getRole().getId() == 2}">
+                        <a th:href="@{~/visits/{id}/delete(id=${visit.getId()})}">
+                            <button class="btn btn-warning" style="margin: 0; border-color: black">
+                                <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,w_37/v1648736344/SmartGarage/delete-image_o6uwau.png"
+                                     onclick="return confirm('Are you sure you want to delete this visit?')">
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+</main>
+
+<footer th:replace="index.html :: footer"></footer>
+
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script th:src="@{/assets/vendor/purecounter/purecounter.js}"
+        src="../static/assets/vendor/purecounter/purecounter.js"></script>
+<script th:src="@{/assets/vendor/aos/aos.js}" src="../static/assets/vendor/aos/aos.js"></script>
+<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"
+        src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"
+        src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script th:src="@{/assets/vendor/isotope-layout/isotope.pkgd.min.js}"
+        src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"
+        src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script th:src="@{/assets/vendor/php-email-form/validate.js}"
+        src="../static/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{/assets/js/main.js}" src="../static/assets/js/main.js"></script>
+
+<script>
+    $.extend($.fn.dataTable.defaults, {
+        searching: false,
+        ordering: false
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
+
+
+<!--Date Picker-->
+
+<script src="../static/assets/js/slider.js" th:src="@{/assets/js/slider.js}"></script>
+
+<script>
+    var $dateRange = $('#dateRange');
+
+    $dateRange.daterangepicker();
+    $dateRange.on('apply.daterangepicker', function (ev, picker) {
+        $('input[name="dateFrom"]').val(picker.startDate.format('DD/MM/YYYY'));
+        $('input[name="dateTo"]').val(picker.endDate.format('DD/MM/YYYY'));
+    });
+</script>
+
+<!--Script for multiple select-->
+<script>
+    $(".chosen-select").chosen({
+        no_results_text: "Oops, nothing found!"
+    })
+</script>
+
+</body>
+</html>

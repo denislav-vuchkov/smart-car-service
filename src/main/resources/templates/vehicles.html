@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Vehicles</title>
+
+    <!--Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- Favicons -->
+    <link th:href="@{/assets/img/favicon.png}" href="../static/assets/img/favicon.png" rel="icon">
+    <link th:href="@{/assets/img/apple-touch-icon.png}" href="../static/assets/img/apple-touch-icon.png"
+          rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{/assets/vendor/aos/aos.css}" href="../static/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}"
+          href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}"
+          href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link th:href="@{/assets/vendor/boxicons/css/boxicons.min.css}"
+          href="../static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link th:href="@{/assets/vendor/glightbox/css/glightbox.min.css}"
+          href="../static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link th:href="@{/assets/vendor/remixicon/remixicon.css}" href="../static/assets/vendor/remixicon/remixicon.css"
+          rel="stylesheet">
+    <link th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}"
+          href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{/assets/css/style.css}" href="../static/assets/css/style.css" rel="stylesheet">
+
+    <!--jQuery and Data Tables-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+    <!-- For multiple select -->
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+
+</head>
+
+<body>
+
+<nav th:replace="index.html :: navbar"></nav>
+
+<main class="inner-page-content">
+    <br>
+    <div style="float: left; margin-left: -1%">
+        <h1 style="margin-left: 17%; margin-bottom: -4%"><b>Search Vehicles</b></h1>
+
+        <form class="formBox" th:action="@{/vehicles}" th:object="${vehicleFilterDTO}" method="post">
+            <hr style="margin-bottom: 4% ; width: 95%">
+
+            <div class="mb-3" style="width: 230px; float: left; margin-right: 10px !important;">
+            </div>
+
+            <div class="mb-3" style="width: 230px; float: left; margin-right: 10px !important;">
+                <h6><b>VIN / License</b></h6>
+                <input th:field="*{identifierFilter}" type="text" class="form-control"
+                       aria-describedby="emailHelp">
+            </div>
+
+            <br> <br>
+            <br> <br>
+
+            <div id="bottomFilterBar">
+
+                <div style="width: 230px">
+                    <h6><b>Brand</b></h6>
+                    <div class="form-row-total">
+                        <div class="form-row">
+                            <select th:field="*{brandFilter}"
+                                    data-placeholder="Type in a make or model..." multiple class="chosen-select"
+                                    name="test" style="width: 100%">
+                                <option th:each="entry : ${brands}"
+                                        th:value="${entry}"
+                                        th:text="${entry}"
+                                        th:selected="${vehicleFilterDTO.getBrandFilter() != null &&
+                                    vehicleFilterDTO.getBrandFilter().contains(entry)}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+
+                <div style="width: 230px">
+                    <h6><b>Year</b></h6>
+                    <div class="form-row-total">
+                        <div class="form-row">
+                            <select th:field="*{yearFilter}"
+                                    data-placeholder="Type in a year of manufacture..." multiple class="chosen-select"
+                                    name="test" style="width: 100%; height: 100px">
+
+                                <option th:each="entry : ${years}"
+                                        th:value="${entry}"
+                                        th:text="${entry}"
+                                        th:selected="${vehicleFilterDTO.getYearFilter() != null &&
+                                    vehicleFilterDTO.getYearFilter().contains(entry)}">
+                                </option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+
+                <div style="width: 230px">
+                    <h6><b>Owner</b></h6>
+                    <div class="form-row-total">
+                        <div class="form-row">
+                            <select th:field="*{ownerFilter}"
+                                    data-placeholder="Type in a name or contact..." multiple class="chosen-select"
+                                    name="test" style="width: 100%">
+                                <option th:each="entry : ${users}"
+                                        th:value="${entry.getId()}"
+                                        th:text="${entry.getUsername()} + ' - ' +
+                                    ${entry.getEmail()} + ' - ' +
+                                    ${entry.getPhoneNumber()}"
+                                        th:selected="${vehicleFilterDTO.getOwnerFilter() != null &&
+                                    vehicleFilterDTO.getOwnerFilter().contains(entry.getId())}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+
+                <div style="width: 230px; float: left; margin-right: 10px">
+                    <h6><b>Sorting</b></h6>
+                    <select th:field="*{sorting}" class="form-select dropdown-toggle">
+                        <option selected value="">(Default)</option>
+                        <option value="make">Make & Model</option>
+                        <option value="model">Model Only</option>
+                        <option value="year">Manufactured</option>
+                    </select>
+                </div>
+
+                <br><br><br>
+
+                <div style="width: 230px; float: left; margin-right: 10px; margin-top: 5%">
+                    <h6><b>Order</b></h6>
+                    <select th:field="*{order}" class="form-select dropdown-toggle">
+                        <option selected value="asc">Ascending</option>
+                        <option value="desc">Descending</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-warning btn-block" style="width: 230px; border-color: black">
+                <b>Apply</b></button>
+        </form>
+    </div>
+
+    <div style="float: left; margin-top: -1.3%">
+
+        <div style="margin-bottom: 6.5%">
+            <a href="vehicle-form.html" th:href="@{/vehicles/new}">
+                <button type="submit" class="btn btn-warning" style="float: left; width: 95.3%; border-color: black">
+                    <div style="float: left; margin-left: 45%">
+                        <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,w_37/v1649363820/SmartGarage/add-new_zzvu76.png">
+                    </div>
+                    <div style="float: left; margin-top: 5px; margin-left: 10px"><b>Add New</b></div>
+                </button>
+            </a>
+        </div>
+
+
+        <div class="table" id="tableDiv" style="width: 95%">
+            <table class="table table-fluid display cell-border" id="myTable" style="border: ridge">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th style="width: 90px" scope="col">License</th>
+                    <th style="width: 450px" scope="col">VIN</th>
+                    <th style="width: 110px" scope="col">Make</th>
+                    <th style="width: 110px" scope="col">Model</th>
+                    <th style="width: 40px" scope="col">Year</th>
+                    <th style="width: 120px" scope="col">Owner</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="vehicle : ${vehicles}">
+                    <td><h6 style="margin-top: 18px" th:text="${vehicle.getId()}">ID</h6></td>
+                    <td>
+                        <h6 style="margin-top: 15px"><b style="background-color: #ffc107;
+                                width: 95px;
+                               border: none;
+                               color: black;
+                               font-family: monospace;
+                               padding: 2px 6px;
+                               text-align: center;
+                               text-decoration: none;
+                               display: inline-block;
+                               margin: 4px 2px;
+                               border-radius: 16px;"
+                                                        th:text="${vehicle.getLicense()}">(License)</b></h6>
+                    </td>
+                    <td>
+                        <div style="margin-top: 18px" th:each="entry : ${vehicle.getVIN().toCharArray()}">
+                            <b style="float: left; color: white;background-color: dimgray; font-family: monospace; padding-left: 4px;padding-right: 4px; margin-right: 3px"
+                               th:text="${entry}"></b>
+                        </div>
+                    </td>
+                    <td>
+                        <h6 style="margin-top: 18px"><b th:text="${vehicle.getModel().getMake().getName()}">Model</b>
+                        </h6>
+                    </td>
+                    <td>
+                        <h6 style="margin-top: 18px"><b th:text="${vehicle.getModel().getName()}">Model</b></h6>
+                    </td>
+
+                    <td><h6 style="margin-top: 18px" th:text="${vehicle.getYear()}">ID</h6></td>
+
+                    <td>
+                        <a th:href="@{/users/{id}(id=${vehicle.getUser().getId()})}">
+                            <button style="width: 150px; margin-top: 9px; margin-bottom: 0" type="button"
+                                    class="btn btn-outline-dark btn-sm"><b th:text="${vehicle.getUser().getUsername()}"
+                                                                           style="font-size: 14px; text-align: left !important">Username</b>
+                            </button>
+                        </a>
+                    </td>
+
+                    <td>
+                        <a th:href="@{~/vehicles/{id}/update(id=${vehicle.getId()})}">
+                            <button class="btn btn-warning" style="margin: 0; border-color: black">
+                                <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_fit,w_37/v1648736003/SmartGarage/update-service_cb70u5.png">
+                            </button>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{~/vehicles/{id}/delete(id=${vehicle.getId()})}">
+                            <button class="btn btn-warning" style="margin: 0; border-color: black">
+                                <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,w_42/v1648736344/SmartGarage/delete-image_o6uwau.png"
+                                     onclick="return confirm('Are you sure you want to delete this vehicle?')">
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+
+</main>
+
+<footer th:replace="index.html :: footer"></footer>
+
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script th:src="@{/assets/vendor/purecounter/purecounter.js}"
+        src="../static/assets/vendor/purecounter/purecounter.js"></script>
+<script th:src="@{/assets/vendor/aos/aos.js}" src="../static/assets/vendor/aos/aos.js"></script>
+<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"
+        src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"
+        src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script th:src="@{/assets/vendor/isotope-layout/isotope.pkgd.min.js}"
+        src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"
+        src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script th:src="@{/assets/vendor/php-email-form/validate.js}"
+        src="../static/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{/assets/js/main.js}" src="../static/assets/js/main.js"></script>
+
+<script>
+    $.extend($.fn.dataTable.defaults, {
+        searching: false,
+        ordering: false
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
+
+<script src="../static/assets/js/slider.js" th:src="@{/assets/js/slider.js}"></script>
+
+<!--Script for multiple select-->
+<script>
+    $(".chosen-select").chosen({
+        no_results_text: "Oops, nothing found!"
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+Please do not delete this txt file.
+
+We need this folder not to be empty as the report generator will break if the directory for saving the reports
+doesn't exist.
+
+If we try to upload an empty directory to main, main will unfortunately ignore it and we will cry (because of bugs).

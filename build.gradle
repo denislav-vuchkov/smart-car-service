@@ -1,0 +1,87 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+//Required for Heroku deployment
+jar {
+    enabled = false
+}
+
+dependencies {
+    implementation 'mysql:mysql-connector-java'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.3'
+
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
+//     Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security:spring-security-test'
+
+    // https://mvnrepository.com/artifact/org.webjars/jquery
+    implementation group: 'org.webjars', name: 'jquery', version: '3.6.0'
+
+    //For Gradle, add to dependencies section of build.gradle
+    implementation group: 'com.cloudinary', name: 'cloudinary-http44', version: '1.31.0'
+    implementation group: 'com.cloudinary', name: 'cloudinary-taglib', version: '1.31.0'
+
+    //For email verification
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.6.5'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    // https://mvnrepository.com/artifact/org.passay/passay
+    implementation group: 'org.passay', name: 'passay', version: '1.6.1'
+
+    // For sending HTTP requests to the 3rd party that will give us currency exchange rates
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.13.2'
+
+    // For iText - for creating PDF documents in the backend
+
+    // https://mvnrepository.com/artifact/com.itextpdf/kernel
+    implementation group: 'com.itextpdf', name: 'kernel', version: '7.2.1'
+    // https://mvnrepository.com/artifact/com.itextpdf/io
+    implementation group: 'com.itextpdf', name: 'io', version: '7.2.1'
+    // https://mvnrepository.com/artifact/com.itextpdf/html2pdf
+    implementation group: 'com.itextpdf', name: 'html2pdf', version: '4.0.1'
+    // https://mvnrepository.com/artifact/com.itextpdf/layout
+    implementation group: 'com.itextpdf', name: 'layout', version: '7.2.1'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
+    testImplementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.36', ext: 'pom'
+    // https://mvnrepository.com/artifact/com.itextpdf/itext-licensekey
+    implementation files('licensing-base-4.0.2.jar')
+
+
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
+    testImplementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.36', ext: 'pom'
+
+    // https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3
+    implementation group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.12.198'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

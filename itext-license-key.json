@@ -1,0 +1,246 @@
+[
+  {
+    "product": "itext-core",
+    "licensee": {
+      "company": "N/A",
+      "name": "Tihomir Dimitrov",
+      "email": "dimitrovtihomir7@gmail.com"
+    },
+    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
+    "creationDate": "2022-04-04",
+    "expirationDate": "2022-05-04",
+    "onExpiration": "grace",
+    "gracePeriod": "1d0h0m",
+    "platform": "any",
+    "licenseType": "trial",
+    "productVersion": {
+      "major": 7,
+      "minor": 2
+    },
+    "limits": {
+      "default": {
+        "limitType": "unlimited",
+        "sendEvents": false
+      }
+    },
+    "licenseVersion": "1.0.0",
+    "sendStatistics": "disabled",
+    "signature": "R1lL53THzsULRGiXTerdP2w5dysxLhca+vRu3MLtXEKn9pgJn3dp68t/Owm7Dq9GWFADHmtIgswjiBVCXOHZAxcR/aghHD04Az+EEjo5bMKeZDvJVuH+oQeGhjAHur/F5xCCOliyW54rysUzFvjqruJYlZ4hgpeLGrxdvqppjxSBVHUWwEQeIV2LO25I6GDqu4hAfrkfwQ2BilXhjBmfBbykBZW9LsYC/djJE/9tphIa16XIZ2YZK7fplY0GvEnsyTxvLeobFPVEtjHjOiYG5/vsqGo4gMQQiLK80N846p6sAxwdQ/KcceK+JVeh9IYw7ncJvRuih7GVRWQc0vfPmJpTqFfUAptr6tx0IcEgZ918L2lQOdgTG+8njTeVH0dDOP0gzTUx5wmLemkJ45+FbbF4TF9e/QOMzoi5RaPw1fEWQaWN8jOCafwBVYzzlCs7fk4945hqZ2kRDxrYpD0CX7ISPlBkINnGOP3H2wpNqtd4h/JNaN3b1FQpn7hKjUlMc4f6Nz7fPAkBjysFVhJ1FMbNmiotHi6CoQPVXuq5AiXuworcKRE7QfYp+BmeTsgAR1ifSUuyZ0BoUULRqdxo6Xe7ufl+YodXpZ4GWvHe9vE5xW5Hj30fMZLSS6GPN1oBmtfvckyF8KUvbLD+qmdYvh8rLvczijmAuZmeV4fLwfw="
+  },
+  {
+    "product": "pdfXfa",
+    "licensee": {
+      "company": "N/A",
+      "name": "Tihomir Dimitrov",
+      "email": "dimitrovtihomir7@gmail.com"
+    },
+    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
+    "creationDate": "2022-04-04",
+    "expirationDate": "2022-05-04",
+    "onExpiration": "grace",
+    "gracePeriod": "1d0h0m",
+    "platform": "any",
+    "licenseType": "trial",
+    "productVersion": {
+      "major": 3
+    },
+    "limits": {
+      "default": {
+        "limitType": "unlimited",
+        "sendEvents": false
+      }
+    },
+    "licenseVersion": "1.0.0",
+    "sendStatistics": "disabled",
+    "signature": "DgWNWWI0NEGgGtCJVuKtnVQKmSeSHXg8xQIcnnqEXvqtQYVReXb/IM6mr5u8ctWKzQ/CDDkFAJtam0xpQlQZo4kHo2Lb35JZQoIgT8shhlpYPLKiY1LlwLcADbmXPGbtEELCOYglPerQbqSCJQNtFrzcNirKSRbtIgOWF7RfDfeHaYyaJK0MUO7wdyLbyY9QaGJeDLAShbMfVFiYVWAYV+b5xwTixzXM6daAmtqx1SXTegc0mzkBIxoatgzX2edSVwqZswST59x2TBOmrPpHykXas/6WqChbYHgl6lzw16j9Gk3xDLrMQxflEFKSQ7YptRsQ16LVDBfhSJkYnR6Awsf4hbpkmgsrC0cJmaHR6H0DKuygx4Od3/KBSY2PAuXsEgMk69yfqvjQLzuOTNJfdAmmnKMh5BB1IESlQ2y6zulTb8MDbqQ0/IY5mAh+ZfJx/9rtbRm9ewc4CZHdqQfR+mS+LE4QVGSrB1nYf+/ZM78ug/dZO2ycvpyEHxu43JYzXZid8mgDJnKihYLzSwHUxR4H74Gb2LPFdE4tC4rmxkS5csifRLbu2QiwNdOU0NaYYGtor0DAheWjaTtNXks1+tE03E3JcCdzhZxi+VZznpjhM9l4Fpd0U0etSbv2XMXMSPNNFc1FU6gUnLzOUsn6k0SaG/H3YvCurOOZKn6yNPg="
+  },
+  {
+    "product": "pdfSweep",
+    "licensee": {
+      "company": "N/A",
+      "name": "Tihomir Dimitrov",
+      "email": "dimitrovtihomir7@gmail.com"
+    },
+    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
+    "creationDate": "2022-04-04",
+    "expirationDate": "2022-05-04",
+    "onExpiration": "grace",
+    "gracePeriod": "1d0h0m",
+    "platform": "any",
+    "licenseType": "trial",
+    "productVersion": {
+      "major": 3
+    },
+    "limits": {
+      "default": {
+        "limitType": "unlimited",
+        "sendEvents": false
+      }
+    },
+    "licenseVersion": "1.0.0",
+    "sendStatistics": "disabled",
+    "signature": "h8YCtxS0y16JZuF8khMVpE07YUNuWVHQkorSETdO4rLt7kQpHoo2kvDV88010xWOjseD7/YUNul8sBYxaFrOc+4ko/+3Gbb53lbM6Ag22u2PE5OkBuHep7dbqdih6JS/bpAm8e4C/qEOly3sH1RxVXi/t6mMtVX9W9cyn78oDXmPnCgUWBrQMvBHcOI4Ss1OsSomE4UOpcGJus8OvUdNAcKJNjCaXrt0EFieUAC+fPBXZvZ/my+yJff2jxp3It5Bgmw7UupAEQFSuUN0mrJSCIQ5otg3e6EhuVooLnRFD4SC6eqhJxu83XI6o53a74Ib/OThvnMTBv9C6Co255JmXRUJmR3ICS+ExCiooPm2UnyZCkLaeNPGRKFvxnOVeTSBIaRk/ss9e3zFALTzPvrggF78v5gWBt1zcKPQF3R7ybtaboKxvWH9f80EdVgamFFELP6npp1Wz8yU6C0R3jeFMfd5S0FS2FFsX8RrEhSMUWy7V9DZYAwk6DrvKgm3kgPOCEvtL38R2njwhhAnCGTGMjY64rjlHqzhEsASTs2v1B2JPEfCQanWyfQrHpYCcXKMpw/b9J2uhp5rYZUm/DK1y/FkgtACO/E/QZANlmIdQ6KD7kel+xizLoJQ7DzeeO6ycTsAdW0CWxi+0iV+iQpWEXU90HBRsXPB/7lNNkybnzY="
+  },
+  {
+    "product": "pdfRender",
+    "licensee": {
+      "company": "N/A",
+      "name": "Tihomir Dimitrov",
+      "email": "dimitrovtihomir7@gmail.com"
+    },
+    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
+    "creationDate": "2022-04-04",
+    "expirationDate": "2022-05-04",
+    "onExpiration": "grace",
+    "gracePeriod": "1d0h0m",
+    "platform": "any",
+    "licenseType": "trial",
+    "productVersion": {
+      "major": 2
+    },
+    "limits": {
+      "default": {
+        "limitType": "unlimited",
+        "sendEvents": false
+      }
+    },
+    "licenseVersion": "1.0.0",
+    "sendStatistics": "disabled",
+    "signature": "OOKuJp78QuwLDB8rgMOaudQEvNEaOIa4xtaDus22YgvjzsYZbZFc3nPGKePruy8SDnYZLREygeDJ4J+WZCfoDo34v5npWcTufxrhEVhxIZSlonYbz6VXBbFUCOWQfXEYovky+UVwDtIOrBhQyVsNt9xZQ2qz7HUWZeCQ1EiYwW3CP1Bx8y8WJzDY8qX2QZeRI1mqIIOXZKGdc7q0UoE7uzOSHb7rIBmnptmwK73RJb9zM0epvLCdG82tJvOB8uOYf8KTTjRrKnS9ewtK+fSfWsAdciQQNsHuEbSG9fbyK1v+axpSx7H19WaIiAaZVmGlCmIZIxbpp+utF0cBChPRfAj/4EZvvc0QQUFlUjukP4zEgpeCbIBuCKbv4TWwzPVX03k/aI1fgHl97lzKS/TUpzSfuWoQV9Rg+esRy01WD1LDT98/Z2V1HbWt+lkvVZ0Q6jdMhzKenoZhCNzh91brr0EerzdZvH84E/WMDJaBJWY8+VG4kVAcju/boUx30B01TSjow5wfZoTmfJuOhT/q+aAu/EsZWAypfnmiqsp6ZFt/aAgettV9gWOP7bJhbylz2e649RsiveICjefQbolCLuaQs95m/e5d2bJAJ15Ox9ZAP1a5lz+vurKnRZBPEepMAbNT/vqXkQfLUPQI8y0UNkvq2gvFTBnDi4Y4j5cF/Es="
+  },
+  {
+    "product": "pdfOcr-tesseract4",
+    "licensee": {
+      "company": "N/A",
+      "name": "Tihomir Dimitrov",
+      "email": "dimitrovtihomir7@gmail.com"
+    },
+    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
+    "creationDate": "2022-04-04",
+    "expirationDate": "2022-05-04",
+    "onExpiration": "grace",
+    "gracePeriod": "1d0h0m",
+    "platform": "any",
+    "licenseType": "trial",
+    "productVersion": {
+      "major": 2
+    },
+    "limits": {
+      "default": {
+        "limitType": "unlimited",
+        "sendEvents": false
+      }
+    },
+    "licenseVersion": "1.0.0",
+    "sendStatistics": "disabled",
+    "signature": "baGMdUQgJKr5QP6SmxsE4lfMEL5nXBxGhuuu8lh3hy1FCp0UUS7w7P9pC2WEr5ls6UYO2oioHiS2KfA+7hOCoxTF/aMERvPdrrv6vI9hTAR46ls1CVp724zDezkImfsFNTa83qYS8gs8Otg5nR5U8XsKCtn1XxLp68iJFjbgMyPDKmWJ0BHvri5LpGaTuOJVa8wb4KE2lQr7aganbEjpyHcb3EBOLrjLbnsY+6X4gcJuNqTgPqTXRDqjPO/XdWK/ujM/Jf7ab5Iwgl3pOD0uSbvA/qR7+/V8RgURQ8ldT+huKAm2sm79QLV7D6f7PAyzucQKJ+aAUlNk1oVmfJxlmIdlEEKhq2uT1w9VDFgqvbohU/aRMoaXi2GD9BQX3sATitx5dcJrRWLMTxBlEpM1ei28gh/Nc81YWSVlsKXcVUDCDlv+b5MS++3a0OmccEa5+j6H2V+MqFa2b4z0eZPFn70KFK1wwklzW1BwCnNZIcXjjtUQiVy4yJrANMHoYWXL/oUnYISQZ4T9e4Pc+mtrpNQ7d90UPxL6chizcAyLpnl2vxQP9dXeJacjSg2fpOaiYTm4yc0/B8ycg8TRcW8xlpA1B1yjeDURP301dee+nn1reSUJCyWPE0G11RvuR3HsTRYqNgHarQfgI0k04vPfQT617XmuvXeY9GFHOtBCdHM="
+  },
+  {
+    "product": "pdfOptimizer",
+    "licensee": {
+      "company": "N/A",
+      "name": "Tihomir Dimitrov",
+      "email": "dimitrovtihomir7@gmail.com"
+    },
+    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
+    "creationDate": "2022-04-04",
+    "expirationDate": "2022-05-04",
+    "onExpiration": "grace",
+    "gracePeriod": "1d0h0m",
+    "platform": "any",
+    "licenseType": "trial",
+    "productVersion": {
+      "major": 2
+    },
+    "limits": {
+      "default": {
+        "limitType": "unlimited",
+        "sendEvents": false
+      }
+    },
+    "licenseVersion": "1.0.0",
+    "sendStatistics": "disabled",
+    "signature": "OxtgJPtAK2b0nhN/ClIypP+MyeML/0VtV16PJIt+OSe5epvH2p7zBxdMMGlB0dLqW5k0S6AmF5I3qbNTRpkEI3Od743LSAmUZKtYt2rpiyRuZRqUMTWrXRm/5XBJ+IfnW3zcqROY7d14LYz5PvlIiWdXiekWnTLmvmLWvnbIjzyCrMYXKoqhOLfA6XmePyKnfFTZHdb6kt2Wzbjh7AiAv2iXIAz7pmeBHYtS2+BnKL6/zy25FW4sfuoGRGsHNiDDxP5Jip0FHMF987rCd/ge7p0WkKJ953+tq6uUHD/wFOEyPWD/q+sWjtpMvQHxaHLfcC6LTbKsXwEbyIWyZG5N/R4Cx3vA7nOlyWVkiRJQtY0ZaUrEIz4ypGpEiH9vd7cjUDek6z23i+HQTeX2eWgEhSYn3i/8OGc2DP5H7grZlKxeoMWGVgtQP4fOIqtl4iLZ+YC2nEF+TIirav0GEuGFy7rGrtcWSN1Q+//Pt1Sg4Kytf5GiLXg/CKptGMC+a11W3lOn4BRYxNfKpeLdjxr8PHl18GyWrOJjZoMV+ByVOOo9lcBbGy1oHIOzmXf4M1eXCIPpj+TSTIof22QqJDkMM1XEr1neb6BcgC7WLRUT98ON5FCQmNSOdxHLIXCZyrbqHmxRcidXgYKdNL7oG0USVjHVnxOyokkLrUZiJVqm6b8="
+  },
+  {
+    "product": "pdfHtml",
+    "licensee": {
+      "company": "N/A",
+      "name": "Tihomir Dimitrov",
+      "email": "dimitrovtihomir7@gmail.com"
+    },
+    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
+    "creationDate": "2022-04-04",
+    "expirationDate": "2022-05-04",
+    "onExpiration": "grace",
+    "gracePeriod": "1d0h0m",
+    "platform": "any",
+    "licenseType": "trial",
+    "productVersion": {
+      "major": 4
+    },
+    "limits": {
+      "default": {
+        "limitType": "unlimited",
+        "sendEvents": false
+      }
+    },
+    "licenseVersion": "1.0.0",
+    "sendStatistics": "disabled",
+    "signature": "XOFTOwFlsI79Aenv0OdFpWxuiPN5M8oqxpqZdKSdTYYaeNZYeXtl6aP/bzf4iP37Ws4XUEaOyp1wsGJtSPr9vMQ/IpqT2CY8ly6kDnchG9PiX0gktYYXQFNRlyb6560Jzt05Pk1ibwYdsiMzal35dnswI7jfujJ84ufBBlSTd0yZ/kXfTukmLJMvKsEzdKi+TzK68yDfX2FnYPUCRD6KXbtQ7szN46b6TPjfxKiwh1MiZStedTZGn0eI/+4oGAA8Rq9OFJ37QuZFkZrbmcv6u/v+qcoxPuoBzAjGeh6vatkd1Rf+xNAHJ/iZySz7CQXh7NP3KwA9YtgDgTNctZb09DDwK9wMl6AmNz5pkEsP1w6jA7Tzn4ERyzmOkCBL2d1oGYATMMsNOEwRz2Xf92ZYDprGuNks7tUSPcI+Ojb4OzoI/YP0HWMSaZs0l5Nyn5IdBdtSWJTMt1k1fPexxOXaJ5m70g+3hpcZwy+rm6I6chH4SJzvS2Z0D7hoAhV9ZNXIB8m92og5iZoowrEYNoMId+pRctZcb0ybP5rCii9uOZMtLurpycvarr9WGXQzhBSyFEcnjPDyLPDXtbzfwAKR+Fr/8PmrpRljgvfkZFO/PpWoFZXRkJr62CiHxXsECgE6TJGMZvgn0xprv3nTaSmV/Ap5QKF/25RYDMmTIY7hofc="
+  },
+  {
+    "product": "pdfCalligraph",
+    "licensee": {
+      "company": "N/A",
+      "name": "Tihomir Dimitrov",
+      "email": "dimitrovtihomir7@gmail.com"
+    },
+    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
+    "creationDate": "2022-04-04",
+    "expirationDate": "2022-05-04",
+    "onExpiration": "grace",
+    "gracePeriod": "1d0h0m",
+    "platform": "any",
+    "licenseType": "trial",
+    "productVersion": {
+      "major": 3
+    },
+    "limits": {
+      "default": {
+        "limitType": "unlimited",
+        "sendEvents": false
+      }
+    },
+    "licenseVersion": "1.0.0",
+    "sendStatistics": "disabled",
+    "signature": "gEwzZm7Mr96FQMGfpLQUgg9ZK5WaCSQOiEwHweqUrSD1Vg55L24xwYVjEaajSq5mCZMBN4y9/32qs5/nYM3toCSFAWboQz4SSeyNZwy8+3GL5lJhhe/trDrm8l5yhKjAOuVXMj3XCsf5Jv+vVy7qhCgxKayR30j05Cwp8YpjKzGnCieMXLnNkKKfJOXnhu+hhKpvIv0dL9nPQhyzSwkywgLjcNZWSb9//yVeapove2QUfIcXjkiN+ljdm0q+LfI+LPmeVTeOzYGyAHU9WYXrG8jBAgNDyStSH85BHEG1wtOVRWNK+cVBWSh02jmsnk6bw3Cw+pTII5E18woZOTSg6MQ040aR+HwRu+kKbQhBQrM5qc1lZ+ek5ke40JSL23+no3SealGwpjxH9szj7FA7sybmP5E7uvi9mkyveOTgAAP756Yp/Pm63NsFHVW2Foqp5mMOia52JEp+tbbD9ddFcNzpzwWacvGVjwk1pwU49Lbehu63/kHLIiDXd3sElW1FQA1+5weeM8rjZbtnFkgBmY7g9lsNSf+L2X8tWR0uRTgPfaOmSwZyw6OiJTPMslQPmowKSq4HPc8VMtDtkF1OAAiVcY5Pg+/qH+Wf72rCp98x9zeuybA90RUEUrDEkREhbJ+86F4L3jJoBPtQEKpvgkqbYr3sjaiY462qa7PLCWk="
+  },
+  {
+    "product": "pdfOffice",
+    "licensee": {
+      "company": "N/A",
+      "name": "Tihomir Dimitrov",
+      "email": "dimitrovtihomir7@gmail.com"
+    },
+    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
+    "creationDate": "2022-04-04",
+    "expirationDate": "2022-05-04",
+    "onExpiration": "grace",
+    "gracePeriod": "1d0h0m",
+    "platform": "any",
+    "licenseType": "trial",
+    "productVersion": {
+      "major": 2
+    },
+    "limits": {
+      "default": {
+        "limitType": "unlimited",
+        "sendEvents": false
+      }
+    },
+    "licenseVersion": "1.0.0",
+    "sendStatistics": "disabled",
+    "signature": "MtP9MypySdVi7bfGJU2gaGwzirVER+P1W2Wgay8zTWv+juAM5P/SzjyZhY2vL3mgoCdYF5A4FKf5dxP3AEs2NTZayeYfkEcor03XUZIaAKZ4Iijj3pVZb+Y6/5tK/mBlRgbu5kQ/wtMyuarXCaHcTBA3JM58QHAGm8BP/K5yslohQZqFnNU4tOMLgzhZHZS10yJetOOcM8pm/zk4NX/ZwDcFYGvJ1R++eJea3XXmoJXKoAlrRftpvhYCQ7B4l7u6ZlrKvXdUI2xxpjjpPShwDQurW1d8eB7eE0gaVcjMj+pOgStxaFcZy/mpdd4CPb6X8dHPqCv65QhklQE0vsVCkysxksoSjFg80TKHW2DLQG0wqyRREoaFD5AByzqAhH7JXJB3zLUZFxjLP8sYHXpOnDuU+FawUv6V1F+YQGklfWuIiTtjfSK4+EL3mDziiHX6SLCxTy4HbcuHUaEElT/Qh18V/ajdaIhZLCXUAehxh37vMOFndnKkWdLZsfwhqbDbnBLZah4f4yn9/iCuONBEGSSO+xZ4LmTPFk20NSvuzZGRs0uzcxKoI03tnlUst/GATe/NeFsujj1CZKmMCgpNMk0TDmAUV6dUOfqlB9NMyI4Ye8/TUtDYaShsa97wVQ6qufNFxtKfWC+DwNJ9OMDZzUcgo6RyNbIu8F2CBucy1OA="
+  }
+]
