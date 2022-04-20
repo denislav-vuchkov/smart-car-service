@@ -2,6 +2,7 @@ package com.smart.garage.services.contracts;
 
 import com.smart.garage.models.ServiceRecord;
 import com.smart.garage.models.User;
+import com.smart.garage.models.Visit;
 
 import java.util.List;
 import java.util.Set;
@@ -14,7 +15,7 @@ public interface ServiceRecordService {
 
     ServiceRecord getById(User requester, int id);
 
-    ServiceRecord create(User requester, ServiceRecord serviceRecord);
+    ServiceRecord create(User requester, ServiceRecord serviceRecord, Visit visit);
 
     ServiceRecord update(User requester, ServiceRecord serviceRecord);
 

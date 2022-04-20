@@ -65,7 +65,7 @@ public class UsersQueryMaker {
 
     private void buildSearch(String column, Optional<String> parameter) {
         parameter.ifPresent(value -> {
-            filters.add(String.format(" %s like :%s", column, column));
+            filters.add(String.format("lower(%s) like lower(:%s)", column, column));
             propertiesMap.put(column, "%" + value + "%");
         });
     }

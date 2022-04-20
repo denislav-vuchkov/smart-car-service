@@ -22,9 +22,9 @@ before_script:
 
 build:
   stage: build
-  artifacts:
-    paths:
-      - public
+#  artifacts:
+#    paths:
+#      - public
   script: gradle --build-cache assemble
   cache:
     key: "$CI_COMMIT_REF_NAME"
@@ -41,12 +41,12 @@ test:
     reports:
       junit: build/test-results/test/**/TEST-*.xml
 
-deploy:
-  stage: deploy
-  image:
-    name: amazon/aws-cli
-    entrypoint: [""]
-  script:
-    - aws --version
-    - aws s3 rm s3://S3_BUCKET --recursive
-    - aws s3 cp public s3://$S3_BUCKET --recursive
+#deploy:
+#  stage: deploy
+#  image:
+#    name: amazon/aws-cli
+#    entrypoint: [""]
+#  script:
+#    - aws --version
+#    - aws s3 rm s3://S3_BUCKET --recursive
+#    - aws s3 cp public s3://$S3_BUCKET --recursive

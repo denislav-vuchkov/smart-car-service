@@ -26,8 +26,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/vehicles")
 public class VehiclesMVCController {
 
-    private static final String CREATE_PAGE = "Register new vehicle";
-    private static final String EDIT_PAGE = "Edit vehicle";
+    private static final String CREATE_PAGE = "Register New Vehicle";
+    private static final String EDIT_PAGE = "Edit Vehicle";
 
     private final VehicleService vehicleService;
     private final UserService userService;

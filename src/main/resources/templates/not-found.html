@@ -28,20 +28,17 @@
 </head>
 
 <body class="user-page"
-      style="background-image: url('https://res.cloudinary.com/tddvjavaforum/image/upload/v1650138541/SmartGarage/CarGone_1_qtgic9.jpg')">
+      style="background-image: url('https://res.cloudinary.com/tddvjavaforum/image/upload/v1650207508/SmartGarage/CarGone_1_qtgic9_aiulry.jpg')">
 
 <nav th:replace="index.html :: navbar"></nav>
 
 <div class="alert alert-warning" role="alert"
-     style="margin-top: 32%; border: ridge white;background-color:black ">
-    <h1 style="color: #ffc451; text-align: center"><b class="ri-search-eye-line"></b>
-    </h1>
-    <h1 style="color: #ffc451; text-align: center"><b th:text="${errorMessage.toString()}">Dummy text goes here</b>
-    </h1>
+     style="margin-top: 40%; border: ridge white;background-color:black ">
+    <h1 style="color: #ffc451; text-align: center"> <i class="ri-file-excel-line"></i> <span style="margin-top: -25px" th:text="${errorMessage.toString()}">Dummy text goes here</h1>
 </div>
 
 
-<div style="margin-top: 25%">
+<div style="margin-top: 35%">
     <footer th:replace="index.html :: footer"></footer>
 </div>
 

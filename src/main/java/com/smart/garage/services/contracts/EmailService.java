@@ -1,12 +1,14 @@
 package com.smart.garage.services.contracts;
 
 import com.smart.garage.models.User;
+import com.smart.garage.models.Vehicle;
 
-import java.io.File;
+import java.io.ByteArrayOutputStream;
+import java.time.LocalDate;
 
 public interface EmailService {
 
-    void send(String to, String email, String subject, File pdfReport);
+    void send(String to, String email, String subject, ByteArrayOutputStream attachment, String fileName);
 
     String buildResetPasswordEmail(String link);
 
@@ -15,5 +17,7 @@ public interface EmailService {
     String buildPasswordEmail(User user);
 
     String buildReportEmail(User user);
+
+    String buildVisitConfirmationEmail(Vehicle vehicle, LocalDate date);
 
 }

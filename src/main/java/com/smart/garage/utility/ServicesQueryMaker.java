@@ -24,7 +24,7 @@ public class ServicesQueryMaker {
                                              Optional<Integer> priceMaximum, Optional<String> sortBy,
                                              Optional<String> sortOrder) {
         name.ifPresent(value -> {
-            filters.add(String.format(" %s like :%s ", "name", "name"));
+            filters.add(String.format(" lower(%s) like lower(:%s) ", "name", "name"));
             propertiesMap.put("name", "%" + value + "%");
         });
 

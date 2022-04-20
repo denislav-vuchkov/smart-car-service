@@ -14,7 +14,7 @@ import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 
-import static com.smart.garage.utility.VisitDateExtractor.*;
+import static com.smart.garage.utility.VisitDataExtractor.*;
 
 @Component
 public class VisitMapper {

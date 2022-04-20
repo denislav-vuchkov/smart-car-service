@@ -35,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/error",
                         "/reset-password",
                         "/forgotten-password",
+                        "/swagger-ui/",
                         "/**/*.css",
                         "/**/*.js",
                         "/**/*.json",

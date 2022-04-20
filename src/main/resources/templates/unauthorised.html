@@ -36,19 +36,17 @@
 </head>
 
 <body class="user-page"
-      style="background-image: url('https://res.cloudinary.com/tddvjavaforum/image/upload/v1650138879/SmartGarage/636246653005895798-GettyImages-92272747_rgalfm_yyv4o9.jpg')">
+      style="background-image: url('https://res.cloudinary.com/tddvjavaforum/image/upload/v1650208699/SmartGarage/636246653005895798-GettyImages-92272747_rgalfm_yyv4o9_ocyfh1.jpg')">
 
 <nav th:replace="index.html :: navbar"></nav>
 
 <div class="alert alert-warning" role="alert"
-     style="margin-top: 32%; border: ridge white;background-color:black ">
-    <h1 style="color: #ffc451; text-align: center"><b class="ri-lock-2-fill"></b>
-    </h1>
-    <h1 style="color: #ffc451; text-align: center"><b th:text="${errorMessage.toString()}">Dummy text goes here</b>
-    </h1>
+     style="margin-top: 35%; border: ridge white;background-color:black ">
+    <h1 style="color: #ffc451; text-align: center"> <i class="ri-lock-2-fill"></i> <span style="margin-top: -25px" th:text="${errorMessage.toString()}">Dummy text goes here</h1>
 </div>
 
-<div style="margin-top: 23%">
+
+<div style="margin-top: 40%">
     <footer th:replace="index.html :: footer"></footer>
 </div>
 

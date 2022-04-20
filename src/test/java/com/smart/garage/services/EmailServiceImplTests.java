@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 @ExtendWith(MockitoExtension.class)
@@ -18,7 +19,7 @@ public class EmailServiceImplTests {
     @Test
     void send_Should_Execute_When_ValidInput(){
         Assertions.assertDoesNotThrow(() -> service.send("dimitrovtihomir7@gmail.com",
-                "Testing the email service", "Test - ignore", new File(".gitignore")));
+                "Testing the email service", "Test - ignore", null, null));
     }
 
     @Test

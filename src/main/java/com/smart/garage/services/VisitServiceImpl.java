@@ -4,10 +4,7 @@ import com.smart.garage.exceptions.DuplicateEntityException;
 import com.smart.garage.exceptions.InvalidParameter;
 import com.smart.garage.models.*;
 import com.smart.garage.repositories.contracts.VisitRepository;
-import com.smart.garage.services.contracts.ServiceRecordService;
-import com.smart.garage.services.contracts.ServicesService;
-import com.smart.garage.services.contracts.VehicleService;
-import com.smart.garage.services.contracts.VisitService;
+import com.smart.garage.services.contracts.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,29 +15,32 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.smart.garage.utility.AuthenticationHelper.*;
-import static com.smart.garage.utility.VisitDateExtractor.validateStartAndEndDatesChronological;
+import static com.smart.garage.utility.VisitDataExtractor.validateStartAndEndDatesChronological;
 
 @Service
 public class VisitServiceImpl implements VisitService {
 
     public static final String OWNER_MISMATCH = "Vehicle and owner mismatch.";
     public static final String VISIT_DELETED = "Vehicle has already been deleted.";
+    public static final String VISIT_STATUS_ERROR = "Only visits with status 'Requested' can be accepted.";
 
     private final VisitRepository visitRepository;
     private final UserServiceImpl userService;
     private final VehicleService vehicleService;
     private final ServicesService servicesService;
     private final ServiceRecordService serviceRecordService;
+    private final EmailService emailService;
 
     @Autowired
-    public VisitServiceImpl(VisitRepository visitRepository,
-                            VehicleService vehicleService, UserServiceImpl userService,
-                            ServicesService servicesService, ServiceRecordService serviceRecordService) {
+    public VisitServiceImpl(VisitRepository visitRepository, VehicleService vehicleService,
+                            UserServiceImpl userService, ServicesService servicesService,
+                            ServiceRecordService serviceRecordService, EmailService emailService) {
         this.visitRepository = visitRepository;
         this.vehicleService = vehicleService;
         this.userService = userService;
         this.servicesService = servicesService;
         this.serviceRecordService = serviceRecordService;
+        this.emailService = emailService;
     }
 
     @Override
@@ -76,12 +76,16 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public Visit create(User requester, Visit visit, Set<Integer> serviceIDs) {
-        validateUserIsEmployee(requester);
+        if (isCustomer(requester)) {
+            validateIsAccessingOwnInformation(requester, visit.getVehicle());
+        } else {
+            validateUserIsEmployee(requester);
+        }
         validateVehicleAndOwnerMatch(requester, visit);
         validateStartAndEndDatesChronological(visit);
         visitRepository.create(visit);
         Set<ServiceRecord> newServices = mapServices(serviceIDs, visit.getId());
-        newServices.forEach(serviceRecord -> serviceRecordService.create(requester, serviceRecord));
+        newServices.forEach(serviceRecord -> serviceRecordService.create(requester, serviceRecord, visit));
         return visit;
     }
 
@@ -101,6 +105,18 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
+    public void accept(User requester, int id) {
+        validateUserIsEmployee(requester);
+        Visit visit = visitRepository.getById(id);
+        validateRequestedStatus(visit);
+        visit.setStatus(StatusCode.NOT_STARTED.getStatus());
+        visitRepository.update(visit);
+        emailService.send(visit.getUser().getEmail(),
+                emailService.buildVisitConfirmationEmail(visit.getVehicle(), visit.getStartDate()),
+                "Smart Garage - Visit Confirmation", null, null);
+    }
+
+    @Override
     public Visit update(User requester, Visit visit, Set<Integer> serviceIDs) {
         validateUserIsEmployee(requester);
         validateVehicleAndOwnerMatch(requester, visit);
@@ -111,7 +127,7 @@ public class VisitServiceImpl implements VisitService {
         if (!existingServices.equals(updatedServices)) {
             existingServices.forEach(s -> serviceRecordService.delete(requester, s.getId()));
             visit.getServices().clear();
-            updatedServices.forEach(serviceRecord -> serviceRecordService.create(requester, serviceRecord));
+            updatedServices.forEach(serviceRecord -> serviceRecordService.create(requester, serviceRecord, visit));
         }
         return visit;
     }
@@ -121,6 +137,8 @@ public class VisitServiceImpl implements VisitService {
         validateUserIsEmployee(requester);
         Visit visit = visitRepository.getById(id);
         if (visit.isDeleted()) throw new DuplicateEntityException(VISIT_DELETED);
+        if (visit.getStatus().equals(StatusCode.REQUESTED.getStatus()))
+            visit.setStatus(StatusCode.DECLINED.getStatus());
         visit.setDeleted(true);
         visitRepository.update(visit);
     }
@@ -134,6 +152,11 @@ public class VisitServiceImpl implements VisitService {
         User owner = userService.getById(requester, visit.getUser().getId());
         Vehicle vehicle = vehicleService.getById(requester, visit.getVehicle().getId());
         if (vehicle.getUser().getId() != owner.getId()) throw new InvalidParameter(OWNER_MISMATCH);
+    }
+
+    private void validateRequestedStatus(Visit visit) {
+        if (!visit.getStatus().equals(StatusCode.REQUESTED.getStatus()))
+            throw new IllegalStateException(VISIT_STATUS_ERROR);
     }
 
     private Set<ServiceRecord> mapServices(Set<Integer> serviceIDs, int visitID) {

@@ -9,7 +9,7 @@ import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.Set;
 
-import static com.smart.garage.utility.VisitDateExtractor.formatDate;
+import static com.smart.garage.utility.VisitDataExtractor.formatDate;
 
 @Getter
 @Setter

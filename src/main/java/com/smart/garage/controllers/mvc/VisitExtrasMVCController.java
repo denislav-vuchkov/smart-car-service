@@ -118,8 +118,7 @@ public class VisitExtrasMVCController {
         //TODO Our commercial license for iText (used by methods that service this controller)
         //TODO expires on the 4th May (we can get a new one just before presenting)
 
-        //TODO our free trial for FOREX Currency Exchange expires on 10 April
-        //TODO our second free trial for FOREX expires on 18 April
+        //TODO our third free trial for FOREX expires on 25 April
         User currentUser = authenticationHelper.getCurrentUser();
 
         Currencies selectedCurrency = Enum.valueOf(Currencies.class, currency);
@@ -127,10 +126,7 @@ public class VisitExtrasMVCController {
         try {
             reportProducerHelper.generateReport(currentUser, selectedVisits, selectedCurrency);
             return "visit-report-produced";
-        } catch (IOException e) {
-            model.addAttribute("errorMessage", "There was an issue with producing the report you requested. Please try again.");
-            return "not-found";
-        } catch (EntityNotFoundException e) {
+        } catch (IOException | EntityNotFoundException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "not-found";
         } catch (InvalidParameter e) {

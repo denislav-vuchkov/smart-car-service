@@ -6,9 +6,14 @@ import com.smart.garage.models.dtos.VisitDTO;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Optional;
+import java.util.Set;
 
-public class VisitDateExtractor {
+public class VisitDataExtractor {
 
     public static final String DATE_PICKER_FORMAT = "MM/dd/yyyy";
     public static final String INVALID_DATE_ERROR = "Invalid date format.";
@@ -43,5 +48,18 @@ public class VisitDateExtractor {
         if (visit.getEndDate() != null) {
             if (visit.getEndDate().isBefore(visit.getStartDate())) throw new InvalidParameter(DATE_MISMATCH);
         }
+    }
+
+    public static <T> Optional<Set<T>> extractParameter(Set<T> parameter) {
+        return Optional.ofNullable(parameter == null || parameter.isEmpty() ? null : parameter);
+    }
+
+    public static Optional<String> extractParameter(String parameter) {
+        return Optional.ofNullable(parameter.isEmpty() ? null : parameter);
+    }
+
+    public static Optional<LocalDateTime> extractParameter(Date parameter) {
+        return Optional.ofNullable(parameter == null ? null :
+                LocalDateTime.ofInstant(parameter.toInstant(), ZoneId.systemDefault()));
     }
 }

@@ -180,7 +180,6 @@
     <div style="float: left; margin-top: -1.3%">
 
         <div th:if="${currentUser.getRole().getId() == 2}" style="margin-bottom: 6.5%">
-
             <a href="visit-form.html" th:href="@{/visits/new}">
                 <button type="submit" class="btn btn-warning"
                         style="float: left; width: 47.1%; margin-right: 0.7%;  border-color: black">
@@ -191,7 +190,6 @@
                     </div>
                 </button>
             </a>
-
             <a href="visit-new-customer.html" th:href="@{/visits/new-customer}">
                 <button type="submit" class="btn btn-warning"
                         style="float: left; width: 47.1%; border-color: black">
@@ -202,9 +200,21 @@
                 </button>
             </a>
         </div>
-        <div>
 
-            <div th:if="${currentUser.getRole().getId() == 2}" style="padding-top: 10px"></div>
+        <div th:if="${currentUser.getRole().getId() == 3}" style="margin-bottom: 7.5%">
+            <a href="visit-form.html" th:href="@{/visits/request}">
+                <button type="submit" class="btn btn-warning"
+                        style="float: left; width: 95%; margin-right: 0.7%;  border-color: black">
+                    <div style="float: left; margin-left: 42%">
+                        <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,w_37/v1649363820/SmartGarage/add-new_zzvu76.png">
+                    </div>
+                    <div style="float: left; margin-top: 5px; margin-left: 10px"><b>Request New Visit</b>
+                    </div>
+                </button>
+            </a>
+        </div>
+
+        <div>
 
             <form class="form-detail" th:action="@{/visits/generate-report}" method="post">
 
@@ -278,12 +288,13 @@
                 <tbody>
 
                 <tr th:each="visit : ${visits}">
+
                     <td><h6 style="margin-top: 18px" th:text="${visit.getId()}">ID</h6></td>
-                    <td>
-                        <h6 style="margin-top: 18px"><b th:text="${visit.getVehicle().getModel().getMake().getName()}
+                    <td><h6 style="margin-top: 18px">
+                        <b th:text="${visit.getVehicle().getModel().getMake().getName()}
                          + ' ' +  ${visit.getVehicle().getModel().getName()}">
-                            Make & Model</b></h6>
-                    </td>
+                            Make & Model</b></h6></td>
+
 
                     <td>
                         <h6 style="margin-top: 15px"><b style="background-color: #ffc107;
@@ -323,7 +334,24 @@
                         </a>
                     </td>
 
-                    <td><h6 style="margin-top: 18px" th:text="${visit.getStatus().getName()}">Status</h6></td>
+                    <td>
+                        <h6 th:unless="${visit.getStatus().getName().equals('Requested') || visit.getStatus().getName().equals('Declined')}"
+                            style="margin-top: 18px;margin-bottom: -12px" th:text="${visit.getStatus().getName()}">
+                            Status</h6>
+                        <h6 th:if="${visit.getStatus().getName().equals('Requested') || visit.getStatus().getName().equals('Declined')}"
+                            style="margin-top: 18px;margin-bottom: -12px"><b th:text="${visit.getStatus().getName()}">Status</b>
+                        </h6>
+
+                        <img th:if="${visit.getStatus().getName().equals('Requested')}"
+                             style="margin-left: 95px; margin-top: -45px;margin-bottom: -12px"
+                             src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,h_25/v1650299248/SmartGarage/PettyBouncyDingo-max-1mb_1_yfefpk.gif">
+
+                        <img th:if="${visit.getStatus().getName().equals('Declined')}"
+                             style="margin-left: 85px; margin-top: -35px;margin-bottom: -10px"
+                             src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,h_25/v1650315971/SmartGarage/canceled_wmc0eg.png">
+
+
+                    </td>
                     <td><h6 style="margin-top: 18px" th:text="${visit.getStartDate()}">Date</h6></td>
                     <td><h6 style="margin-top: 18px" th:text="${visit.displayEndDate()}">Date</h6></td>
 
@@ -361,11 +389,25 @@
                     </td>
 
                     <td th:if="${currentUser.getRole().getId() == 2}">
-                        <a th:href="@{~/visits/{id}(id=${visit.getId()})}">
+
+                        <a th:unless="${visit.getStatus().getName().equals('Requested')}"
+                           th:href="@{~/visits/{id}(id=${visit.getId()})}">
                             <button class="btn btn-warning" style="margin: 0; border-color: black">
-                                <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,h_37/v1649793543/SmartGarage/view-details-3_ls8vxa.png">
+                                <img th:unless="${visit.getStatus().getName().equals('Requested')}"
+                                     src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,h_37/v1649793543/SmartGarage/view-details-3_ls8vxa.png">
                             </button>
                         </a>
+
+                        <a th:if="${visit.getStatus().getName().equals('Requested')}"
+                           th:href="@{~/visits/{id}/accept(id=${visit.getId()})}">
+                            <button class="btn btn-warning" style="margin: 0; border-color: black"
+                                    onclick="return confirm('You are about to notify the customer via email. Are you sure you want to confirm this visit?')">
+
+                                <img th:if="${visit.getStatus().getName().equals('Requested')}"
+                                     src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,h_37/v1650298124/SmartGarage/accept_fuaxzh.png">
+                            </button>
+                        </a>
+
                     </td>
 
 
@@ -380,7 +422,11 @@
                     <td th:if="${currentUser.getRole().getId() == 2}">
                         <a th:href="@{~/visits/{id}/delete(id=${visit.getId()})}">
                             <button class="btn btn-warning" style="margin: 0; border-color: black">
-                                <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,w_37/v1648736344/SmartGarage/delete-image_o6uwau.png"
+                                <img th:if="${visit.getStatus().getName().equals('Requested')}"
+                                     src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,h_37/v1650298141/SmartGarage/reject_lifwuj.png"
+                                     onclick="return confirm('Are you sure you want to decline this visit?')">
+                                <img th:unless="${visit.getStatus().getName().equals('Requested')}"
+                                     src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,w_37/v1648736344/SmartGarage/delete-image_o6uwau.png"
                                      onclick="return confirm('Are you sure you want to delete this visit?')">
                             </button>
                         </a>

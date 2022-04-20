@@ -5,6 +5,7 @@ import com.smart.garage.exceptions.InvalidParameter;
 import com.smart.garage.exceptions.UnauthorizedOperationException;
 import com.smart.garage.models.*;
 import com.smart.garage.models.dtos.PhotoDTO;
+import com.smart.garage.models.dtos.UserDTOOut;
 import com.smart.garage.models.dtos.VisitDTO;
 import com.smart.garage.models.dtos.VisitFilterDTO;
 import com.smart.garage.services.contracts.ServicesService;
@@ -21,17 +22,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.smart.garage.utility.VisitDataExtractor.extractParameter;
 
 @Controller
 @RequestMapping("/visits")
-public class VisitsMVCController {
+public class VisitsEmployeeMVCController {
 
-    private static final String CREATE_PAGE = "Register new visit";
-    private static final String EDIT_PAGE = "Edit visit";
+    private static final String CREATE_PAGE = "Register New Visit";
+    private static final String EDIT_PAGE = "Edit Visit";
 
     private final VisitService visitService;
     private final VehicleService vehicleService;
@@ -42,10 +44,10 @@ public class VisitsMVCController {
     private final AuthenticationHelper authenticationHelper;
 
     @Autowired
-    public VisitsMVCController(VisitService visitService, VehicleService vehicleService,
-                               UserService userService, ServicesService servicesService,
-                               VisitMapper visitMapper, UserMapper userMapper,
-                               AuthenticationHelper authenticationHelper) {
+    public VisitsEmployeeMVCController(VisitService visitService, VehicleService vehicleService,
+                                       UserService userService, ServicesService servicesService,
+                                       VisitMapper visitMapper, UserMapper userMapper,
+                                       AuthenticationHelper authenticationHelper) {
         this.visitService = visitService;
         this.vehicleService = vehicleService;
         this.userService = userService;
@@ -218,88 +220,29 @@ public class VisitsMVCController {
     }
 
     private void addPageAttributes(User currentUser, Model model) {
-        model.addAttribute("users", userService.getAllFiltered(UserRoles.CUSTOMER.getValue(),
-                        currentUser, Optional.empty(), Optional.empty(),
-                        Optional.empty(), Optional.empty(), Optional.empty(),
-                        Optional.empty(), Optional.empty(), Optional.empty())
-                .stream().filter(u -> !u.isDeleted()).map(userMapper::toDTOOut).collect(Collectors.toList()));
+        model.addAttribute("users", getActiveCustomers(currentUser));
         model.addAttribute("vehicles", vehicleService.getAll(currentUser, true));
-        model.addAttribute("status", visitService.getStatus());
-        model.addAttribute("services", servicesService.getAll(Optional.empty(),
-                Optional.empty(), Optional.empty(),
-                Optional.of("id"), Optional.empty()));
+        model.addAttribute("status", getActiveStatusLabels());
+        model.addAttribute("services", getServicesSortedByID());
         model.addAttribute("currencies", Currencies.values());
     }
 
-    private <T> Optional<Set<T>> extractParameter(Set<T> parameter) {
-        return Optional.ofNullable(parameter == null || parameter.isEmpty() ? null : parameter);
+    private List<UserDTOOut> getActiveCustomers(User currentUser) {
+        return userService.getAllFiltered(UserRoles.CUSTOMER.getValue(), currentUser,
+                        Optional.empty(), Optional.empty(), Optional.empty(),
+                        Optional.empty(), Optional.empty(), Optional.empty(),
+                        Optional.empty(), Optional.empty()).stream()
+                .filter(u -> !u.isDeleted()).map(userMapper::toDTOOut).collect(Collectors.toList());
     }
 
-    private Optional<String> extractParameter(String parameter) {
-        return Optional.ofNullable(parameter.isEmpty() ? null : parameter);
+    private List<VisitStatus> getActiveStatusLabels() {
+        return visitService.getStatus().stream()
+                .filter(s -> !s.getName().matches("Declined")).collect(Collectors.toList());
     }
 
-    private Optional<LocalDateTime> extractParameter(Date parameter) {
-        return Optional.ofNullable(parameter == null ? null :
-                LocalDateTime.ofInstant(parameter.toInstant(), ZoneId.systemDefault()));
+    private List<Servicez> getServicesSortedByID() {
+        return servicesService.getAll(Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.of("id"), Optional.empty());
     }
 
-
-    @GetMapping("/customer")
-    public String getMyVisits(Model model) {
-        User currentUser = authenticationHelper.getCurrentUser();
-        try {
-            addMyAttributes(currentUser, model);
-            model.addAttribute("visitFilterDTO", new VisitFilterDTO());
-            model.addAttribute("visits", visitService.getAll(currentUser,
-                    Optional.of(Set.of(currentUser.getId())),
-                    Optional.empty(),
-                    Optional.empty(),
-                    Optional.empty(),
-                    Optional.empty(),
-                    Optional.empty(),
-                    Optional.empty(),
-                    false));
-            return "visits";
-        } catch (UnauthorizedOperationException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "unauthorised";
-        }
-    }
-
-    @PostMapping("/customer")
-    public String getMyVisits(@ModelAttribute("visitFilterDTO") VisitFilterDTO visitFilterDTO, Model model) {
-        User currentUser = authenticationHelper.getCurrentUser();
-        try {
-            addMyAttributes(currentUser, model);
-            model.addAttribute("visitFilterDTO", visitFilterDTO);
-            model.addAttribute("visits", visitService.getAll(currentUser,
-                    Optional.of(Set.of(currentUser.getId())),
-                    extractParameter(visitFilterDTO.getVehicleFilter()),
-                    extractParameter(visitFilterDTO.getStatusFilter()),
-                    extractParameter(visitFilterDTO.getDateFrom()),
-                    extractParameter(visitFilterDTO.getDateTo()),
-                    extractParameter(visitFilterDTO.getSorting()),
-                    extractParameter(visitFilterDTO.getOrder()),
-                    false));
-            return "visits";
-        } catch (UnauthorizedOperationException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "unauthorised";
-        } catch (InvalidParameter e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "visits";
-        }
-    }
-
-    private void addMyAttributes(User currentUser, Model model) {
-        model.addAttribute("vehicles", vehicleService.getAll(currentUser, Optional.empty(),
-                Optional.of(Set.of(currentUser.getId())), Optional.empty(), Optional.empty(),
-                Optional.empty(), Optional.empty(), true));
-        model.addAttribute("status", visitService.getStatus());
-        model.addAttribute("services", servicesService.getAll(Optional.empty(),
-                Optional.empty(), Optional.empty(),
-                Optional.of("id"), Optional.empty()));
-        model.addAttribute("currencies", Currencies.values());
-    }
 }

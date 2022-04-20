@@ -2,6 +2,7 @@ package com.smart.garage.services;
 
 import com.smart.garage.models.ServiceRecord;
 import com.smart.garage.models.User;
+import com.smart.garage.models.Visit;
 import com.smart.garage.repositories.contracts.ServiceRecordRepository;
 import com.smart.garage.services.contracts.ServiceRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Set;
 
-import static com.smart.garage.utility.AuthenticationHelper.validateUserIsEmployee;
+import static com.smart.garage.utility.AuthenticationHelper.*;
 
 @Service
 public class ServiceRecordServiceImpl implements ServiceRecordService {
@@ -41,8 +42,12 @@ public class ServiceRecordServiceImpl implements ServiceRecordService {
     }
 
     @Override
-    public ServiceRecord create(User requester, ServiceRecord serviceRecord) {
-        validateUserIsEmployee(requester);
+    public ServiceRecord create(User requester, ServiceRecord serviceRecord, Visit visit) {
+        if (isCustomer(requester)) {
+            validateIsAccessingOwnInformation(requester, visit);
+        } else {
+            validateUserIsEmployee(requester);
+        }
         serviceRecordRepository.create(serviceRecord);
         return serviceRecord;
     }

@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -54,8 +56,18 @@ public class Visit {
     @JoinColumn(name = "visit_id")
     private Set<Photo> photos;
 
-    @Column(name= "is_deleted")
+    @Column(name = "is_deleted")
     private boolean isDeleted;
+
+    public String getFormattedStartDate() {
+        return startDate == null ? "-" : startDate.format(DateTimeFormatter
+                .ofLocalizedDate(FormatStyle.MEDIUM));
+    }
+
+    public String getFormattedEndDate() {
+        return endDate == null ? "-" : endDate.format(DateTimeFormatter
+                .ofLocalizedDate(FormatStyle.MEDIUM));
+    }
 
     public String displayEndDate() {
         return endDate == null ? "-" : endDate.toString();

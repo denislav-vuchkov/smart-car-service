@@ -97,9 +97,11 @@
         <div class="row">
             <div class="col" style="margin-top: 5px; margin-bottom: 30px">
                 <a th:href="@{/users/new}" th:if="${currentUser.getRole.getId() != 3}">
-                    <button type="submit" class="btn btn-warning btn-lg" id="newModalButton"
-                            style="border-color: black">
-                        <b>Register new employee</b>
+                    <button type="submit" class="btn btn-warning" style="float: left; width: 100%; border-color: black">
+                        <div style="float: left; margin-left: 45%">
+                            <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,w_37/v1649363820/SmartGarage/add-new_zzvu76.png">
+                        </div>
+                        <div style="float: left; margin-top: 5px; margin-left: 10px"><b>Add New</b></div>
                     </button>
                 </a>
             </div>

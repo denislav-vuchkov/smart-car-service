@@ -83,8 +83,7 @@
 </head>
 
 <body class="user-page"
-      style="background-image: url('https://res.cloudinary.com/tddvjavaforum/image/upload/v1649577235/SmartGarage/cars/photo-1611251509063-60c22db0c4fb_tyzhy9.jpg'); background-repeat: no-repeat;
-      height: auto !important;">
+      style="background-image: url('https://res.cloudinary.com/tddvjavaforum/image/upload/v1650391559/SmartGarage/cars/Cool-Car-Backgraund_vectorized_yqbhnp.png')">
 
 <nav th:replace="index.html :: navbar"></nav>
 
@@ -102,18 +101,30 @@
                             <h3 style="text-align: center; margin-bottom: 25px">User</h3>
 
                             <div class="input-group form-group" style="width: 60%; margin-left: 20%">
-                                <p></p>
-                                <input type="text" class="form-control" th:value="${'Username: ' + visit.getUser().getUsername()}"
+                                <div class="input-group-prepend">
+                                    <span style="width: 80px" class="input-group-text">User:</span>
+                                </div>
+                                <input type="text" class="form-control"
+                                       th:value="${visit.getUser().getUsername()}"
                                        style="color: white;background-color: rgba(0,0,0,0.5);" disabled>
                             </div>
 
                             <div class="input-group form-group" style="width: 60%; margin-left: 20%;">
-                                <input type="text" class="form-control" th:value="${'Email: ' + visit.getUser().getEmail()}"
+                                <div class="input-group-prepend">
+                                    <span style="width: 80px" class="input-group-text">Email:</span>
+                                </div>
+                                <input type="text" class="form-control"
+                                       th:value="${visit.getUser().getEmail()}"
                                        style="color: white;background-color: rgba(0,0,0,0.5);" disabled>
                             </div>
 
-                            <div class="input-group form-group" style="width: 60%; margin-left: 20%; margin-bottom: 40px">
-                                <input type="text" class="form-control" th:value="${'Phone number: ' + visit.getUser().getPhoneNumber()}"
+                            <div class="input-group form-group"
+                                 style="width: 60%; margin-left: 20%; margin-bottom: 40px">
+                                <div class="input-group-prepend">
+                                    <span style="width: 80px" class="input-group-text">Phone:</span>
+                                </div>
+                                <input type="text" class="form-control"
+                                       th:value="${visit.getUser().getPhoneNumber()}"
                                        style="color: white;background-color: rgba(0,0,0,0.5);" disabled>
                             </div>
 
@@ -125,42 +136,76 @@
                         <br>
 
                         <div class="input-group form-group" style="width: 60%; margin-left: 20%">
-                            <input th:value="${'License: ' + visit.getVehicle().getLicense()}" style="color: white;background-color: rgba(0,0,0,0.5)" type="text" class="form-control" disabled>
+                            <div class="input-group-prepend">
+                                <span style="width: 80px" class="input-group-text">Plate:</span>
+                            </div>
+
+                            <input th:value="${visit.getVehicle().getLicense()}"
+                                   style="color: white;background-color: rgba(0,0,0,0.5)" type="text"
+                                   class="form-control" disabled>
                         </div>
 
                         <div class="input-group form-group" style="width: 60%; margin-left: 20%">
-                            <input th:value="${'VIN: ' + visit.getVehicle().getVIN()}"
-                                   style="color: white;background-color: rgba(0,0,0,0.5)" type="text" class="form-control" disabled>
+                            <div class="input-group-prepend">
+                                <span style="width: 80px" class="input-group-text">VIN:</span>
+                            </div>
+                            <input th:value="${visit.getVehicle().getVIN()}"
+                                   style="color: white;background-color: rgba(0,0,0,0.5)" type="text"
+                                   class="form-control" disabled>
                         </div>
 
                         <div class="input-group form-group" style="width: 60%; margin-left: 20%">
-                            <input th:value="${'Make: ' + visit.getVehicle().getModel().getMake().getName()}"
-                                   style="color: white;background-color: rgba(0,0,0,0.5)" type="text" class="form-control" disabled>
+                            <div class="input-group-prepend">
+                                <span style="width: 80px" class="input-group-text">Make:</span>
+                            </div>
+                            <input th:value="${visit.getVehicle().getModel().getMake().getName()}"
+                                   style="color: white;background-color: rgba(0,0,0,0.5)" type="text"
+                                   class="form-control" disabled>
                         </div>
 
                         <div class="input-group form-group" style="width: 60%; margin-left: 20%">
-                            <input th:value="${'Model: ' + visit.getVehicle().getModel().getName()}"
-                                   style="color: white;background-color: rgba(0,0,0,0.5)" type="text" class="form-control" disabled>
+                            <div class="input-group-prepend">
+                                <span style="width: 80px" class="input-group-text">Model:</span>
+                            </div>
+                            <input th:value="${visit.getVehicle().getModel().getName()}"
+                                   style="color: white;background-color: rgba(0,0,0,0.5)" type="text"
+                                   class="form-control" disabled>
                         </div>
 
                         <div class="input-group form-group" style="width: 60%; margin-left: 20%">
-                            <input th:value="${'Year: ' + visit.getVehicle().getYear()}"
-                                   style="color: white;background-color: rgba(0,0,0,0.5)" type="text" class="form-control" disabled>
+                            <div class="input-group-prepend">
+                                <span style="width: 80px" class="input-group-text">Year:</span>
+                            </div>
+                            <input th:value="${visit.getVehicle().getYear()}"
+                                   style="color: white;background-color: rgba(0,0,0,0.5)" type="text"
+                                   class="form-control" disabled>
                         </div>
 
                         <div class="input-group form-group" style="width: 60%; margin-left: 20%">
-                            <input th:value="${'Start date: ' + visit.getStartDate()}"
-                                   style="color: white;background-color: rgba(0,0,0,0.5)" type="text" class="form-control" disabled>
+                            <div class="input-group-prepend">
+                                <span style="width: 80px" class="input-group-text">From:</span>
+                            </div>
+                            <input th:value="${visit.getFormattedStartDate()}"
+                                   style="color: white;background-color: rgba(0,0,0,0.5)" type="text"
+                                   class="form-control" disabled>
                         </div>
 
                         <div class="input-group form-group" style="width: 60%; margin-left: 20%">
-                            <input th:value="${'End date: ' + visit.displayEndDate()}"
-                                   style="color: white;background-color: rgba(0,0,0,0.5)" type="text" class="form-control" disabled>
+                            <div class="input-group-prepend">
+                                <span style="width: 80px" class="input-group-text">To:</span>
+                            </div>
+                            <input th:value="${visit.getFormattedEndDate()}"
+                                   style="color: white;background-color: rgba(0,0,0,0.5)" type="text"
+                                   class="form-control" disabled>
                         </div>
 
                         <div class="input-group form-group" style="width: 60%; margin-left: 20%">
-                            <input th:value="${'Status: ' + visit.getStatus().getName()}"
-                                   style="color: white;background-color: rgba(0,0,0,0.5); margin-bottom: 25px" type="text" class="form-control" disabled>
+                            <div class="input-group-prepend">
+                                <span style="width: 80px" class="input-group-text">Status:</span>
+                            </div>
+                            <input th:value="${visit.getStatus().getName()}"
+                                   style="color: white;background-color: rgba(0,0,0,0.5)"
+                                   type="text" class="form-control" disabled>
                         </div>
 
 
@@ -169,13 +214,25 @@
                         <h3 style="text-align: center; ">Services</h3>
                         <br>
 
-                        <div class="input-group form-group" style="width: 60%; margin-left: 20%" th:each=" service : ${visit.getServices()}">
-                            <input th:value="${service.getServiceName()}"
-                                   style="color: white;background-color: rgba(0,0,0,0.5)" type="text" class="form-control" disabled>
+                        <div class="input-group form-group" style="width: 60%; margin-left: 20%"
+                             th:each=" service : ${visit.displayServices()}">
+                            <div class="input-group-prepend">
+                                <span style="width: 80px" class="input-group-text"><h3
+                                        style="margin-left: 10px; margin-top: -10px; margin-bottom: -12px; color: black"
+                                        class="ri-tools-fill"></h3>
+</span>
+                            </div>
+                            <input th:value="${service.getServiceName() + ' - ' + service.getServicePriceBGN() + '.00 BGN'}"
+                                   style="color: white;background-color: rgba(0,0,0,0.5)" type="text"
+                                   class="form-control" disabled>
                         </div>
 
                         <div class="input-group form-group" style="width: 60%; margin-left: 20%">
-                            <input th:value="${'Total cost: ' + visit.getTotalCost() + ' BGN'}" style="color: white;background-color: rgba(0,0,0,0.5); margin-bottom: 25px"
+                            <div class="input-group-prepend">
+                                <span style="width: 80px" class="input-group-text">Total:</span>
+                            </div>
+                            <input th:value="${visit.getTotalCost() + '.00 BGN'}"
+                                   style="color: white;background-color: rgba(0,0,0,0.5)"
                                    type="text" class="form-control" disabled>
                         </div>
 
@@ -190,7 +247,8 @@
                             <div class="form-row-total" style="visibility: hidden; display: none">
                                 <div class="form-row">
                                     <label style="margin-bottom: 5px">Select visit/s</label>
-                                    <select required th:name="selectedVisits" data-placeholder="Begin typing a visit id to filter..."
+                                    <select required th:name="selectedVisits"
+                                            data-placeholder="Begin typing a visit id to filter..."
                                             multiple class="chosen-select"
                                             name="test" style="width: 100%">
                                         <option selected th:value="${visit.getId()}"></option>
@@ -201,7 +259,8 @@
                             <div class="form-row-total" style="margin-bottom: 25px">
                                 <div class="form-row" style="align-content: center; text-align: center">
                                     <h5 style="margin-left: 35%; color: white">Select a currency</h5>
-                                    <select th:name="selectedCurrency" class="form-select" aria-label="Default select example"
+                                    <select th:name="selectedCurrency" class="form-select"
+                                            aria-label="Default select example"
                                             style="background-color: rgba(0,0,0,0.5); color: white; margin-bottom: 10px; width: 60%; margin-left: 20%">
                                         <option th:each="currency : ${currencies}"
                                                 th:value="${currency.name()}"
@@ -228,14 +287,17 @@
                             <h4 style="text-align: center; margin-bottom: 25px; color: white">No photos available</h4>
                         </div>
 
-                        <div th:each="photo : ${visit.getPhotos()}" class="row align-items-start" style="margin-bottom: 45px; width: 40%">
-                            <div style="margin-bottom: 0; margin-left: 20%">
-                                <img th:src="${photo.getPhoto()}" src="https://res.cloudinary.com/tddvjavaforum/image/upload/v1649339932/SmartGarage/VisitPhotos/visitID-38/token-a7cfc61d-ae12-4c6a-97ad-4df2c81ca312.jpg">
+                        <div th:each="photo : ${visit.getPhotos()}" class="row align-items-start"
+                             style="margin-bottom: 45px; width: 40%">
+                            <div style="margin-bottom: 0; margin-left: 115px">
+                                <img th:src="${photo.getPhoto()}" style="border: solid #ffc451"
+                                     src="https://res.cloudinary.com/tddvjavaforum/image/upload/v1649339932/SmartGarage/VisitPhotos/visitID-38/token-a7cfc61d-ae12-4c6a-97ad-4df2c81ca312.jpg">
                             </div>
 
                             <div th:if="${currentUser.getRole().getId() != 3}">
                                 <a th:href="@{/visits/{id}/photos/{token}/delete(id=${visit.getId()}, token=${photo.getToken()})}">
-                                    <button type="submit" class="btn btn-outline-danger btn-lg" style="margin-left: 50px">Delete
+                                    <button type="submit" class="btn btn-outline-danger btn-lg"
+                                            style="margin-top: 20px; margin-left: 115px;width: 350px">Delete
                                     </button>
                                 </a>
                             </div>
@@ -244,21 +306,25 @@
 
 
                         <div style="padding-bottom: 100px; margin-left: 3.5%" class="w3-cell-row"
-                                th:if="${currentUser.getRole().getId() != 3}">
+                             th:if="${currentUser.getRole().getId() != 3}">
 
                             <hr style="color:white; border: solid ; opacity: 20%; width: 80%; margin-left: 9%">
 
                             <form class="formBox" id="form" enctype="multipart/form-data" style="margin: 0"
-                                  th:action="@{/visits/{id}/photos(id=${photoDTO.getVisitId()})}" th:object="${photoDTO}" method="post">
+                                  th:action="@{/visits/{id}/photos(id=${photoDTO.getVisitId()})}"
+                                  th:object="${photoDTO}" method="post">
 
-                                <h3 style="margin-left: 120px; margin-bottom: 30px; width: 500px">Upload a new image</h3>
+                                <h3 style="margin-left: 120px; margin-bottom: 30px; width: 500px">Upload a new
+                                    image</h3>
 
-                                <input type="number" th:field="*{visitId}" name="inpFile" style="visibility: hidden; display: none">
+                                <input type="number" th:field="*{visitId}" name="inpFile"
+                                       style="visibility: hidden; display: none">
 
-                                <input required type="file" multiple="multiple" th:field="*{photo}" name="inpFile" id="inpFile"
-                                       style="padding-left: 55px; padding-top: 15px; color: white">
+                                <input required type="file" multiple="multiple" th:field="*{photo}" name="inpFile"
+                                       id="inpFile"
+                                       style="padding-left: 115px; padding-top: 15px; color: white">
 
-                                <div style="padding-left: 55px" class="w3-container w3-cell">
+                                <div style="padding-left: 115px" class="w3-container w3-cell">
                                     <div class="image-preview" id="imagePreview">
                                         <img src="" alt="Image Preview" class="image-preview__image">
                                         <span class="image-preview__default-text">Image preview</span>
@@ -269,7 +335,7 @@
 
                                 <div class="w3-cell-row w3-cell">
                                     <button type="submit" class="btn btn-outline-light btn-lg" id="submit-button"
-                                            style="margin-left: 55px">Upload
+                                            style="margin-left: 92px;width:350px">Upload
                                     </button>
                                 </div>
 
@@ -286,7 +352,7 @@
         </div>
     </div>
 
-    <div style="margin-top: 35%">
+    <div style="margin-top: 120%">
         <footer th:replace="index.html :: footer"></footer>
     </div>
     <div id="preloader"></div>

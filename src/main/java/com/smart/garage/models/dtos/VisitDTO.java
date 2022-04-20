@@ -9,10 +9,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
-import static com.smart.garage.utility.VisitDateExtractor.formatDate;
+import static com.smart.garage.utility.VisitDataExtractor.formatDate;
 
 @Getter
 @Setter

@@ -25,6 +25,8 @@ public interface VisitService {
 
     Visit create(User requester, User user, Vehicle vehicle, Visit visit, Set<Integer> serviceIDs);
 
+    void accept(User requester, int id);
+
     Visit update(User requester, Visit visit, Set<Integer> serviceIDs);
 
     void softDelete(User requester, int id);

@@ -22,7 +22,7 @@ public class ReportProducerHelper {
     private final EmailService emailService;
     private final VisitService visitService;
 
-    public static final String DEST = "reports/";
+    public static final String DEST = "s3://elasticbeanstalk-eu-west-3-527048854654/resources/reports/";
 
     @Autowired
     public ReportProducerHelper(ForexCurrencyExchange forexCurrencyExchange, EmailService emailService, VisitService visitService) {
@@ -32,7 +32,8 @@ public class ReportProducerHelper {
     }
 
     public void generateReport(User requester, int[] visitIDs, Currencies selectedCurrency) throws IOException {
-        LicenseKey.loadLicenseFile(new File("itext-license-key.json"));
+        InputStream resource = getClass().getClassLoader().getResourceAsStream("itext-license-key.json");
+        LicenseKey.loadLicenseFile(resource);
 
         List<Visit> visitList = getAllVisits(requester, visitIDs);
 
@@ -56,19 +57,11 @@ public class ReportProducerHelper {
         });
 
         htmlReport.append(getHtmlPageEnd());
-
-        String documentName = DEST + "Visit-report-for-" + requester.getUsername() + ".pdf";
-        File reportPDF = new File(documentName);
-
-        OutputStream fileOutputStream = new FileOutputStream(documentName);
-        HtmlConverter.convertToPdf(htmlReport.toString(), fileOutputStream);
-
+        String fileName = "Visit-report-for-" + requester.getUsername() + ".pdf";
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        HtmlConverter.convertToPdf(htmlReport.toString(), byteArrayOutputStream);
         String emailContent = emailService.buildReportEmail(requester);
-        emailService.send(requester.getEmail(), emailContent, "Visit Report", reportPDF);
-
-        if (reportPDF.exists()) {
-            reportPDF.delete();
-        }
+        emailService.send(requester.getEmail(), emailContent, "Visit Report", byteArrayOutputStream, fileName);
     }
 
     private void checkValidVisitSelection(User requester, List<Visit> visitList) {
@@ -85,6 +78,30 @@ public class ReportProducerHelper {
         }
 
         return visitList;
+    }
+
+    private String getVisitSection(User requester, Visit visit, Currencies selectedCurrency) throws IOException {
+        double convertedVisitCost = forexCurrencyExchange.convertPriceFromBGNToForeignCurrency(selectedCurrency, visit.getTotalCost());
+
+        List<String> services = visit.displayServices().stream().map(ServiceRecord::getServiceName).collect(Collectors.toList());
+        String servicesString = String.join(", ", services);
+
+        String startDate = String.format("%d-%s-%d", visit.getStartDate().getYear(), visit.getStartDate().getMonth(), visit.getStartDate().getDayOfMonth());
+        String endDate = visit.getEndDate() == null ? "-" : String.format("%d-%s-%d", visit.getEndDate().getYear(), visit.getEndDate().getMonth(), visit.getEndDate().getDayOfMonth());
+
+        StringBuilder visitSection = new StringBuilder("\n" +
+                "    <p style=\"padding: 20px 0px 20px 10px; font-size: 20px; color: rgb(255, 255, 255); background: grey; margin-top: 30px;page-break-before: auto\">\n" +
+                "        Visit ID: \n" + visit.getId() +
+                "    </p>\n" +
+                "\n");
+
+        if (requester.getRole().getName() != UserRoles.CUSTOMER) {
+            visitSection.append(addVehicleOwnerSection(visit));
+        }
+
+        visitSection.append(addVehicleSection(visit, convertedVisitCost, selectedCurrency, servicesString, endDate, startDate));
+
+        return visitSection.toString();
     }
 
     private String getHTMLStringStart(LocalDateTime dateOfReportRequest) {
@@ -191,30 +208,6 @@ public class ReportProducerHelper {
                 "    </div>\n" +
                 "\n" +
                 "\n";
-    }
-
-    private String getVisitSection(User requester, Visit visit, Currencies selectedCurrency) throws IOException {
-        double convertedVisitCost = forexCurrencyExchange.convertPriceFromBGNToForeignCurrency(selectedCurrency, visit.getTotalCost());
-
-        List<String> services = visit.displayServices().stream().map(ServiceRecord::getServiceName).collect(Collectors.toList());
-        String servicesString = String.join(", ", services);
-
-        String startDate = String.format("%d-%s-%d", visit.getStartDate().getYear(), visit.getStartDate().getMonth(), visit.getStartDate().getDayOfMonth());
-        String endDate = visit.getEndDate() == null ? "-" : String.format("%d-%s-%d", visit.getEndDate().getYear(), visit.getEndDate().getMonth(), visit.getEndDate().getDayOfMonth());
-
-        StringBuilder visitSection = new StringBuilder("\n" +
-                "    <p style=\"padding: 20px 0px 20px 10px; font-size: 20px; color: rgb(255, 255, 255); background: grey; margin-top: 30px;page-break-before: auto\">\n" +
-                "        Visit ID: \n" + visit.getId() +
-                "    </p>\n" +
-                "\n");
-
-        if (requester.getRole().getName() != UserRoles.CUSTOMER) {
-            visitSection.append(addVehicleOwnerSection(visit));
-        }
-
-        visitSection.append(addVehicleSection(visit, convertedVisitCost, selectedCurrency, servicesString, endDate, startDate));
-
-        return visitSection.toString();
     }
 
     private String addVehicleSection(Visit visit, Double convertedVisitCost, Currencies selectedCurrency,

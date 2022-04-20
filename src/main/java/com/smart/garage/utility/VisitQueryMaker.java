@@ -14,7 +14,8 @@ public class VisitQueryMaker {
     private static final String BY_START_DATE = "start_date >= :startDate";
     private static final String BY_END_DATE = "start_date <= :endDate";
 
-    public static final String DEFAULT_ORDER_DESC = " ORDER BY visits.id DESC";
+    public static final String DEFAULT_ORDER_ASC = " ORDER BY visits.id DESC";
+    public static final String DEFAULT_ORDER_DESC = " ORDER BY visits.id ASC";
 
     private static final String ORDER_BY_STATUS_ASC = " ORDER BY status_id ASC";
     private static final String ORDER_BY_STATUS_DESC = " ORDER BY status_id DESC";
@@ -53,7 +54,7 @@ public class VisitQueryMaker {
     }
 
     public void setSortClause(Optional<String> sorting, Optional<String> order) {
-        if (sorting.isEmpty() && order.isPresent()) setDefaultSort(order);
+        if (sorting.isEmpty()) setDefaultSort(order);
 
         if (sorting.isPresent()) {
             String sortBy = sorting.get();
@@ -92,9 +93,11 @@ public class VisitQueryMaker {
     }
 
     private void setDefaultSort(Optional<String> order) {
-        if (order.get().equalsIgnoreCase("desc")) {
+        if (order.isEmpty() || order.get().equalsIgnoreCase("asc")) {
+            query.append(DEFAULT_ORDER_ASC);
+        } else if (order.get().equalsIgnoreCase("desc")) {
             query.append(DEFAULT_ORDER_DESC);
-        } else if (!order.get().equalsIgnoreCase("asc")) {
+        } else {
             throw new InvalidParameter(INVALID_ORDER);
         }
     }

@@ -111,11 +111,14 @@
         <div class="row">
             <div class="col" style="margin-top: 5px; margin-bottom: 30px">
                 <a th:href="@{/services/new}" th:if="${currentUser.getRole().getId() != 3}">
-                    <button type="submit" class="btn btn-warning btn-lg" id="newModalButton"
-                            style="border-color: black">
-                        <b>Create new</b>
+                    <button type="submit" class="btn btn-warning" style="float: left; width: 100%; border-color: black">
+                        <div style="float: left; margin-left: 45%">
+                            <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,w_37/v1649363820/SmartGarage/add-new_zzvu76.png">
+                        </div>
+                        <div style="float: left; margin-top: 5px; margin-left: 10px"><b>Add New</b></div>
                     </button>
                 </a>
+
             </div>
         </div>
 
@@ -138,7 +141,7 @@
                     <td th:if="${currentUser.getRole().getId() != 3}" style="width: 100px">
                         <a th:href="@{~/services/{id}/update(id=${service.getId()})}">
                             <button class="btn btn-warning" style="margin-top: 0; margin-bottom: 0; margin-left: 20%; border-color: black">
-                                <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_fit,w_27/v1648736003/SmartGarage/update-service_cb70u5.png">
+                                <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_fit,w_32/v1648736003/SmartGarage/update-service_cb70u5.png">
                             </button>
                         </a>
                     </td>
@@ -146,7 +149,7 @@
                         <a th:href="@{~/services/{id}/delete(id=${service.getId()})}">
                             <button class="btn btn-warning"
                                     style="margin-top: 0; margin-bottom: 0; margin-left: 20%; border-color: black">
-                                <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,w_30/v1648736344/SmartGarage/delete-image_o6uwau.png"
+                                <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,w_34/v1648736344/SmartGarage/delete-image_o6uwau.png"
                                      onclick="return confirm('Are you sure you want to delete this service?')">
                             </button>
                         </a>

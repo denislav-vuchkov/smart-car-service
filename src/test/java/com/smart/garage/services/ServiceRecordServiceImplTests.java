@@ -3,6 +3,9 @@ package com.smart.garage.services;
 import com.smart.garage.Helper;
 import com.smart.garage.exceptions.UnauthorizedOperationException;
 import com.smart.garage.models.ServiceRecord;
+import com.smart.garage.models.User;
+import com.smart.garage.models.Vehicle;
+import com.smart.garage.models.Visit;
 import com.smart.garage.repositories.contracts.ServiceRecordRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,6 +16,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 @ExtendWith(MockitoExtension.class)
 public class ServiceRecordServiceImplTests {
@@ -64,14 +68,29 @@ public class ServiceRecordServiceImplTests {
 
     @Test
     void create_Throws_When_UserIsNotEmployee() {
+
+        User customer1 = Helper.createCustomer();
+        customer1.setVehicleSet(new HashSet<>());
+        customer1.setId(5);
+
+        User customer2 = Helper.createCustomer();
+        customer2.setVehicleSet(new HashSet<>());
+        customer2.setId(10);
+        Vehicle vehicle = new Vehicle();
+        vehicle.setUser(customer2);
+
+        Visit visit = new Visit();
+        visit.setUser(customer2);
+        visit.setVehicle(vehicle);
+
         Assertions.assertThrows(UnauthorizedOperationException.class,
-                () -> serviceRecordService.create(Helper.createCustomer(), new ServiceRecord()));
+                () -> serviceRecordService.create(customer1, new ServiceRecord(), visit));
     }
 
     @Test
     void create_Should_Call_RepoMethod() {
         ServiceRecord serviceRecord = new ServiceRecord();
-        serviceRecordService.create(Helper.createEmployee(), serviceRecord);
+        serviceRecordService.create(Helper.createEmployee(), serviceRecord, new Visit());
         Mockito.verify(serviceRecordRepository, Mockito.times(1))
                 .create(serviceRecord);
     }

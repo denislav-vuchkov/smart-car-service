@@ -12,9 +12,14 @@ repositories {
     mavenCentral()
 }
 
-//Required for Heroku deployment
 jar {
-    enabled = false
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    zip64 = true
 }
 
 dependencies {
@@ -24,7 +29,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.3'
+    implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.4'
 
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
@@ -72,12 +77,8 @@ dependencies {
     // https://mvnrepository.com/artifact/com.itextpdf/itext-licensekey
     implementation files('licensing-base-4.0.2.jar')
 
-
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
     testImplementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.36', ext: 'pom'
-
-    // https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3
-    implementation group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.12.198'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

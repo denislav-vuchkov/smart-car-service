@@ -6,6 +6,7 @@ import com.smart.garage.exceptions.InvalidParameter;
 import com.smart.garage.exceptions.UnauthorizedOperationException;
 import com.smart.garage.models.*;
 import com.smart.garage.repositories.contracts.VisitRepository;
+import com.smart.garage.services.contracts.EmailService;
 import com.smart.garage.services.contracts.ServiceRecordService;
 import com.smart.garage.services.contracts.ServicesService;
 import com.smart.garage.services.contracts.VehicleService;
@@ -17,6 +18,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.io.ByteArrayOutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,6 +38,8 @@ public class VisitServiceImplTests {
     ServicesService servicesService;
     @Mock
     ServiceRecordService serviceRecordService;
+    @Mock
+    EmailService emailService;
 
     @InjectMocks
     VisitServiceImpl visitService;
@@ -130,8 +134,22 @@ public class VisitServiceImplTests {
 
     @Test
     void create_Throws_When_UserIsNotEmployee() {
+        User customer1 = Helper.createCustomer();
+        customer1.setVehicleSet(new HashSet<>());
+        customer1.setId(5);
+
+        User customer2 = Helper.createCustomer();
+        customer2.setVehicleSet(new HashSet<>());
+        customer2.setId(10);
+        Vehicle vehicle = new Vehicle();
+        vehicle.setUser(customer2);
+
+        Visit visit = new Visit();
+        visit.setUser(customer2);
+        visit.setVehicle(vehicle);
+
         Assertions.assertThrows(UnauthorizedOperationException.class,
-                () -> visitService.create(Helper.createCustomer(), new Visit(), new HashSet<>()));
+                () -> visitService.create(customer1, visit, new HashSet<>()));
     }
 
     @Test
@@ -212,7 +230,7 @@ public class VisitServiceImplTests {
         Mockito.when(servicesService.getById(Mockito.anyInt())).thenReturn(testService);
         visitService.create(Helper.createEmployee(), visit, Set.of(7));
         Mockito.verify(serviceRecordService, Mockito.times(1))
-                .create(Mockito.any(User.class), Mockito.any(ServiceRecord.class));
+                .create(Mockito.any(User.class), Mockito.any(ServiceRecord.class), Mockito.any(Visit.class));
     }
 
     @Test
@@ -391,6 +409,84 @@ public class VisitServiceImplTests {
                 () -> visitService.create(Helper.createEmployee(), customer, vehicle, visit, new HashSet<>()));
     }
 
+    @Test
+    void accept_Throws_When_UserIsNotEmployee() {
+        Assertions.assertThrows(UnauthorizedOperationException.class,
+                () -> visitService.accept(Helper.createCustomer(), 5));
+    }
+
+    @Test
+    void accept_Should_Retrieve_OriginalFromRepo() {
+        Visit visit = new Visit();
+        visit.setId(10);
+        visit.setUser(Helper.createCustomer());
+        visit.setVehicle(new Vehicle());
+        visit.setStartDate(LocalDate.now());
+        visit.setStatus(StatusCode.REQUESTED.getStatus());
+        Mockito.when(visitRepository.getById(Mockito.anyInt())).thenReturn(visit);
+        Mockito.when(emailService.buildVisitConfirmationEmail(
+                Mockito.any(Vehicle.class), Mockito.any(LocalDate.class))).thenReturn("");
+        visitService.accept(Helper.createEmployee(), 10);
+        Mockito.verify(visitRepository, Mockito.times(1)).getById(10);
+    }
+
+    @Test
+    void accept_Throws_When_StatusNotRequested() {
+        Visit visit = new Visit();
+        visit.setStatus(StatusCode.IN_PROGRESS.getStatus());
+        Mockito.when(visitRepository.getById(Mockito.anyInt())).thenReturn(visit);
+        Assertions.assertThrows(IllegalStateException.class,
+                () -> visitService.accept(Helper.createEmployee(), 5));
+    }
+
+    @Test
+    void accept_Should_ChangeStatus_FromRequestedToNotStarted() {
+        Visit visit = new Visit();
+        visit.setId(10);
+        visit.setUser(Helper.createCustomer());
+        visit.setVehicle(new Vehicle());
+        visit.setStartDate(LocalDate.now());
+        visit.setStatus(StatusCode.REQUESTED.getStatus());
+        Mockito.when(visitRepository.getById(Mockito.anyInt())).thenReturn(visit);
+        Mockito.when(emailService.buildVisitConfirmationEmail(
+                Mockito.any(Vehicle.class), Mockito.any(LocalDate.class))).thenReturn("");
+        visitService.accept(Helper.createEmployee(), 10);
+        Assertions.assertEquals(StatusCode.NOT_STARTED.getStatus(), visit.getStatus());
+    }
+
+    @Test
+    void accept_Should_Call_UpdateRepoMethod() {
+        Visit visit = new Visit();
+        visit.setId(10);
+        visit.setUser(Helper.createCustomer());
+        visit.setVehicle(new Vehicle());
+        visit.setStartDate(LocalDate.now());
+        visit.setStatus(StatusCode.REQUESTED.getStatus());
+        Mockito.when(visitRepository.getById(Mockito.anyInt())).thenReturn(visit);
+        Mockito.when(emailService.buildVisitConfirmationEmail(
+                Mockito.any(Vehicle.class), Mockito.any(LocalDate.class))).thenReturn("");
+        visitService.accept(Helper.createEmployee(), 10);
+        Mockito.verify(visitRepository, Mockito.times(1)).update(visit);
+    }
+
+
+    @Test
+    void accept_Should_Call_SendEmailMethod() {
+        Visit visit = new Visit();
+        visit.setId(10);
+        visit.setUser(Helper.createCustomer());
+        visit.setVehicle(new Vehicle());
+        visit.setStartDate(LocalDate.now());
+        visit.setStatus(StatusCode.REQUESTED.getStatus());
+        Mockito.when(visitRepository.getById(Mockito.anyInt())).thenReturn(visit);
+        Mockito.when(emailService.buildVisitConfirmationEmail(
+                Mockito.any(Vehicle.class), Mockito.any(LocalDate.class))).thenReturn("");
+        visitService.accept(Helper.createEmployee(), 10);
+        Mockito.verify(emailService, Mockito.times(1)).send(
+                Mockito.anyString(), Mockito.anyString(), Mockito.anyString(),
+                Mockito.nullable(ByteArrayOutputStream.class), Mockito.nullable(String.class));
+    }
+
 
     @Test
     void update_Throws_When_UserIsNotEmployee() {
@@ -492,7 +588,7 @@ public class VisitServiceImplTests {
         Mockito.verify(serviceRecordService, Mockito.times(0))
                 .delete(Mockito.any(User.class), Mockito.anyInt());
         Mockito.verify(serviceRecordService, Mockito.times(0))
-                .create(Mockito.any(User.class), Mockito.any(ServiceRecord.class));
+                .create(Mockito.any(User.class), Mockito.any(ServiceRecord.class), Mockito.any(Visit.class));
     }
 
     @Test
@@ -529,7 +625,7 @@ public class VisitServiceImplTests {
         Mockito.verify(serviceRecordService, Mockito.times(1))
                 .delete(Mockito.any(User.class), Mockito.anyInt());
         Mockito.verify(serviceRecordService, Mockito.times(1))
-                .create(Mockito.any(User.class), Mockito.any(ServiceRecord.class));
+                .create(Mockito.any(User.class), Mockito.any(ServiceRecord.class), Mockito.any(Visit.class));
     }
 
     @Test
@@ -562,7 +658,9 @@ public class VisitServiceImplTests {
 
     @Test
     void delete_Should_Retrieve_OriginalFromRepo() {
-        Mockito.when(visitRepository.getById(Mockito.anyInt())).thenReturn(new Visit());
+        Visit visit = new Visit();
+        visit.setStatus(StatusCode.NOT_STARTED.getStatus());
+        Mockito.when(visitRepository.getById(Mockito.anyInt())).thenReturn(visit);
         visitService.softDelete(Helper.createEmployee(), 10);
         Mockito.verify(visitRepository, Mockito.times(1)).getById(10);
     }
@@ -577,8 +675,20 @@ public class VisitServiceImplTests {
     }
 
     @Test
-    void delete_Should_Update_VehicleStatus() {
+    void delete_Should_Decline_RequestedVisits() {
         Visit visit = new Visit();
+        visit.setStatus(StatusCode.REQUESTED.getStatus());
+        visit.setDeleted(false);
+        Mockito.when(visitRepository.getById(Mockito.anyInt())).thenReturn(visit);
+        visitService.softDelete(Helper.createEmployee(), 10);
+        Assertions.assertEquals(StatusCode.DECLINED.getStatus(), visit.getStatus());
+    }
+
+
+    @Test
+    void delete_Should_Update_VisitDeleteStatus() {
+        Visit visit = new Visit();
+        visit.setStatus(StatusCode.NOT_STARTED.getStatus());
         visit.setDeleted(false);
         Mockito.when(visitRepository.getById(Mockito.anyInt())).thenReturn(visit);
         visitService.softDelete(Helper.createEmployee(), 10);

@@ -81,8 +81,8 @@ public class UserServiceImpl implements UserService {
         String password = generatePassayPassword();
         user.setPassword(password);
 
-        emailService.send(user.getEmail(), emailService.buildWelcomeEmail(user), "Smart Garage - Welcome!", null);
-        emailService.send(user.getEmail(), emailService.buildPasswordEmail(user), "Smart Garage - Your Password!", null);
+        emailService.send(user.getEmail(), emailService.buildWelcomeEmail(user), "Smart Garage - Welcome!", null, null);
+        emailService.send(user.getEmail(), emailService.buildPasswordEmail(user), "Smart Garage - Your Password!", null, null);
 
         BCryptPasswordEncoder encoder = passwordEncoder.getBCryptPasswordEncoder();
         password = encoder.encode(password);
@@ -252,8 +252,8 @@ public class UserServiceImpl implements UserService {
     }
 
     private void sendEmailWithResetPasswordToken(User user, String token) {
-        String link = "http://localhost:8080/reset-password?token=" + token;
-        emailService.send(user.getEmail(), emailService.buildResetPasswordEmail(link), "Smart Garage - Reset your password", null);
+        String link = "http://smartgarage.shop/reset-password?token=" + token;
+        emailService.send(user.getEmail(), emailService.buildResetPasswordEmail(link), "Smart Garage - Reset your password", null, null);
     }
 
 }
