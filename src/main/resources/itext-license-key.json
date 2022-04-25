@@ -3,12 +3,12 @@
     "product": "itext-core",
     "licensee": {
       "company": "N/A",
-      "name": "Tihomir Dimitrov",
-      "email": "dimitrovtihomir7@gmail.com"
+      "name": "Denislav Vuchkov",
+      "email": "denislav.vuchkov@gmail.com"
     },
-    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
-    "creationDate": "2022-04-04",
-    "expirationDate": "2022-05-04",
+    "key": "9660706a4a1abeb0cc40592b2e7c8b9afdf39381368368de0d248f705083f6a2",
+    "creationDate": "2022-04-25",
+    "expirationDate": "2022-05-25",
     "onExpiration": "grace",
     "gracePeriod": "1d0h0m",
     "platform": "any",
@@ -25,18 +25,18 @@
     },
     "licenseVersion": "1.0.0",
     "sendStatistics": "disabled",
-    "signature": "R1lL53THzsULRGiXTerdP2w5dysxLhca+vRu3MLtXEKn9pgJn3dp68t/Owm7Dq9GWFADHmtIgswjiBVCXOHZAxcR/aghHD04Az+EEjo5bMKeZDvJVuH+oQeGhjAHur/F5xCCOliyW54rysUzFvjqruJYlZ4hgpeLGrxdvqppjxSBVHUWwEQeIV2LO25I6GDqu4hAfrkfwQ2BilXhjBmfBbykBZW9LsYC/djJE/9tphIa16XIZ2YZK7fplY0GvEnsyTxvLeobFPVEtjHjOiYG5/vsqGo4gMQQiLK80N846p6sAxwdQ/KcceK+JVeh9IYw7ncJvRuih7GVRWQc0vfPmJpTqFfUAptr6tx0IcEgZ918L2lQOdgTG+8njTeVH0dDOP0gzTUx5wmLemkJ45+FbbF4TF9e/QOMzoi5RaPw1fEWQaWN8jOCafwBVYzzlCs7fk4945hqZ2kRDxrYpD0CX7ISPlBkINnGOP3H2wpNqtd4h/JNaN3b1FQpn7hKjUlMc4f6Nz7fPAkBjysFVhJ1FMbNmiotHi6CoQPVXuq5AiXuworcKRE7QfYp+BmeTsgAR1ifSUuyZ0BoUULRqdxo6Xe7ufl+YodXpZ4GWvHe9vE5xW5Hj30fMZLSS6GPN1oBmtfvckyF8KUvbLD+qmdYvh8rLvczijmAuZmeV4fLwfw="
+    "signature": "dC9GfNsEeDwNyhGO92YPGYs+sQtUVMv5dEMnuCh2gZs9lquvNt2OcH12m1+NuYrPOXzXcEzgw/zOoSs8mvPn252NGZVEnqTCykxNI+17cLYRgHkZCsErjYiaUD8Ak0jlzen4DwjZjpdrSXX7bd7cuwK3qoiGMNKyPMSfPSWoaFJwxeBnuLwNOqpyOhV57PMViOlfVRhopR/bQo6C3v6AfqL7gYIeP28BWmPBLdXyjM9ndfqb5t1JfjaHUbud/2bZHyQgkNuBL/3IFMnB6hY7nrXU935WYq3/+GKti01nqpVmIjIYzq+Sdji1LOUSIiyrxgx3Kw9rcjPSnO2Wgd6rTiBdqAijXSrotU0BaLUXYIVe7ldHJpuJgL60GJFKy8/SRUZg+VblkU36ruaqMvCsIiWXdQURjK1f7m9afVoMLE1iZxtjpBTC24mOQBfmVWupZrNy9OzQoyAcPYA0jNwhZlC+uk/n2EJil/5U7/cIl7YP+B1fzxkhz5mK5+lkChZxxBSOgH2TZLvyRAFw9tQZKkWsLpOuzH3sdrI0IFRIizTWvTo0Fl/spsAqFxJpsCJzKburVCrLyWAsYjo9s04t9tiDa+S182ect9YWbCDalV2XGOmL/S6gqK95dngQQ6+W1WBzWbAcfe6Q7Ca3vi7FghGEbHxkXZDny64yL/Bbn58="
   },
   {
     "product": "pdfXfa",
     "licensee": {
       "company": "N/A",
-      "name": "Tihomir Dimitrov",
-      "email": "dimitrovtihomir7@gmail.com"
+      "name": "Denislav Vuchkov",
+      "email": "denislav.vuchkov@gmail.com"
     },
-    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
-    "creationDate": "2022-04-04",
-    "expirationDate": "2022-05-04",
+    "key": "9660706a4a1abeb0cc40592b2e7c8b9afdf39381368368de0d248f705083f6a2",
+    "creationDate": "2022-04-25",
+    "expirationDate": "2022-05-25",
     "onExpiration": "grace",
     "gracePeriod": "1d0h0m",
     "platform": "any",
@@ -52,18 +52,18 @@
     },
     "licenseVersion": "1.0.0",
     "sendStatistics": "disabled",
-    "signature": "DgWNWWI0NEGgGtCJVuKtnVQKmSeSHXg8xQIcnnqEXvqtQYVReXb/IM6mr5u8ctWKzQ/CDDkFAJtam0xpQlQZo4kHo2Lb35JZQoIgT8shhlpYPLKiY1LlwLcADbmXPGbtEELCOYglPerQbqSCJQNtFrzcNirKSRbtIgOWF7RfDfeHaYyaJK0MUO7wdyLbyY9QaGJeDLAShbMfVFiYVWAYV+b5xwTixzXM6daAmtqx1SXTegc0mzkBIxoatgzX2edSVwqZswST59x2TBOmrPpHykXas/6WqChbYHgl6lzw16j9Gk3xDLrMQxflEFKSQ7YptRsQ16LVDBfhSJkYnR6Awsf4hbpkmgsrC0cJmaHR6H0DKuygx4Od3/KBSY2PAuXsEgMk69yfqvjQLzuOTNJfdAmmnKMh5BB1IESlQ2y6zulTb8MDbqQ0/IY5mAh+ZfJx/9rtbRm9ewc4CZHdqQfR+mS+LE4QVGSrB1nYf+/ZM78ug/dZO2ycvpyEHxu43JYzXZid8mgDJnKihYLzSwHUxR4H74Gb2LPFdE4tC4rmxkS5csifRLbu2QiwNdOU0NaYYGtor0DAheWjaTtNXks1+tE03E3JcCdzhZxi+VZznpjhM9l4Fpd0U0etSbv2XMXMSPNNFc1FU6gUnLzOUsn6k0SaG/H3YvCurOOZKn6yNPg="
+    "signature": "Dn0CFaqitpzE/2gQwaWgBVy7qZXahk8rJ0XJbx03xAQSomcptzdjdGn2IpYV66YB2rPfyZhCExPd+yzJsPUnsi7WHZHhbWPQKnjjDxT51rMCqwzqdaSqxRFEpYlP2UEV0vJFp6/5O7Dd73kBoTnDqFnJF8qtQokmu/Ui+cXOmQshltZea4BPgUCK4eH3wL0cEvRrK0ztCkq+j+niRJFfRA7RGZAa3oXtFcNio+lKQIkYgTmitcsOHngptDKLgEIjcCXUnqenevwWSA/yOfjjCRM/NuAhY8sZsVmeAsnX4Z6XP+5AG3L7/AQ4DSIUS/UVDebiQkcM1bKFc+SDmV17mpGsKTd8gFfJtOgFEBoY2n5hdbfefoyteBQwk81d48yLCt9u2Gplf7x4GLXNA57If/E71SLpE8rrQNo7EHltuvFk1MaMlreAFGNA+wPzvXYgQZ9dSbtfIUOSSdg7BKXTfqA8uu8DUrUPY2oBRJLuy/Xv0RbC8v3B4bKRv4zGdiMeDZRF8wEH11mUQfJbX8FORir4racUH27yiw0G94gB8FHvdvynrFvGt5yw2HQgIhEWQ98zG9kTVJaItj87pXMvU1MO8oENHu6G9tylBaG0N16dUuhrpHMlg9lwgY5N30spQdZcVjN8LsQR1tB1VgsZu39vbC2bkZsuGsj1XpN47/M="
   },
   {
     "product": "pdfSweep",
     "licensee": {
       "company": "N/A",
-      "name": "Tihomir Dimitrov",
-      "email": "dimitrovtihomir7@gmail.com"
+      "name": "Denislav Vuchkov",
+      "email": "denislav.vuchkov@gmail.com"
     },
-    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
-    "creationDate": "2022-04-04",
-    "expirationDate": "2022-05-04",
+    "key": "9660706a4a1abeb0cc40592b2e7c8b9afdf39381368368de0d248f705083f6a2",
+    "creationDate": "2022-04-25",
+    "expirationDate": "2022-05-25",
     "onExpiration": "grace",
     "gracePeriod": "1d0h0m",
     "platform": "any",
@@ -79,18 +79,18 @@
     },
     "licenseVersion": "1.0.0",
     "sendStatistics": "disabled",
-    "signature": "h8YCtxS0y16JZuF8khMVpE07YUNuWVHQkorSETdO4rLt7kQpHoo2kvDV88010xWOjseD7/YUNul8sBYxaFrOc+4ko/+3Gbb53lbM6Ag22u2PE5OkBuHep7dbqdih6JS/bpAm8e4C/qEOly3sH1RxVXi/t6mMtVX9W9cyn78oDXmPnCgUWBrQMvBHcOI4Ss1OsSomE4UOpcGJus8OvUdNAcKJNjCaXrt0EFieUAC+fPBXZvZ/my+yJff2jxp3It5Bgmw7UupAEQFSuUN0mrJSCIQ5otg3e6EhuVooLnRFD4SC6eqhJxu83XI6o53a74Ib/OThvnMTBv9C6Co255JmXRUJmR3ICS+ExCiooPm2UnyZCkLaeNPGRKFvxnOVeTSBIaRk/ss9e3zFALTzPvrggF78v5gWBt1zcKPQF3R7ybtaboKxvWH9f80EdVgamFFELP6npp1Wz8yU6C0R3jeFMfd5S0FS2FFsX8RrEhSMUWy7V9DZYAwk6DrvKgm3kgPOCEvtL38R2njwhhAnCGTGMjY64rjlHqzhEsASTs2v1B2JPEfCQanWyfQrHpYCcXKMpw/b9J2uhp5rYZUm/DK1y/FkgtACO/E/QZANlmIdQ6KD7kel+xizLoJQ7DzeeO6ycTsAdW0CWxi+0iV+iQpWEXU90HBRsXPB/7lNNkybnzY="
+    "signature": "F73qbkklOwkgNvpoFoX+/TdiU71oLJ2L4n2HigZ/uTxYapYkOjxNIDKPumBqlfsf1C2gbaJ1HtCs7BSQfmJ5WSqzrB/9WCRJmFlIT5PMRJDOKixIQE0toZYjOy1O2tHQYvY3cH6CjUanz+Bc2De28I0OqLzDLW1JxPyZidPwrJS/egQeDoBuB627AqkHSbqTsG/58GMUzeG2t6S/NrQfGfIYAAKJIxMGPM5XuYlNF6aw7exHTh6y0trA6FVdXEErdGtMi2AGN/p3pFbfFrb4pT4Kq/PlPe0uVLIXv+0WNpyLcvs5Y5wwXuWRB4myiB4Rhyjs2Op2+LfGTnSrFqwwnbnS4MKWfJW54Bp66XP8dalRM2Aoqv60TdkxAxAcVC7gP56WPpfk5fGihKAAzVIk1/VO7aqVEMVNfx0Rlk1lXM9k2r/CDd710vk/047d1KTYrSrdRmhGloXnkKOjuSzm7BkhRgqRfBmi4SLAouPyjMVCZtm4DdOAx3hz1vlmCS6O5VLNao1cPD5YnFwXIGUpuPyK+NLif+8PVwi+jyGWyTJO9uBtTM1PFl3d/nmaEzF9KgPR5aqC4eDfLqgQFIkJVEpbi5XxtjS4K7yQDBCjGTywZRo1ZnQEUtAeAIL3usnkw9Hk5j/+To6Xv5JEaOVuDqqYaPNnU8+tBZ6XzEqc0O4="
   },
   {
     "product": "pdfRender",
     "licensee": {
       "company": "N/A",
-      "name": "Tihomir Dimitrov",
-      "email": "dimitrovtihomir7@gmail.com"
+      "name": "Denislav Vuchkov",
+      "email": "denislav.vuchkov@gmail.com"
     },
-    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
-    "creationDate": "2022-04-04",
-    "expirationDate": "2022-05-04",
+    "key": "9660706a4a1abeb0cc40592b2e7c8b9afdf39381368368de0d248f705083f6a2",
+    "creationDate": "2022-04-25",
+    "expirationDate": "2022-05-25",
     "onExpiration": "grace",
     "gracePeriod": "1d0h0m",
     "platform": "any",
@@ -106,18 +106,18 @@
     },
     "licenseVersion": "1.0.0",
     "sendStatistics": "disabled",
-    "signature": "OOKuJp78QuwLDB8rgMOaudQEvNEaOIa4xtaDus22YgvjzsYZbZFc3nPGKePruy8SDnYZLREygeDJ4J+WZCfoDo34v5npWcTufxrhEVhxIZSlonYbz6VXBbFUCOWQfXEYovky+UVwDtIOrBhQyVsNt9xZQ2qz7HUWZeCQ1EiYwW3CP1Bx8y8WJzDY8qX2QZeRI1mqIIOXZKGdc7q0UoE7uzOSHb7rIBmnptmwK73RJb9zM0epvLCdG82tJvOB8uOYf8KTTjRrKnS9ewtK+fSfWsAdciQQNsHuEbSG9fbyK1v+axpSx7H19WaIiAaZVmGlCmIZIxbpp+utF0cBChPRfAj/4EZvvc0QQUFlUjukP4zEgpeCbIBuCKbv4TWwzPVX03k/aI1fgHl97lzKS/TUpzSfuWoQV9Rg+esRy01WD1LDT98/Z2V1HbWt+lkvVZ0Q6jdMhzKenoZhCNzh91brr0EerzdZvH84E/WMDJaBJWY8+VG4kVAcju/boUx30B01TSjow5wfZoTmfJuOhT/q+aAu/EsZWAypfnmiqsp6ZFt/aAgettV9gWOP7bJhbylz2e649RsiveICjefQbolCLuaQs95m/e5d2bJAJ15Ox9ZAP1a5lz+vurKnRZBPEepMAbNT/vqXkQfLUPQI8y0UNkvq2gvFTBnDi4Y4j5cF/Es="
+    "signature": "eHJWYJ325bnots0zqipJwGlBk96thbUAhQe98T/RgKuY9+5mE0i99GHwv2F5BZC+puVgtOhwf/0W9AAJ/OhFQI1kGtxjCiVZz8+LetTDhIyPe/E2WWxGB+nnZnKuyEVGEW4sDijwTTo/dz3J0jfN6xPjccU6DGnrW2LA5X+5S4sHED4we5bzhYChQST3I97N2mP/XrFuxk9Q0itBwqjftN/e2tKVgwWL/7oiVIMh5P/N48FxGoAMGgpKThRIBX4vWGeH2iZz5NaPYY1Q1CwsdheEhPr6v0YQabYxg6LJEGHCUpK6QwqWfimLUuXp3DrptBliypTgFb47Vn879HMOGi9pCQwjXA+QRjjnqpMeImqaLI/LY67LryqAYpLIcaAIp5oJZOlp8ogNjpcY7Vhkk44XxJkbZIas3inTC0X/eVAmRpeU/Z1roiwUlnXQybSULC7N5CEYEUBqcVT3vsUwmwzbBab9eBgruel4fWS1Ixae7XZE0CGIBiN1X29e37gp+sEYKTacLnOdMJanDiY3t5qiYTLuxvCXciZ/7vsNYtGQWSiK+8FopMLB5o6VnTE0su+tJse5kJ/TS1+wwgaJSOu6dHwhhTtDBd/jPCmcXfqaABsK/Uhi5VB7BWRIW3ROX6jtmIXOlQXOnrfzfPklk//jAKMZh3CU1Suij+Ltd3A="
   },
   {
     "product": "pdfOcr-tesseract4",
     "licensee": {
       "company": "N/A",
-      "name": "Tihomir Dimitrov",
-      "email": "dimitrovtihomir7@gmail.com"
+      "name": "Denislav Vuchkov",
+      "email": "denislav.vuchkov@gmail.com"
     },
-    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
-    "creationDate": "2022-04-04",
-    "expirationDate": "2022-05-04",
+    "key": "9660706a4a1abeb0cc40592b2e7c8b9afdf39381368368de0d248f705083f6a2",
+    "creationDate": "2022-04-25",
+    "expirationDate": "2022-05-25",
     "onExpiration": "grace",
     "gracePeriod": "1d0h0m",
     "platform": "any",
@@ -133,18 +133,18 @@
     },
     "licenseVersion": "1.0.0",
     "sendStatistics": "disabled",
-    "signature": "baGMdUQgJKr5QP6SmxsE4lfMEL5nXBxGhuuu8lh3hy1FCp0UUS7w7P9pC2WEr5ls6UYO2oioHiS2KfA+7hOCoxTF/aMERvPdrrv6vI9hTAR46ls1CVp724zDezkImfsFNTa83qYS8gs8Otg5nR5U8XsKCtn1XxLp68iJFjbgMyPDKmWJ0BHvri5LpGaTuOJVa8wb4KE2lQr7aganbEjpyHcb3EBOLrjLbnsY+6X4gcJuNqTgPqTXRDqjPO/XdWK/ujM/Jf7ab5Iwgl3pOD0uSbvA/qR7+/V8RgURQ8ldT+huKAm2sm79QLV7D6f7PAyzucQKJ+aAUlNk1oVmfJxlmIdlEEKhq2uT1w9VDFgqvbohU/aRMoaXi2GD9BQX3sATitx5dcJrRWLMTxBlEpM1ei28gh/Nc81YWSVlsKXcVUDCDlv+b5MS++3a0OmccEa5+j6H2V+MqFa2b4z0eZPFn70KFK1wwklzW1BwCnNZIcXjjtUQiVy4yJrANMHoYWXL/oUnYISQZ4T9e4Pc+mtrpNQ7d90UPxL6chizcAyLpnl2vxQP9dXeJacjSg2fpOaiYTm4yc0/B8ycg8TRcW8xlpA1B1yjeDURP301dee+nn1reSUJCyWPE0G11RvuR3HsTRYqNgHarQfgI0k04vPfQT617XmuvXeY9GFHOtBCdHM="
+    "signature": "OX+65MdPWFoD0rD9p2TMm9JD6JW9LftTCYmEXug35R72V1AeRyM/KGa+1Vl20gdLknq8pbOKy1pQNYUKdlHXSN96sNaooI9cvWRYdcF7qJboOu+iBwjDU8twbzxN+ydytAMLmc3PMdXmkSUTJBBSZ6o+9s2/HOSLIQZb0WCtJ2wATe/3xHYKuOCuXh1zcxJe8908kTpVw0FwiZNJGcKij8bNt07wVsgwm7SBV7nuM5QxO55xK8naojWKenfxd4tE23RZklp4Wi5o+J1YSEdcGOfjST+yp2GYVaJ9/DSx0Au+KCiPWlTpcY/K4DKmV6qote3dyc2w8xDuafuwMEag4StYRyqwb5BV7IfsJOc2Gu9KUVRHYnOn6RcGz5B2+nT0dAmIKVzmaYFEiKrE34xN5RasJu5BInl4KKADB/IJXCehHWC+7nEhwg9YkhPNje57mQUozIE8fQsuRNLlsRXzJbzvKwo1hpGxBycCdTc4fvPMlzl/KDtxx+RB71znZQcQfixmBGqReHTkOG7gBkf6zYPtunjYy/5OPVNNugjWZjmxxpMxnFSL4/nzcsmoQMmUTJAOYJgZybYdejM+vK671l3mIRq44WxxVzR0YjzCEYnc+qYOL1jKqKJi80sqNo/+rUeQEgyrGgTeS+pE9pcSflJxjs6S2wtkyiXR2IwsgXM="
   },
   {
     "product": "pdfOptimizer",
     "licensee": {
       "company": "N/A",
-      "name": "Tihomir Dimitrov",
-      "email": "dimitrovtihomir7@gmail.com"
+      "name": "Denislav Vuchkov",
+      "email": "denislav.vuchkov@gmail.com"
     },
-    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
-    "creationDate": "2022-04-04",
-    "expirationDate": "2022-05-04",
+    "key": "9660706a4a1abeb0cc40592b2e7c8b9afdf39381368368de0d248f705083f6a2",
+    "creationDate": "2022-04-25",
+    "expirationDate": "2022-05-25",
     "onExpiration": "grace",
     "gracePeriod": "1d0h0m",
     "platform": "any",
@@ -160,18 +160,18 @@
     },
     "licenseVersion": "1.0.0",
     "sendStatistics": "disabled",
-    "signature": "OxtgJPtAK2b0nhN/ClIypP+MyeML/0VtV16PJIt+OSe5epvH2p7zBxdMMGlB0dLqW5k0S6AmF5I3qbNTRpkEI3Od743LSAmUZKtYt2rpiyRuZRqUMTWrXRm/5XBJ+IfnW3zcqROY7d14LYz5PvlIiWdXiekWnTLmvmLWvnbIjzyCrMYXKoqhOLfA6XmePyKnfFTZHdb6kt2Wzbjh7AiAv2iXIAz7pmeBHYtS2+BnKL6/zy25FW4sfuoGRGsHNiDDxP5Jip0FHMF987rCd/ge7p0WkKJ953+tq6uUHD/wFOEyPWD/q+sWjtpMvQHxaHLfcC6LTbKsXwEbyIWyZG5N/R4Cx3vA7nOlyWVkiRJQtY0ZaUrEIz4ypGpEiH9vd7cjUDek6z23i+HQTeX2eWgEhSYn3i/8OGc2DP5H7grZlKxeoMWGVgtQP4fOIqtl4iLZ+YC2nEF+TIirav0GEuGFy7rGrtcWSN1Q+//Pt1Sg4Kytf5GiLXg/CKptGMC+a11W3lOn4BRYxNfKpeLdjxr8PHl18GyWrOJjZoMV+ByVOOo9lcBbGy1oHIOzmXf4M1eXCIPpj+TSTIof22QqJDkMM1XEr1neb6BcgC7WLRUT98ON5FCQmNSOdxHLIXCZyrbqHmxRcidXgYKdNL7oG0USVjHVnxOyokkLrUZiJVqm6b8="
+    "signature": "dRIqkvjhGhAObBE6ULgECeh5u7GDqzT21LZzscV80DCapITShmjdM1ZLWTAGW98VWJgR3Hqkqs+4+j7EAhkw94slHdtemZt+ls1r9P4XF+GawZLId4zUhTi+/Hol9tpiWJZftlxkiXd+fuHEU35JrpE2SGv8hMDg7//7N5VUSvw1TTLMJ5VPhrad5NS7G3yGj25iI6DT3+MSCdngzwFcOKm9gMyr/tskJAU+KXE3Go1kLfntAX4tbGE6ho2cJ6LMGv0Q2QeVQMKmaYfwa/tdclIWNpfOek7g+wzOpOtJxuTjUs/9HR7tfdjKsJl2Eu2ybNRqfEghl9KxCAdYBHESMB1DN/tIy9YZgoN26fl/lfNsoUvAaxoa4OVzfr0YXPddwEoRzuILTVDsjAsEzQBaz5Tf7H8C2SJHUtbUVIr/zGW7ja7wr64eJwTZRBiVWrtk2JiZ3Ubra5KYqdQZbP5rM4MnZPAm1t9bV1OR73DruzUrP59URpRm4HIE2xkw0oov0jQwM+0oGbsMv9PWn8fp3W6spOVpGnGqTp29j8SVswmS/LEuY7iaUDzoe/JVfMlvrh+fVRBV1toyZQTs7VYPEOKALxBv4bImACdwzdmpMiiXKTlN6lBWjJiMIcR508/qFHSfLrVwoMxsq8ls2Snhswdkycu/qaryr8F0EITtuew="
   },
   {
     "product": "pdfHtml",
     "licensee": {
       "company": "N/A",
-      "name": "Tihomir Dimitrov",
-      "email": "dimitrovtihomir7@gmail.com"
+      "name": "Denislav Vuchkov",
+      "email": "denislav.vuchkov@gmail.com"
     },
-    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
-    "creationDate": "2022-04-04",
-    "expirationDate": "2022-05-04",
+    "key": "9660706a4a1abeb0cc40592b2e7c8b9afdf39381368368de0d248f705083f6a2",
+    "creationDate": "2022-04-25",
+    "expirationDate": "2022-05-25",
     "onExpiration": "grace",
     "gracePeriod": "1d0h0m",
     "platform": "any",
@@ -187,18 +187,18 @@
     },
     "licenseVersion": "1.0.0",
     "sendStatistics": "disabled",
-    "signature": "XOFTOwFlsI79Aenv0OdFpWxuiPN5M8oqxpqZdKSdTYYaeNZYeXtl6aP/bzf4iP37Ws4XUEaOyp1wsGJtSPr9vMQ/IpqT2CY8ly6kDnchG9PiX0gktYYXQFNRlyb6560Jzt05Pk1ibwYdsiMzal35dnswI7jfujJ84ufBBlSTd0yZ/kXfTukmLJMvKsEzdKi+TzK68yDfX2FnYPUCRD6KXbtQ7szN46b6TPjfxKiwh1MiZStedTZGn0eI/+4oGAA8Rq9OFJ37QuZFkZrbmcv6u/v+qcoxPuoBzAjGeh6vatkd1Rf+xNAHJ/iZySz7CQXh7NP3KwA9YtgDgTNctZb09DDwK9wMl6AmNz5pkEsP1w6jA7Tzn4ERyzmOkCBL2d1oGYATMMsNOEwRz2Xf92ZYDprGuNks7tUSPcI+Ojb4OzoI/YP0HWMSaZs0l5Nyn5IdBdtSWJTMt1k1fPexxOXaJ5m70g+3hpcZwy+rm6I6chH4SJzvS2Z0D7hoAhV9ZNXIB8m92og5iZoowrEYNoMId+pRctZcb0ybP5rCii9uOZMtLurpycvarr9WGXQzhBSyFEcnjPDyLPDXtbzfwAKR+Fr/8PmrpRljgvfkZFO/PpWoFZXRkJr62CiHxXsECgE6TJGMZvgn0xprv3nTaSmV/Ap5QKF/25RYDMmTIY7hofc="
+    "signature": "GuIczr72x8e6ooeRTPf8firQnr9R40BaTJpdjd9FAC49OAR6vA1Fwy4Y7fKIXCAmCf9JfHkMhiVbceqo7X2hJzy8nMpVHksXFHLAjQ+Z0DAitjLiIIEs81Un8puSyd0Mwpsn9ZWlKYVcWuu48Ec+teUqE6M3R4phYaeh8WfjUIQy2NnJ1GKH8IznVTbXXrLby0iUBMxHCBYte/094nnUd8nvtBZXM4/1FHojMLJQiO/OWR/y51G+l41VnltkR3yAnIwn1JrRAWoc73fk4GF9j3bFgQBntgElRLfoG40cRWAgJDWXjBDI02/a+naPjsyMv2vPgAKa3/z5rJx4+U65m+V/hRAM2eVSU6q9ditJPcWqV+ZVnZVuSzL6NWu+NEfyQeToAnfP0eOYMHSqU2RWcYQRpagJcDAnoNX4eDVC2xm8K715ebv2OdWv6T1cWgr0zZFtkzd3WS3Vz06P3oh81dXKEl1xBIclQW1nKpdKqtCs3yrvLGuW7bm4CLex9+fqAlQ1ZAdTfyEEl9kNVdYCigC/YXJiZdzQb5JFHcMcaJZgHy6JAKB7769u99FqJE8aqQCLHxkr9V66NfvYFZcvp6ELQD5S5lDmipzo4zd5eYkzGdQYNUC08d0PR/HsGHvvsZLGba7AjpOYbVap+ojM18tJvMzy9fUD3umR5hmIV8A="
   },
   {
     "product": "pdfCalligraph",
     "licensee": {
       "company": "N/A",
-      "name": "Tihomir Dimitrov",
-      "email": "dimitrovtihomir7@gmail.com"
+      "name": "Denislav Vuchkov",
+      "email": "denislav.vuchkov@gmail.com"
     },
-    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
-    "creationDate": "2022-04-04",
-    "expirationDate": "2022-05-04",
+    "key": "9660706a4a1abeb0cc40592b2e7c8b9afdf39381368368de0d248f705083f6a2",
+    "creationDate": "2022-04-25",
+    "expirationDate": "2022-05-25",
     "onExpiration": "grace",
     "gracePeriod": "1d0h0m",
     "platform": "any",
@@ -214,18 +214,18 @@
     },
     "licenseVersion": "1.0.0",
     "sendStatistics": "disabled",
-    "signature": "gEwzZm7Mr96FQMGfpLQUgg9ZK5WaCSQOiEwHweqUrSD1Vg55L24xwYVjEaajSq5mCZMBN4y9/32qs5/nYM3toCSFAWboQz4SSeyNZwy8+3GL5lJhhe/trDrm8l5yhKjAOuVXMj3XCsf5Jv+vVy7qhCgxKayR30j05Cwp8YpjKzGnCieMXLnNkKKfJOXnhu+hhKpvIv0dL9nPQhyzSwkywgLjcNZWSb9//yVeapove2QUfIcXjkiN+ljdm0q+LfI+LPmeVTeOzYGyAHU9WYXrG8jBAgNDyStSH85BHEG1wtOVRWNK+cVBWSh02jmsnk6bw3Cw+pTII5E18woZOTSg6MQ040aR+HwRu+kKbQhBQrM5qc1lZ+ek5ke40JSL23+no3SealGwpjxH9szj7FA7sybmP5E7uvi9mkyveOTgAAP756Yp/Pm63NsFHVW2Foqp5mMOia52JEp+tbbD9ddFcNzpzwWacvGVjwk1pwU49Lbehu63/kHLIiDXd3sElW1FQA1+5weeM8rjZbtnFkgBmY7g9lsNSf+L2X8tWR0uRTgPfaOmSwZyw6OiJTPMslQPmowKSq4HPc8VMtDtkF1OAAiVcY5Pg+/qH+Wf72rCp98x9zeuybA90RUEUrDEkREhbJ+86F4L3jJoBPtQEKpvgkqbYr3sjaiY462qa7PLCWk="
+    "signature": "Ug0ZBRW1HXZ2CIokjGYRo5njsqMMf6cLq2ywUA3A7xkeIm0IWML3Q+ZlD0FSkL2NHv2eFnv3HzVHnxeh2Vn4jBh0SYFL4W3swXlAkEBUarAt0mjaDSij5YsSX3kPoyP9B8X7M2/6jQx+3LvmJ6xT3XZvhT8Eqa4f4OmXTIxXIYMe0pV+tUdwQRfJsaDi4L3ob4XrDEqQNvSNehOqPZKPv6naIm4rV1tNRjUVIDAQK/ZBR31wCRJxTM+/uphniLR+qp8E9cRKCKyHjfRi+VZJjIdnhRVDmCiptj/ed5yd81VUr36jt5FUyxDhhMzcm0vQcm/fUgRd32o7bGRi5bd9yfpI2F0ZV5tLI/txrw/EqMNtvUQTHP38/KY5O94URR/LyXfNf+hMp+1sEExTOrngO2uds9xWLLp/dxiSVGuh2FhgUfxTe77lNAAi8X5ry80y25zHOkd5M/hWKvJl79ddg92zR27RT6FIHnEnJecFOihQ5bzqC7bV12AFOGM44iW3I7KRJ6aOGKfrG7BMe2urBxmXmgvyzGJ3r3DPZS7wsqrePEbwzmvQiplWQCpD6By4jaajfndRloMAmMJp1atwzG9kzAaOkLwJC08gLUl4P+r2MTs4GvTnoCKWBv3YLoEJymQ4mCvGaGvHtLl6/onIvDSgWoR+wq3YWPiVk2FvkII="
   },
   {
     "product": "pdfOffice",
     "licensee": {
       "company": "N/A",
-      "name": "Tihomir Dimitrov",
-      "email": "dimitrovtihomir7@gmail.com"
+      "name": "Denislav Vuchkov",
+      "email": "denislav.vuchkov@gmail.com"
     },
-    "key": "91ac69109be6260f0b54640bc4e96edc212f4989920aaa206800efe2888c9443",
-    "creationDate": "2022-04-04",
-    "expirationDate": "2022-05-04",
+    "key": "9660706a4a1abeb0cc40592b2e7c8b9afdf39381368368de0d248f705083f6a2",
+    "creationDate": "2022-04-25",
+    "expirationDate": "2022-05-25",
     "onExpiration": "grace",
     "gracePeriod": "1d0h0m",
     "platform": "any",
@@ -241,6 +241,6 @@
     },
     "licenseVersion": "1.0.0",
     "sendStatistics": "disabled",
-    "signature": "MtP9MypySdVi7bfGJU2gaGwzirVER+P1W2Wgay8zTWv+juAM5P/SzjyZhY2vL3mgoCdYF5A4FKf5dxP3AEs2NTZayeYfkEcor03XUZIaAKZ4Iijj3pVZb+Y6/5tK/mBlRgbu5kQ/wtMyuarXCaHcTBA3JM58QHAGm8BP/K5yslohQZqFnNU4tOMLgzhZHZS10yJetOOcM8pm/zk4NX/ZwDcFYGvJ1R++eJea3XXmoJXKoAlrRftpvhYCQ7B4l7u6ZlrKvXdUI2xxpjjpPShwDQurW1d8eB7eE0gaVcjMj+pOgStxaFcZy/mpdd4CPb6X8dHPqCv65QhklQE0vsVCkysxksoSjFg80TKHW2DLQG0wqyRREoaFD5AByzqAhH7JXJB3zLUZFxjLP8sYHXpOnDuU+FawUv6V1F+YQGklfWuIiTtjfSK4+EL3mDziiHX6SLCxTy4HbcuHUaEElT/Qh18V/ajdaIhZLCXUAehxh37vMOFndnKkWdLZsfwhqbDbnBLZah4f4yn9/iCuONBEGSSO+xZ4LmTPFk20NSvuzZGRs0uzcxKoI03tnlUst/GATe/NeFsujj1CZKmMCgpNMk0TDmAUV6dUOfqlB9NMyI4Ye8/TUtDYaShsa97wVQ6qufNFxtKfWC+DwNJ9OMDZzUcgo6RyNbIu8F2CBucy1OA="
+    "signature": "i+uqmoNDNecC1xqig8kgmBe3uVHeOajQIWXSIBsJXkO/rMu+FYVGuq5rFlTvm8uuOU0nBhf5It08OMdOBPphx23HLedvudiRct56CBVmW/RgEzzKLnN5xqhNkZpqyHAChOnjGUC5aRU/j0NZOlw/wDEHD2m6fxUMBtmkQWa2XMFqqbJN7NGeAdndGFiZKnbb/kH7NlROoHiCHmeYN4DAuinRhpYX9Ts/yXhFFPHaaTZy7oLNdIpuQWcvHkshe7RtaBxLu64KZ84UKPHW6lYHT9bhH/sSGuHwxQA5G0szqzMNy8TCu63GJJxtYD2hnF+JTxY1Q6O17KoeNquQEKywtHTpJIdgC3RiJSG8r9IIvAo04JBMztv8Oe4rIhBatUatUnYBpfPN3MCJ6n2okpdfE9iJUZ1WyUGBLqbspo+wPMdWJpWTI4G30h9C47cHY9wwPt3qJ6UNw0rmDZ7tYC8UK60FHxbhh3V7Elp4ScaZ00p5i6LNkhU5XxEioExqx8BpodSpxsHsj8+wzYS5nOVVZBQesF9YwG4CRz23QKM6kYqtCeSuTB31/V1ZunBw++qm7vRe+uX5lXvL4L3bJiVK800OLfD9HifKKjpDel3LHVEFqJKc5xgWY8/OlQXM4106MAJbt4ZH+X1oOVT0agBUt39rMJ8BFlgsU2N1G5foXF8="
   }
 ]

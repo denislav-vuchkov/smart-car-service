@@ -14,9 +14,9 @@ import java.net.URL;
 public class ForexCurrencyExchange {
 
     public Double convertPriceFromBGNToForeignCurrency(Currencies currency, int priceInBGN) throws IOException {
-        //TODO Our trial for FOREX exchange rates expires on 26 April
+        //TODO Our trial for FOREX exchange rates expires on 02 May
         //I am doing the conversion from this website --> https://console.fastforex.io/
-        String API_KEY_FOREX = "4ad14a96fc-05d65be781-rakr1p";
+        String API_KEY_FOREX = "8e3422bb7a-e7e358329e-rawayd";
 
         String url = "https://api.fastforex.io/fetch-one?from=BGN&to=" + currency.toString() + "&api_key=" + API_KEY_FOREX;
         URL obj = new URL(url);

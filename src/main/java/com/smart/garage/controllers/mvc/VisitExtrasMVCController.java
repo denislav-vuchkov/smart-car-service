@@ -144,9 +144,9 @@ public class VisitExtrasMVCController {
                                  @RequestParam(name = "selectedCurrency", required = false) String currency,
                                  Model model) {
         //TODO Our commercial license for iText (used by methods that service this controller)
-        //TODO expires on the 4th May (we can get a new one just before presenting)
+        //TODO expires on the 25th May (we can get a new one just before presenting)
 
-        //TODO our third free trial for FOREX expires on 25 April
+        //TODO our third free trial for FOREX expires on 2 May
         User currentUser = authenticationHelper.getCurrentUser();
 
         Currencies selectedCurrency = Enum.valueOf(Currencies.class, currency);
@@ -215,23 +215,28 @@ public class VisitExtrasMVCController {
     public String executeStripePayment(@PathVariable int id, ChargeRequest chargeRequest, Model model) throws StripeException {
         User currentUser = authenticationHelper.getCurrentUser();
         try {
+            Visit visit = visitService.getById(currentUser, id);
             visitService.settle(currentUser, id);
+            chargeRequest.setDescription("Repair services for: " + visit.getVehicle().getLicense() + " - " +
+                    visit.getVehicle().makeName() + " " + visit.getVehicle().modelName());
+            chargeRequest.setCurrency(Currencies.BGN);
+            Charge charge = stripeServiceImpl.charge(chargeRequest);
+            PaymentRecord paymentRecord = paymentRecordsMapper.toObject(visit, STRIPE, charge.getId());
+            paymentRecordsService.create(currentUser, paymentRecord);
+            model.addAttribute("visit", visit);
+            model.addAttribute("chargeId", charge.getId());
+            model.addAttribute("balance_transaction", charge.getBalanceTransaction());
+            model.addAttribute("status", charge.getStatus());
         } catch (UnauthorizedOperationException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "unauthorised";
         } catch (EntityNotFoundException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "not-found";
+        } catch (InvalidParameter e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "redirect:/visits/payment-error";
         }
-        Visit visit = visitService.getById(currentUser, id);
-        chargeRequest.setDescription("Repair services for: " + visit.getVehicle().getLicense() + " - "
-                + visit.getVehicle().makeName() + " " + visit.getVehicle().modelName());
-        chargeRequest.setCurrency(Currencies.BGN);
-        Charge charge = stripeServiceImpl.charge(chargeRequest);
-        model.addAttribute("visit", visit);
-        model.addAttribute("chargeId", charge.getId());
-        model.addAttribute("balance_transaction", charge.getBalanceTransaction());
-        model.addAttribute("status", charge.getStatus());
         return "stripe-success";
     }
 
@@ -243,8 +248,8 @@ public class VisitExtrasMVCController {
 
     @PostMapping("/{id}/pay-with-paypal")
     public void preparePaypalPayment(@PathVariable int id,
-                                       HttpServletRequest request,
-                                       HttpServletResponse response) {
+                                     HttpServletRequest request,
+                                     HttpServletResponse response) {
         User currentUser = authenticationHelper.getCurrentUser();
 
         try {
@@ -264,8 +269,8 @@ public class VisitExtrasMVCController {
 
     @GetMapping("/{id}/pay-with-paypal/execute")
     public String executePaypalPayment(@PathVariable int id,
-                                     HttpServletRequest request,
-                                     Model model) {
+                                       HttpServletRequest request,
+                                       Model model) {
         User currentUser = authenticationHelper.getCurrentUser();
 
         String paymentId = request.getParameter("paymentId");
