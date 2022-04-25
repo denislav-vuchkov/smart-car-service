@@ -35,6 +35,8 @@ dependencies {
 
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
+
+
 //     Spring Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.security:spring-security-test'
@@ -77,8 +79,14 @@ dependencies {
     // https://mvnrepository.com/artifact/com.itextpdf/itext-licensekey
     implementation files('licensing-base-4.0.2.jar')
 
+    // Stripe Java client library
+    implementation "com.stripe:stripe-java:20.114.0"
+
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
     testImplementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.36', ext: 'pom'
+
+    // https://mvnrepository.com/artifact/com.paypal.sdk/rest-api-sdk
+    implementation group: 'com.paypal.sdk', name: 'rest-api-sdk', version: '1.14.0'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

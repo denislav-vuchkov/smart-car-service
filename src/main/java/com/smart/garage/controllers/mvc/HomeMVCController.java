@@ -21,6 +21,12 @@ public class HomeMVCController {
         return "index";
     }
 
+    @GetMapping("about-us")
+    public String showAboutUs() {
+        return "about-us";
+    }
+
+
     @ModelAttribute("visitsCount")
     public long getNumberOfVisits() {
         return statisticsService.getNumberOfVisits();

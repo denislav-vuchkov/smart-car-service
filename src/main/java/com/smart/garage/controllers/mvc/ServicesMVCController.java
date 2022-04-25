@@ -21,7 +21,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-import static com.smart.garage.services.ServicesServiceImpl.RESTRICTED_FOR_EMPLOYEES;
+import static com.smart.garage.utility.AuthenticationHelper.RESTRICTED_FOR_EMPLOYEES;
 
 @Controller
 @RequestMapping("/services")

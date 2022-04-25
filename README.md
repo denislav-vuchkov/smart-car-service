@@ -17,7 +17,8 @@ When the shop visit is created the employee creates a new user, new
  email, that contains information about his automatically generated login information and a separate one with their password.
  Both customers and employees can generate reports for a visit/s in one of 25 currencies which is generated in the backend
  as PDF and sent to their email. 
-- At the end of the project we started integration of online card payments.
+
+- At the end of the project we achieved a good level of payment integration with both **Paypal** and **Stripe**.
 
 
 ## Hosted Address:
@@ -36,6 +37,7 @@ When the shop visit is created the employee creates a new user, new
 ### Prerequisites
 The following list of software should be installed on your computer:
 - [Java 11](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html)
+- [MariaDB](https://mariadb.org/)
 
 ### Clone
 - Clone or download the project on your local machine using `https://gitlab.com/tddv/smart-garage`
@@ -45,6 +47,14 @@ The following list of software should be installed on your computer:
 - Run the scripts in the `SQL folder` in the project
 - All the `code` required to get started
 
+
+### Login Details
+Our backend generates user passwords and encrypts them before saving them in the database
+which is why we are providing here details you can use to login. Passwords of these two users were 
+forcefully set to simple one (not complying to the rules for passwords in our backend) to make it easier for us to test and use
+as we develop the web application.
+- Customer: username - `Tihomir`,  passwords - `Test123`
+- Employee: username - `Denislav`,  passwords - `Test123` 
 
 ## Technologies
 
@@ -61,6 +71,8 @@ The following list of software should be installed on your computer:
 - [**Cloudinary**](https://cloudinary.com/) (uploading and hosting multimedia as 3rd party provider)
 - [**FOREX API**](https://www.fastforex.io/) (for getting live data on currency exchange rates)
 - [**iText**](https://itextpdf.com/en) (external licensed library for generating PDF documents in Java)
+- [**PayPal Integration**](https://developer.paypal.com/home) 
+- [**Stripe Integration**](https://stripe.com/docs) 
 - **Amazon Web Services** (AWS) Relational Database
 - **AWS Elastic Beanstalk**
 - **HTML**

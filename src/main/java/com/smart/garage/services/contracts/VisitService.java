@@ -5,6 +5,7 @@ import com.smart.garage.models.Vehicle;
 import com.smart.garage.models.Visit;
 import com.smart.garage.models.VisitStatus;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +27,8 @@ public interface VisitService {
     Visit create(User requester, User user, Vehicle vehicle, Visit visit, Set<Integer> serviceIDs);
 
     void accept(User requester, int id);
+
+    void settle(User requester, int id);
 
     Visit update(User requester, Visit visit, Set<Integer> serviceIDs);
 

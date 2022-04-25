@@ -25,8 +25,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.smart.garage.services.ServicesServiceImpl.RESTRICTED_FOR_EMPLOYEES;
-import static com.smart.garage.services.ServicesServiceImpl.RESTRICTED_FOR_OWNER;
+import static com.smart.garage.utility.AuthenticationHelper.RESTRICTED_FOR_EMPLOYEES;
+import static com.smart.garage.utility.AuthenticationHelper.RESTRICTED_FOR_OWNER;
 import static org.passay.CharacterOccurrencesRule.ERROR_CODE;
 
 @Service

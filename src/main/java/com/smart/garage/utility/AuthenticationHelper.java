@@ -14,14 +14,16 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.smart.garage.services.ServicesServiceImpl.RESTRICTED_FOR_EMPLOYEES;
-import static com.smart.garage.services.ServicesServiceImpl.RESTRICTED_FOR_OWNER;
-
 @Component
 public class AuthenticationHelper {
 
     public static final String UNAUTHORISED_NOT_LOGGED = "You have to be logged in order to access the requested resource!";
     public static final String UNAUTHORISED_LOGGED = "You cannot access this resource while logged in! Please log out and try again.";
+
+    public static final String RESTRICTED_FOR_CUSTOMERS = "This resource is restricted for customers only.";
+    public static final String RESTRICTED_FOR_EMPLOYEES = "This resource is restricted for employees and admins only.";
+
+    public static final String RESTRICTED_FOR_OWNER = "This resource is restricted for the owner of the account.";
 
     private final UserService userService;
 
@@ -41,6 +43,12 @@ public class AuthenticationHelper {
     public static void validateUserIsEmployee(User user) {
         if (!isEmployee(user)) {
             throw new UnauthorizedOperationException(RESTRICTED_FOR_EMPLOYEES);
+        }
+    }
+
+    public static void validateUserIsCustomer(User user) {
+        if (!isCustomer(user)) {
+            throw new UnauthorizedOperationException(RESTRICTED_FOR_CUSTOMERS);
         }
     }
 

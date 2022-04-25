@@ -236,202 +236,241 @@
                                    type="text" class="form-control" disabled>
                         </div>
 
-
-                        <hr style="color:white; border: solid ; opacity: 20%; margin-bottom: 25px; width: 80%; margin-left: 9%">
-
-                        <h3 style="text-align: center; ">Generate report</h3>
-
-                        <br>
-
-                        <form class="form-detail" th:action="@{/visits/generate-report}" method="post">
-                            <div class="form-row-total" style="visibility: hidden; display: none">
-                                <div class="form-row">
-                                    <label style="margin-bottom: 5px">Select visit/s</label>
-                                    <select required th:name="selectedVisits"
-                                            data-placeholder="Begin typing a visit id to filter..."
-                                            multiple class="chosen-select"
-                                            name="test" style="width: 100%">
-                                        <option selected th:value="${visit.getId()}"></option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-row-total" style="margin-bottom: 25px">
-                                <div class="form-row" style="align-content: center; text-align: center">
-                                    <h5 style="margin-left: 35%; color: white">Select a currency</h5>
-                                    <select th:name="selectedCurrency" class="form-select"
-                                            aria-label="Default select example"
-                                            style="background-color: rgba(0,0,0,0.5); color: white; margin-bottom: 10px; width: 60%; margin-left: 20%">
-                                        <option th:each="currency : ${currencies}"
-                                                th:value="${currency.name()}"
-                                                th:text="${currency.name()}"
-                                                style="background-color: rgba(0,0,0,0.5) !important;">
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="form-row-last" style="margin-top: -20px">
-                                    <button type="submit" class="btn btn-outline-light btn-lg"
-                                            style="margin-left: 37%">
-                                        Generate
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                        <div th:if="${visit.getStatus().getName().equals('Ready (Unpaid)')
+                                            && currentUser.getRole().getId() == 3
+                                            && currentUser.getId() == visit.getUser().getId()}">
 
 
-                        <hr style="color:white; border: solid ; opacity: 20%; margin-bottom: 25px; width: 80%; margin-left: 9%">
+                            <form style="margin-left: 220px; margin-top: 30px" th:action="@{/visits/{id}/pay-with-stripe(id=${visit.getId()})}" method='POST'
+                                  id='checkout-form'>
+                                <input type='hidden' th:value='${amount}' name='amount'/>
+                                <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
+                                <script
+                                        src='https://checkout.stripe.com/checkout.js'
+                                        class='stripe-button'
+                                        th:attr='data-key=${stripePublicKey},
+                                        data-amount=${amount},
+                                        data-currency=${currency}'
+                                        data-name='Smart Garage'
+                                        data-description='Vehicle service checkout'
+                                        data-image
+                                                ='https://res.cloudinary.com/tddvjavaforum/image/upload/v1650469847/SmartGarage/payment_mqpozd.png'
+                                        data-locale='auto'
+                                        data-zip-code='false'>
+                                </script>
+                            </form>
+                            <img style="margin-left: 220px; margin-top: 5px; margin-bottom: -5px" src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,h_26/v1650564620/SmartGarage/Untitled_x6m5rp.png">
+                            <form class="form-detail" th:action="@{~/visits/{id}/pay-with-paypal(id=${visit.getId()})}" method="post">
 
-                        <h3 style="text-align: center; margin-bottom: 25px">Photos</h3>
+                                <button type="submit" class="btn btn-warning" style="width: 150px; margin-left: 35%" >
 
-                        <div th:if="${visit.getPhotos() == null || visit.getPhotos().isEmpty()}">
-                            <h4 style="text-align: center; margin-bottom: 25px; color: white">No photos available</h4>
-                        </div>
+                                    <img src="https://res.cloudinary.com/tddvjavaforum/image/upload/c_scale,w_70/v1650466026/SmartGarage/580b57fcd9996e24bc43c530_ljczqt.png"
+                                         style="margin-bottom: 7%; margin-top: 5%">
 
-                        <div th:each="photo : ${visit.getPhotos()}" class="row align-items-start"
-                             style="margin-bottom: 45px; width: 40%">
-                            <div style="margin-bottom: 0; margin-left: 115px">
-                                <img th:src="${photo.getPhoto()}" style="border: solid #ffc451"
-                                     src="https://res.cloudinary.com/tddvjavaforum/image/upload/v1649339932/SmartGarage/VisitPhotos/visitID-38/token-a7cfc61d-ae12-4c6a-97ad-4df2c81ca312.jpg">
-                            </div>
-
-                            <div th:if="${currentUser.getRole().getId() != 3}">
-                                <a th:href="@{/visits/{id}/photos/{token}/delete(id=${visit.getId()}, token=${photo.getToken()})}">
-                                    <button type="submit" class="btn btn-outline-danger btn-lg"
-                                            style="margin-top: 20px; margin-left: 115px;width: 350px">Delete
-                                    </button>
-                                </a>
-                            </div>
-
-                        </div>
-
-
-                        <div style="padding-bottom: 100px; margin-left: 3.5%" class="w3-cell-row"
-                             th:if="${currentUser.getRole().getId() != 3}">
-
-                            <hr style="color:white; border: solid ; opacity: 20%; width: 80%; margin-left: 9%">
-
-                            <form class="formBox" id="form" enctype="multipart/form-data" style="margin: 0"
-                                  th:action="@{/visits/{id}/photos(id=${photoDTO.getVisitId()})}"
-                                  th:object="${photoDTO}" method="post">
-
-                                <h3 style="margin-left: 120px; margin-bottom: 30px; width: 500px">Upload a new
-                                    image</h3>
-
-                                <input type="number" th:field="*{visitId}" name="inpFile"
-                                       style="visibility: hidden; display: none">
-
-                                <input required type="file" multiple="multiple" th:field="*{photo}" name="inpFile"
-                                       id="inpFile"
-                                       style="padding-left: 115px; padding-top: 15px; color: white">
-
-                                <div style="padding-left: 115px" class="w3-container w3-cell">
-                                    <div class="image-preview" id="imagePreview">
-                                        <img src="" alt="Image Preview" class="image-preview__image">
-                                        <span class="image-preview__default-text">Image preview</span>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="w3-cell-row w3-cell">
-                                    <button type="submit" class="btn btn-outline-light btn-lg" id="submit-button"
-                                            style="margin-left: 92px;width:350px">Upload
-                                    </button>
-                                </div>
-
+                                </button>
                             </form>
 
                         </div>
 
 
+
+                    </div>
+
+                    <hr style="color:white; border: solid ; opacity: 20%; margin-bottom: 25px; width: 80%; margin-left: 9%">
+
+                    <h3 style="text-align: center; ">Generate report</h3>
+
+                    <br>
+
+                    <form class="form-detail" th:action="@{/visits/generate-report}" method="post">
+                        <div class="form-row-total" style="visibility: hidden; display: none">
+                            <div class="form-row">
+                                <label style="margin-bottom: 5px">Select visit/s</label>
+                                <select required th:name="selectedVisits"
+                                        data-placeholder="Begin typing a visit id to filter..."
+                                        multiple class="chosen-select"
+                                        name="test" style="width: 100%">
+                                    <option selected th:value="${visit.getId()}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row-total" style="margin-bottom: 25px">
+                            <div class="form-row" style="align-content: center; text-align: center">
+                                <h5 style="margin-left: 35%; color: white">Select a currency</h5>
+                                <select th:name="selectedCurrency" class="form-select"
+                                        aria-label="Default select example"
+                                        style="background-color: rgba(0,0,0,0.5); color: white; margin-bottom: 10px; width: 60%; margin-left: 20%">
+                                    <option th:each="currency : ${currencies}"
+                                            th:value="${currency.name()}"
+                                            th:text="${currency.name()}"
+                                            style="background-color: rgba(0,0,0,0.5) !important;">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-row-last" style="margin-top: -20px">
+                                <button type="submit" class="btn btn-outline-light btn-lg"
+                                        style="margin-left: 37%">
+                                    Generate
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <hr style="color:white; border: solid ; opacity: 20%; margin-bottom: 25px; width: 80%; margin-left: 9%">
+
+                    <h3 style="text-align: center; margin-bottom: 25px">Photos</h3>
+
+                    <div th:if="${visit.getPhotos() == null || visit.getPhotos().isEmpty()}">
+                        <h4 style="text-align: center; margin-bottom: 25px; color: white">No photos available</h4>
+                    </div>
+
+                    <div th:each="photo : ${visit.getPhotos()}" class="row align-items-start"
+                         style="margin-bottom: 45px; width: 40%">
+                        <div style="margin-bottom: 0; margin-left: 115px">
+                            <img th:src="${photo.getPhoto()}" style="border: solid #ffc451"
+                                 src="https://res.cloudinary.com/tddvjavaforum/image/upload/v1649339932/SmartGarage/VisitPhotos/visitID-38/token-a7cfc61d-ae12-4c6a-97ad-4df2c81ca312.jpg">
+                        </div>
+
+                        <div th:if="${currentUser.getRole().getId() != 3}">
+                            <a th:href="@{/visits/{id}/photos/{token}/delete(id=${visit.getId()}, token=${photo.getToken()})}">
+                                <button type="submit" class="btn btn-outline-danger btn-lg"
+                                        style="margin-top: 20px; margin-left: 115px;width: 350px">Delete
+                                </button>
+                            </a>
+                        </div>
+
+                    </div>
+
+
+                    <div style="padding-bottom: 100px; margin-left: 3.5%" class="w3-cell-row"
+                         th:if="${currentUser.getRole().getId() != 3}">
+
+                        <hr style="color:white; border: solid ; opacity: 20%; width: 80%; margin-left: 9%">
+
+                        <form class="formBox" id="form" enctype="multipart/form-data" style="margin: 0"
+                              th:action="@{/visits/{id}/photos(id=${photoDTO.getVisitId()})}"
+                              th:object="${photoDTO}" method="post">
+
+                            <h3 style="margin-left: 120px; margin-bottom: 30px; width: 500px">Upload a new
+                                image</h3>
+
+                            <input type="number" th:field="*{visitId}" name="inpFile"
+                                   style="visibility: hidden; display: none">
+
+                            <input required type="file" multiple="multiple" th:field="*{photo}" name="inpFile"
+                                   id="inpFile"
+                                   style="padding-left: 115px; padding-top: 15px; color: white">
+
+                            <div style="padding-left: 115px" class="w3-container w3-cell">
+                                <div class="image-preview" id="imagePreview">
+                                    <img src="" alt="Image Preview" class="image-preview__image">
+                                    <span class="image-preview__default-text">Image preview</span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="w3-cell-row w3-cell">
+                                <button type="submit" class="btn btn-outline-light btn-lg" id="submit-button"
+                                        style="margin-left: 92px;width:350px">Upload
+                                </button>
+                            </div>
+
+                        </form>
+
                     </div>
 
 
                 </div>
+
+
             </div>
         </div>
     </div>
+</div>
 
-    <div style="margin-top: 120%">
-        <footer th:replace="index.html :: footer"></footer>
-    </div>
-    <div id="preloader"></div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+<div style="margin-top: 120%">
+    <footer th:replace="index.html :: footer"></footer>
+</div>
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
 
-    <!-- Vendor JS Files -->
-    <script th:src="@{/assets/vendor/purecounter/purecounter.js}"
-            src="../static/assets/vendor/purecounter/purecounter.js"></script>
-    <script th:src="@{/assets/vendor/aos/aos.js}" src="../static/assets/vendor/aos/aos.js"></script>
-    <script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"
-            src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"
-            src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script th:src="@{/assets/vendor/isotope-layout/isotope.pkgd.min.js}"
-            src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"
-            src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script th:src="@{/assets/vendor/php-email-form/validate.js}"
-            src="../static/assets/vendor/php-email-form/validate.js"></script>
+<!-- Vendor JS Files -->
+<script th:src="@{/assets/vendor/purecounter/purecounter.js}"
+        src="../static/assets/vendor/purecounter/purecounter.js"></script>
+<script th:src="@{/assets/vendor/aos/aos.js}" src="../static/assets/vendor/aos/aos.js"></script>
+<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"
+        src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"
+        src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script th:src="@{/assets/vendor/isotope-layout/isotope.pkgd.min.js}"
+        src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"
+        src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script th:src="@{/assets/vendor/php-email-form/validate.js}"
+        src="../static/assets/vendor/php-email-form/validate.js"></script>
 
-    <!-- Template Main JS File -->
-    <script th:src="@{/assets/js/main.js}" src="../static/assets/js/main.js"></script>
+<!-- Template Main JS File -->
+<script th:src="@{/assets/js/main.js}" src="../static/assets/js/main.js"></script>
 
-    <!--Script for Date Picker-->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
-            integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        $('.input-group.date').datepicker({
-            autoclose: true,
-            todayHighlight: true
-        });
-    </script>
+<!--Script for Date Picker-->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+        integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $('.input-group.date').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+</script>
 
-    <!--Script for multiple select-->
-    <script>
-        $(".chosen-select").chosen({
-            no_results_text: "Oops, nothing found!"
-        })
-    </script>
+<!--Script for multiple select-->
+<script>
+    $(".chosen-select").chosen({
+        no_results_text: "Oops, nothing found!"
+    })
+</script>
 
 
-    <script>
-        const inpFile = document.getElementById("inpFile");
-        const previewContainer = document.getElementById("imagePreview");
-        const previewImage = previewContainer.querySelector(".image-preview__image");
-        const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
+<script>
+    const inpFile = document.getElementById("inpFile");
+    const previewContainer = document.getElementById("imagePreview");
+    const previewImage = previewContainer.querySelector(".image-preview__image");
+    const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
 
-        inpFile.addEventListener("change", function () {
-            const file = this.files[0];
+    inpFile.addEventListener("change", function () {
+        const file = this.files[0];
 
-            if (file) {
-                const reader = new FileReader();
+        if (file) {
+            const reader = new FileReader();
 
-                previewDefaultText.style.display = "none";
-                previewImage.style.display = "block";
+            previewDefaultText.style.display = "none";
+            previewImage.style.display = "block";
 
-                reader.addEventListener("load", function () {
-                    previewImage.setAttribute("src", this.result);
-                })
+            reader.addEventListener("load", function () {
+                previewImage.setAttribute("src", this.result);
+            })
 
-                reader.readAsDataURL(file);
+            reader.readAsDataURL(file);
 
-            } else {
-                previewDefaultText.style.display = null;
-                previewImage.style.display = null;
-                previewImage.setAttribute("src", "");
-            }
+        } else {
+            previewDefaultText.style.display = null;
+            previewImage.style.display = null;
+            previewImage.setAttribute("src", "");
+        }
 
-        })
+    })
 
-    </script>
+</script>
 
 </body>
 </html>

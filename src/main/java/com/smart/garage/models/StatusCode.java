@@ -6,8 +6,9 @@ public enum StatusCode {
     DECLINED(new VisitStatus(2, "Declined")),
     NOT_STARTED(new VisitStatus(3, "Not Started")),
     IN_PROGRESS(new VisitStatus(4, "In Progress")),
-    READY_FOR_PICKUP(new VisitStatus(5, "Ready for Pickup")),
-    COMPLETED(new VisitStatus(6, "Completed"));
+    READY_UNPAID(new VisitStatus(5, "Ready (Unpaid)")),
+    READY_SETTLED(new VisitStatus(6, "Ready (Settled)")),
+    COMPLETED(new VisitStatus(7, "Completed"));
 
     private final VisitStatus status;
 

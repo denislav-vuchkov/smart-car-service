@@ -28,7 +28,35 @@ CREATE TABLE IF NOT EXISTS `history_of_services` (
   UNIQUE KEY `visits_history_id_uindex` (`id`),
   KEY `visits_history_visits_id_fk` (`visit_id`),
   CONSTRAINT `visits_history_visits_id_fk` FOREIGN KEY (`visit_id`) REFERENCES `visits` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table vbehq9xh6ueil92g.payments
+CREATE TABLE IF NOT EXISTS `payments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `visit_id` int(11) NOT NULL,
+  `payment_method_id` int(11) NOT NULL,
+  `unique_payment_id` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `payments_id_uindex` (`id`),
+  UNIQUE KEY `payments_payment_id_uindex` (`unique_payment_id`) USING HASH,
+  KEY `payments_payment_methods_id_fk` (`payment_method_id`),
+  KEY `payments_visits_id_fk` (`visit_id`),
+  CONSTRAINT `payments_payment_methods_id_fk` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`),
+  CONSTRAINT `payments_visits_id_fk` FOREIGN KEY (`visit_id`) REFERENCES `visits` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table vbehq9xh6ueil92g.payment_methods
+CREATE TABLE IF NOT EXISTS `payment_methods` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `payment_methods_id_uindex` (`id`),
+  UNIQUE KEY `payment_methods_name_uindex` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -44,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `reset_password_tokens` (
   UNIQUE KEY `confirmation_tokens_id_uindex` (`id`),
   KEY `confirmation_tokens_users_fk` (`user_id`),
   CONSTRAINT `confirmation_tokens_users_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- Data exporting was unselected.
 
@@ -87,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_phone_number_uindex` (`phone_number`),
   KEY `users_roles_id_fk` (`role_id`),
   CONSTRAINT `users_roles_id_fk` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- Data exporting was unselected.
 
@@ -154,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `visits` (
   CONSTRAINT `visits_users_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   CONSTRAINT `visits_vehicles_fk` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicles` (`id`),
   CONSTRAINT `visits_visit_status_id_fk` FOREIGN KEY (`status_id`) REFERENCES `visit_status` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- Data exporting was unselected.
 
@@ -168,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `visit_pictures` (
   UNIQUE KEY `visit_pictures_id_uindex` (`id`),
   KEY `visit_pictures_visits_id_fk` (`visit_id`),
   CONSTRAINT `visit_pictures_visits_id_fk` FOREIGN KEY (`visit_id`) REFERENCES `visits` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- Data exporting was unselected.
 

@@ -1,21 +1,30 @@
 package com.smart.garage.controllers.mvc;
 
+import com.paypal.api.payments.Payment;
+import com.paypal.base.rest.PayPalRESTException;
 import com.smart.garage.exceptions.*;
 import com.smart.garage.models.*;
+import com.smart.garage.models.dtos.ChargeRequest;
 import com.smart.garage.models.dtos.NewCustomerDTO;
 import com.smart.garage.models.dtos.PhotoDTO;
 import com.smart.garage.services.contracts.*;
 import com.smart.garage.utility.AuthenticationHelper;
+import com.smart.garage.utility.ForexCurrencyExchange;
 import com.smart.garage.utility.ReportProducerHelper;
+import com.smart.garage.utility.mappers.PaymentRecordsMapper;
 import com.smart.garage.utility.mappers.UserMapper;
 import com.smart.garage.utility.mappers.VehicleMapper;
 import com.smart.garage.utility.mappers.VisitMapper;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Charge;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -24,40 +33,59 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.smart.garage.services.ServicesServiceImpl.RESTRICTED_FOR_EMPLOYEES;
+import static com.smart.garage.utility.AuthenticationHelper.RESTRICTED_FOR_EMPLOYEES;
 
 @Controller
 @RequestMapping("/visits")
 public class VisitExtrasMVCController {
 
+    public static final int PAYPAL = 1;
+    public static final int STRIPE = 2;
+    public static final String ERROR_DELETING_PHOTO = "There was deleting the photo you selected. Please try again.";
+    public static final String ERROR_UPLOADING_PHOTO = "There was an issue with the upload of your photo. Please try again.";
     private final VisitService visitService;
     private final VehicleMakeService vehicleMakeService;
     private final VehicleModelService vehicleModelService;
     private final ServicesService servicesService;
     private final PhotoService photoService;
+    private final StripeService stripeServiceImpl;
+
     private final UserMapper userMapper;
     private final VehicleMapper vehicleMapper;
     private final VisitMapper visitMapper;
     private final ReportProducerHelper reportProducerHelper;
     private final AuthenticationHelper authenticationHelper;
+    private final ForexCurrencyExchange currencyExchange;
+    private final PaymentServices paymentService;
+    private final PaymentRecordsService paymentRecordsService;
+    private final PaymentRecordsMapper paymentRecordsMapper;
 
     @Autowired
-    public VisitExtrasMVCController(VisitService visitService,
-                                    VehicleMakeService vehicleMakeService, VehicleModelService vehicleModelService,
-                                    ServicesService servicesService, PhotoService photoService,
+    public VisitExtrasMVCController(VisitService visitService, VehicleMakeService vehicleMakeService,
+                                    VehicleModelService vehicleModelService, ServicesService servicesService,
+                                    PhotoService photoService, StripeService stripeServiceImpl,
                                     UserMapper userMapper, VehicleMapper vehicleMapper, VisitMapper visitMapper,
                                     ReportProducerHelper reportProducerHelper,
-                                    AuthenticationHelper authenticationHelper) {
+                                    AuthenticationHelper authenticationHelper,
+                                    ForexCurrencyExchange currencyExchange,
+                                    PaymentServices paymentService,
+                                    PaymentRecordsService paymentRecordsService,
+                                    PaymentRecordsMapper paymentRecordsMapper) {
         this.visitService = visitService;
         this.vehicleMakeService = vehicleMakeService;
         this.vehicleModelService = vehicleModelService;
         this.servicesService = servicesService;
         this.photoService = photoService;
+        this.stripeServiceImpl = stripeServiceImpl;
         this.userMapper = userMapper;
         this.vehicleMapper = vehicleMapper;
         this.visitMapper = visitMapper;
         this.reportProducerHelper = reportProducerHelper;
         this.authenticationHelper = authenticationHelper;
+        this.currencyExchange = currencyExchange;
+        this.paymentService = paymentService;
+        this.paymentRecordsService = paymentRecordsService;
+        this.paymentRecordsMapper = paymentRecordsMapper;
     }
 
     @GetMapping("/new-customer")
@@ -159,7 +187,7 @@ public class VisitExtrasMVCController {
             photoService.save(currentUser, photoDTO.getPhoto(), id);
             return "redirect:/visits/" + id;
         } catch (IOException e) {
-            model.addAttribute("errorMessage", "There was an issue with the upload of your photo. Please try again.");
+            model.addAttribute("errorMessage", ERROR_UPLOADING_PHOTO);
             return "not-found";
         }
     }
@@ -177,9 +205,96 @@ public class VisitExtrasMVCController {
             photoService.delete(currentUser, id, token);
             return "redirect:/visits/" + id;
         } catch (IOException e) {
-            model.addAttribute("errorMessage", "There was deleting the photo you selected. Please try again.");
+            model.addAttribute("errorMessage", ERROR_DELETING_PHOTO);
             return "not-found";
         }
+    }
+
+
+    @PostMapping("/{id}/pay-with-stripe")
+    public String executeStripePayment(@PathVariable int id, ChargeRequest chargeRequest, Model model) throws StripeException {
+        User currentUser = authenticationHelper.getCurrentUser();
+        try {
+            visitService.settle(currentUser, id);
+        } catch (UnauthorizedOperationException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "unauthorised";
+        } catch (EntityNotFoundException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "not-found";
+        }
+        Visit visit = visitService.getById(currentUser, id);
+        chargeRequest.setDescription("Repair services for: " + visit.getVehicle().getLicense() + " - "
+                + visit.getVehicle().makeName() + " " + visit.getVehicle().modelName());
+        chargeRequest.setCurrency(Currencies.BGN);
+        Charge charge = stripeServiceImpl.charge(chargeRequest);
+        model.addAttribute("visit", visit);
+        model.addAttribute("chargeId", charge.getId());
+        model.addAttribute("balance_transaction", charge.getBalanceTransaction());
+        model.addAttribute("status", charge.getStatus());
+        return "stripe-success";
+    }
+
+    @ExceptionHandler(StripeException.class)
+    public String handleError(Model model, StripeException ex) {
+        model.addAttribute("error", ex.getMessage());
+        return "visit";
+    }
+
+    @PostMapping("/{id}/pay-with-paypal")
+    public void preparePaypalPayment(@PathVariable int id,
+                                       HttpServletRequest request,
+                                       HttpServletResponse response) {
+        User currentUser = authenticationHelper.getCurrentUser();
+
+        try {
+            Visit visit = visitService.getById(currentUser, id);
+            double totalInUSD = currencyExchange.convertPriceFromBGNToForeignCurrency(Currencies.USD, visit.getTotalCost());
+            PaypalOrder orderDetail = new PaypalOrder(String.valueOf(id), totalInUSD, 0, 0, totalInUSD);
+
+            String approvalLink = paymentService.authorizePayment(orderDetail, currentUser, visit);
+
+            response.sendRedirect(approvalLink);
+        } catch (IOException | PayPalRESTException | UnauthorizedOperationException | EntityNotFoundException ex) {
+            request.setAttribute("errorMessage", ex.getMessage());
+            ex.printStackTrace();
+            request.getRequestDispatcher("http://smartgarage.shop/visits/payment-error");
+        }
+    }
+
+    @GetMapping("/{id}/pay-with-paypal/execute")
+    public String executePaypalPayment(@PathVariable int id,
+                                     HttpServletRequest request,
+                                     Model model) {
+        User currentUser = authenticationHelper.getCurrentUser();
+
+        String paymentId = request.getParameter("paymentId");
+        String payerId = request.getParameter("PayerID");
+
+        try {
+            Payment payment = paymentService.executePayment(paymentId, payerId);
+            Visit visit = visitService.getById(currentUser, id);
+
+            visitService.settle(currentUser, id);
+            PaymentRecord paymentRecord = paymentRecordsMapper.toObject(visit, PAYPAL, paymentId);
+            paymentRecordsService.create(currentUser, paymentRecord);
+
+            return "redirect:/visits/payment-success";
+        } catch (PayPalRESTException ex) {
+            model.addAttribute("errorMessage", ex.getMessage());
+            ex.printStackTrace();
+            return "unauthorised";
+        }
+    }
+
+    @GetMapping("/payment-success")
+    public String showSuccessfulPayment() {
+        return "paypal-success";
+    }
+
+    @GetMapping("/payment-error")
+    public String showPaypalPaymentError() {
+        return "paypal-error";
     }
 
     private void addPageAttributes(User currentUser, Model model) {

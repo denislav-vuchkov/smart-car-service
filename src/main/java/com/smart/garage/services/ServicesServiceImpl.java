@@ -15,12 +15,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import static com.smart.garage.utility.AuthenticationHelper.RESTRICTED_FOR_EMPLOYEES;
+
 @Service
 public class ServicesServiceImpl implements ServicesService {
 
-    public static final String RESTRICTED_FOR_EMPLOYEES = "This resource is restricted for employees and admins only.";
-    public static final String RESTRICTED_FOR_OWNER = "This resource is restricted for the owner of the account.";
-    private final ServicesRepository servicesRepository;
+ private final ServicesRepository servicesRepository;
 
     @Autowired
     public ServicesServiceImpl(ServicesRepository servicesRepository) {

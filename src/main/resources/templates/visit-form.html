@@ -75,7 +75,8 @@
                             <select th:field="*{vehicleID}" class="form-select dropdown-toggle" type="number">
                                 <option selected value=0>(Select vehicle)</option>
                                 <option th:each="v : ${vehicles}"
-                                        th:value="${v.getId()}" th:text="${v.getLicense()}">
+                                        th:value="${v.getId()}"
+                                        th:text="${v.getLicense() + ' - ' + v.makeName() + ' ' + v.modelName()}">
                                 </option>
                             </select>
                         </div>

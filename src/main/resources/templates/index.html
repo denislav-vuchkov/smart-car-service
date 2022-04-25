@@ -73,7 +73,7 @@
                 <li th:if="${isAuthenticated && currentUser != null}"><a class="nav-link"
                                                                          th:href="@{/users/{id}(id=${currentUser.getId()})}">Profile</a>
                 </li>
-                <li><a class="nav-link" href="#contact">Denis & Tisho</a></li>
+                <li><a class="nav-link" th:href="@{/about-us}">Denis & Tisho</a></li>
                 <li th:if="${isAuthenticated && currentUser != null}"><a class="nav-link" th:href="@{/swagger-ui/}">Swagger</a>
                 </li>
             </ul>
@@ -384,10 +384,12 @@
                         </p>
 
                         <div class="social-links mt-3">
-                            <a target="_blank" href="https://www.facebook.com/profile.php?id=100000635400906" class="facebook"><i class="bx bxl-facebook"></i></a>
+                            <a target="_blank" href="https://www.facebook.com/profile.php?id=100000635400906"
+                               class="facebook"><i class="bx bxl-facebook"></i></a>
                             <a target="_blank" href="https://www.linkedin.com/in/dare-to-dream/" class="linkedin"><i
                                     class="bx bxl-linkedin"></i></a>
-                            <a target="_blank" href="https://gitlab.com/tddv" class="facebook"><i class="ri-gitlab-fill"></i></a>
+                            <a target="_blank" href="https://gitlab.com/tddv" class="facebook"><i
+                                    class="ri-gitlab-fill"></i></a>
 
                         </div>
                     </div>

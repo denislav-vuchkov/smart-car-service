@@ -5,6 +5,7 @@ import com.smart.garage.exceptions.InvalidParameter;
 import com.smart.garage.models.*;
 import com.smart.garage.repositories.contracts.VisitRepository;
 import com.smart.garage.services.contracts.*;
+import com.smart.garage.utility.ForexCurrencyExchange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,25 +23,29 @@ public class VisitServiceImpl implements VisitService {
 
     public static final String OWNER_MISMATCH = "Vehicle and owner mismatch.";
     public static final String VISIT_DELETED = "Vehicle has already been deleted.";
-    public static final String VISIT_STATUS_ERROR = "Only visits with status 'Requested' can be accepted.";
+    public static final String REQUESTED_STATUS_ERROR = "Only visits with status 'Requested' can be accepted.";
+    public static final String UNPAID_STATUS_ERROR = "Only visits with status 'Ready (unpaid)' can be charged.";
 
     private final VisitRepository visitRepository;
-    private final UserServiceImpl userService;
     private final VehicleService vehicleService;
+    private final UserService userService;
     private final ServicesService servicesService;
     private final ServiceRecordService serviceRecordService;
     private final EmailService emailService;
+    private final ForexCurrencyExchange currencyExchange;
 
     @Autowired
     public VisitServiceImpl(VisitRepository visitRepository, VehicleService vehicleService,
-                            UserServiceImpl userService, ServicesService servicesService,
-                            ServiceRecordService serviceRecordService, EmailService emailService) {
+                            UserService userService, ServicesService servicesService,
+                            ServiceRecordService serviceRecordService, EmailService emailService,
+                            ForexCurrencyExchange currencyExchange) {
         this.visitRepository = visitRepository;
         this.vehicleService = vehicleService;
         this.userService = userService;
         this.servicesService = servicesService;
         this.serviceRecordService = serviceRecordService;
         this.emailService = emailService;
+        this.currencyExchange = currencyExchange;
     }
 
     @Override
@@ -117,6 +122,16 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
+    public void settle(User requester, int id) {
+        validateUserIsCustomer(requester);
+        Visit visit = visitRepository.getById(id);
+        validateIsAccessingOwnInformation(requester, visit);
+        validateUnpaidStatus(visit);
+        visit.setStatus(StatusCode.READY_SETTLED.getStatus());
+        visitRepository.update(visit);
+    }
+
+    @Override
     public Visit update(User requester, Visit visit, Set<Integer> serviceIDs) {
         validateUserIsEmployee(requester);
         validateVehicleAndOwnerMatch(requester, visit);
@@ -156,7 +171,12 @@ public class VisitServiceImpl implements VisitService {
 
     private void validateRequestedStatus(Visit visit) {
         if (!visit.getStatus().equals(StatusCode.REQUESTED.getStatus()))
-            throw new IllegalStateException(VISIT_STATUS_ERROR);
+            throw new IllegalStateException(REQUESTED_STATUS_ERROR);
+    }
+
+    private void validateUnpaidStatus(Visit visit) {
+        if (!visit.getStatus().equals(StatusCode.READY_UNPAID.getStatus()))
+            throw new IllegalStateException(UNPAID_STATUS_ERROR);
     }
 
     private Set<ServiceRecord> mapServices(Set<Integer> serviceIDs, int visitID) {

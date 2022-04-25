@@ -6,10 +6,7 @@ import com.smart.garage.exceptions.InvalidParameter;
 import com.smart.garage.exceptions.UnauthorizedOperationException;
 import com.smart.garage.models.*;
 import com.smart.garage.repositories.contracts.VisitRepository;
-import com.smart.garage.services.contracts.EmailService;
-import com.smart.garage.services.contracts.ServiceRecordService;
-import com.smart.garage.services.contracts.ServicesService;
-import com.smart.garage.services.contracts.VehicleService;
+import com.smart.garage.services.contracts.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,7 +28,7 @@ public class VisitServiceImplTests {
     @Mock
     VisitRepository visitRepository;
     @Mock
-    UserServiceImpl userService;
+    UserService userService;
     @Mock
     VehicleService vehicleService;
     @Mock
@@ -487,6 +484,97 @@ public class VisitServiceImplTests {
                 Mockito.nullable(ByteArrayOutputStream.class), Mockito.nullable(String.class));
     }
 
+    @Test
+    void settle_Throws_When_UserIsNotCustomer() {
+        Assertions.assertThrows(UnauthorizedOperationException.class,
+                () -> visitService.settle(Helper.createEmployee(), 5));
+    }
+
+    @Test
+    void settle_Should_Retrieve_OriginalFromRepo() {
+        Visit visit = new Visit();
+        visit.setId(10);
+        visit.setUser(Helper.createCustomer());
+        visit.setVehicle(new Vehicle());
+        visit.setStartDate(LocalDate.now());
+        visit.setStatus(StatusCode.READY_UNPAID.getStatus());
+        Mockito.when(visitRepository.getById(Mockito.anyInt())).thenReturn(visit);
+        visitService.settle(Helper.createCustomer(), 10);
+        Mockito.verify(visitRepository, Mockito.times(1)).getById(10);
+    }
+
+    @Test
+    void settle_Throws_When_UserIsNotPayingOwnVisit() {
+        Visit visit = new Visit();
+        visit.setId(5);
+        User user = Helper.createCustomer();
+        user.setId(10);
+        visit.setUser(user);
+        visit.setVehicle(new Vehicle());
+        visit.setStartDate(LocalDate.now());
+        visit.setStatus(StatusCode.READY_UNPAID.getStatus());
+        Mockito.when(visitRepository.getById(Mockito.anyInt())).thenReturn(visit);
+        Assertions.assertThrows(UnauthorizedOperationException.class,
+                () -> visitService.settle(Helper.createCustomer(), 5));
+    }
+
+
+    @Test
+    void settle_Throws_When_StatusNotUnpaid() {
+        Visit visit = new Visit();
+        visit.setId(5);
+        visit.setUser(Helper.createCustomer());
+        visit.setVehicle(new Vehicle());
+        visit.setStartDate(LocalDate.now());
+        visit.setStatus(StatusCode.IN_PROGRESS.getStatus());
+        Mockito.when(visitRepository.getById(Mockito.anyInt())).thenReturn(visit);
+        Assertions.assertThrows(IllegalStateException.class,
+                () -> visitService.settle(Helper.createCustomer(), 5));
+    }
+
+    @Test
+    void settle_Should_ChangeStatus_FromUnpaidToNotSettled() {
+        Visit visit = new Visit();
+        visit.setId(10);
+        visit.setUser(Helper.createCustomer());
+        visit.setVehicle(new Vehicle());
+        visit.setStartDate(LocalDate.now());
+        visit.setStatus(StatusCode.READY_UNPAID.getStatus());
+        Mockito.when(visitRepository.getById(Mockito.anyInt())).thenReturn(visit);
+        visitService.settle(Helper.createCustomer(), 10);
+        Assertions.assertEquals(StatusCode.READY_SETTLED.getStatus(), visit.getStatus());
+    }
+
+    @Test
+    void settle_Should_Call_UpdateRepoMethod() {
+        Visit visit = new Visit();
+        visit.setId(10);
+        visit.setUser(Helper.createCustomer());
+        visit.setVehicle(new Vehicle());
+        visit.setStartDate(LocalDate.now());
+        visit.setStatus(StatusCode.READY_UNPAID.getStatus());
+        Mockito.when(visitRepository.getById(Mockito.anyInt())).thenReturn(visit);
+        visitService.settle(Helper.createCustomer(), 10);
+        Mockito.verify(visitRepository, Mockito.times(1)).update(visit);
+    }
+
+
+    @Test
+    void settle_Should_Call_SendEmailMethod() {
+        Visit visit = new Visit();
+        visit.setId(10);
+        visit.setUser(Helper.createCustomer());
+        visit.setVehicle(new Vehicle());
+        visit.setStartDate(LocalDate.now());
+        visit.setStatus(StatusCode.REQUESTED.getStatus());
+        Mockito.when(visitRepository.getById(Mockito.anyInt())).thenReturn(visit);
+        Mockito.when(emailService.buildVisitConfirmationEmail(
+                Mockito.any(Vehicle.class), Mockito.any(LocalDate.class))).thenReturn("");
+        visitService.accept(Helper.createEmployee(), 10);
+        Mockito.verify(emailService, Mockito.times(1)).send(
+                Mockito.anyString(), Mockito.anyString(), Mockito.anyString(),
+                Mockito.nullable(ByteArrayOutputStream.class), Mockito.nullable(String.class));
+    }
 
     @Test
     void update_Throws_When_UserIsNotEmployee() {

@@ -6,9 +6,10 @@ import com.smart.garage.exceptions.UnauthorizedOperationException;
 import com.smart.garage.models.Currencies;
 import com.smart.garage.models.User;
 import com.smart.garage.models.Visit;
-import com.smart.garage.models.VisitStatus;
+import com.smart.garage.models.dtos.PhotoDTO;
 import com.smart.garage.models.dtos.VisitDTO;
 import com.smart.garage.models.dtos.VisitFilterDTO;
+import com.smart.garage.services.StripeServiceImpl;
 import com.smart.garage.services.contracts.ServicesService;
 import com.smart.garage.services.contracts.VehicleService;
 import com.smart.garage.services.contracts.VisitService;
@@ -30,8 +31,8 @@ import static com.smart.garage.utility.VisitDataExtractor.extractParameter;
 @RequestMapping("/visits")
 public class VisitsCustomerMVCController {
 
+    public static final String PUBLIC_KEY = "pk_test_51KqWsVJk66hxMyhp7HZlPl1mrAdRt5xj8lxP7n7EanB4xJpiBbfnxnZA54UipbkPlZ8THFqebwRt5QdvBiSNlOTy00NWvBi2sv";
     private static final String REQUEST_PAGE = "Request New Visit";
-
     private final VisitService visitService;
     private final VehicleService vehicleService;
     private final ServicesService servicesService;
@@ -41,7 +42,7 @@ public class VisitsCustomerMVCController {
     @Autowired
     public VisitsCustomerMVCController(VisitService visitService, VehicleService vehicleService,
                                        ServicesService servicesService, VisitMapper visitMapper,
-                                       AuthenticationHelper authenticationHelper) {
+                                       AuthenticationHelper authenticationHelper, StripeServiceImpl paymentsService) {
         this.visitService = visitService;
         this.vehicleService = vehicleService;
         this.servicesService = servicesService;
@@ -96,6 +97,29 @@ public class VisitsCustomerMVCController {
         }
     }
 
+    @GetMapping("/{id}")
+    public String showVisitPage(@PathVariable int id, Model model) {
+        User currentUser = authenticationHelper.getCurrentUser();
+        try {
+            Visit visit = visitService.getById(currentUser, id);
+            model.addAttribute("visit", visit);
+            model.addAttribute("currencies", Currencies.values());
+            model.addAttribute("stripePublicKey", PUBLIC_KEY);
+            model.addAttribute("amount", visit.getTotalCost() * 100);
+            model.addAttribute("currency", Currencies.BGN);
+            PhotoDTO photo = new PhotoDTO();
+            photo.setVisitId(id);
+            model.addAttribute("photoDTO", photo);
+            return "visit";
+        } catch (EntityNotFoundException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "not-found";
+        } catch (UnauthorizedOperationException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "unauthorised";
+        }
+    }
+
     @GetMapping("/request")
     public String requestNewVisit(Model model) {
         User currentUser = authenticationHelper.getCurrentUser();
@@ -132,21 +156,6 @@ public class VisitsCustomerMVCController {
             errors.rejectValue("startDate", "invalid_date", e.getMessage());
             model.addAttribute("errorMessage", e.getMessage());
             return "visit-form";
-        }
-    }
-
-    @GetMapping("/{id}/accept")
-    public String update(@PathVariable int id, Model model) {
-        User currentUser = authenticationHelper.getCurrentUser();
-        try {
-            visitService.accept(currentUser, id);
-            return "redirect:/visits";
-        } catch (UnauthorizedOperationException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "unauthorised";
-        } catch (EntityNotFoundException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "not-found";
         }
     }
 

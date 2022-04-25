@@ -47,10 +47,25 @@ INSERT INTO `history_of_services` (`id`, `visit_id`, `service_id`, `service_name
 	(86, 78, 3, 'Air Filter/Fuel Filter', 461),
 	(87, 78, 6, 'Axle Repair', 331),
 	(88, 78, 40, 'Power Steering System', 428),
-	(89, 78, 5, 'AntiFreeze', 323);
+	(89, 78, 5, 'AntiFreeze', 323),
+	(90, 79, 8, 'Belts & Hoses', 376),
+	(91, 79, 6, 'Axle Repair', 331),
+	(92, 80, 6, 'Axle Repair', 331),
+	(93, 80, 8, 'Belts & Hoses', 376);
 /*!40000 ALTER TABLE `history_of_services` ENABLE KEYS */;
 
--- Dumping data for table vbehq9xh6ueil92g.reset_password_tokens: ~0 rows (approximately)
+-- Dumping data for table vbehq9xh6ueil92g.payments: ~0 rows (approximately)
+/*!40000 ALTER TABLE `payments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `payments` ENABLE KEYS */;
+
+-- Dumping data for table vbehq9xh6ueil92g.payment_methods: ~2 rows (approximately)
+/*!40000 ALTER TABLE `payment_methods` DISABLE KEYS */;
+INSERT INTO `payment_methods` (`id`, `name`) VALUES
+	(1, 'PAYPAL'),
+	(2, 'STRIPE');
+/*!40000 ALTER TABLE `payment_methods` ENABLE KEYS */;
+
+-- Dumping data for table vbehq9xh6ueil92g.reset_password_tokens: ~21 rows (approximately)
 /*!40000 ALTER TABLE `reset_password_tokens` DISABLE KEYS */;
 INSERT INTO `reset_password_tokens` (`id`, `user_id`, `token`, `created_at`, `expired_at`, `accessed`) VALUES
 	(10, 1, '2976ae38-9d34-4883-be42-cd3047c2f38f', '2022-04-01 17:07:04', '2022-04-01 18:07:04', 1),
@@ -73,7 +88,7 @@ INSERT INTO `reset_password_tokens` (`id`, `user_id`, `token`, `created_at`, `ex
 	(27, 1, 'db65c777-6bc4-4907-b4de-b76be01eca1f', '2022-04-19 09:12:45', '2022-04-19 10:12:45', 0),
 	(28, 1, '75506e0b-fb6e-430c-98ce-e2b164e52399', '2022-04-19 12:15:19', '2022-04-19 13:15:19', 0),
 	(29, 1, '8ecfd68d-422f-432c-a343-fe72892d1ea4', '2022-04-19 11:51:58', '2022-04-19 12:51:58', 1),
-	(30, 42, '28a368d8-53da-487c-91d6-6d185a8b52e8', '2022-04-19 11:56:12', '2022-04-19 12:56:12', 1);
+	(31, 1, '2c4d840e-e082-4a10-a868-95cd24b610ed', '2022-04-20 10:22:59', '2022-04-20 11:22:59', 0);
 /*!40000 ALTER TABLE `reset_password_tokens` ENABLE KEYS */;
 
 -- Dumping data for table vbehq9xh6ueil92g.roles: ~2 rows (approximately)
@@ -86,7 +101,7 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 -- Dumping data for table vbehq9xh6ueil92g.services: ~60 rows (approximately)
 /*!40000 ALTER TABLE `services` DISABLE KEYS */;
 INSERT INTO `services` (`id`, `name`, `price_bgn`) VALUES
-	(1, 'ABS Repairs', 182),
+	(1, 'ABS Repairs', 282),
 	(2, 'Air Conditioning Systems', 320),
 	(3, 'Air Filter/Fuel Filter', 461),
 	(4, 'Alternators & Starters', 165),
@@ -166,8 +181,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `phone_number`, `rol
 	(35, 'alexandra23', '$2a$15$TZMClX1v/tXh8mBM.Uu5RuIHcMDNX8rA4AevD0HfXw7UTqP8H2.6K', 'g222.delchev93@gmail.com', '0876051432', 3, 0, '2022-04-10 21:15:17'),
 	(36, 'georgi1', '$2a$15$Uwbr3Zov0/RorekrklyIYe/DOY5X3dLfjGLgQ.4hpneaizAG0nIZm', 'g1.delchev93@gmail.com', '0876051469', 3, 0, '2022-04-10 21:34:38'),
 	(37, 'Alexandra31', '$2a$15$qMTDcKOXsqDY1Nbzth6cZus0pvi29izQTAbF5G6X891TYspVhydHO', 'ra2andom@gmail.com', '0876051421', 3, 1, '2022-04-10 21:59:46'),
-	(38, 'Alexandra313', '$2a$15$tL0ejowyOwJa7UX/LbtZZeuGLzqPjXbWMZDe.5YAGKOe4zon.wrWq', 'ra2a3ndom@gmail.com', '0876051412', 3, 1, '2022-04-11 23:24:21'),
-	(42, 'Tihomir1', '$2a$10$0kUFeX9HPuAMHl67263NzO7sMQGKyAXbW.6eXHLCD69nj.iDpG.na', 'testing123tihomir@gmail.com', '0876051111', 3, 0, '2022-04-19 11:54:57');
+	(38, 'Alexandra313', '$2a$15$tL0ejowyOwJa7UX/LbtZZeuGLzqPjXbWMZDe.5YAGKOe4zon.wrWq', 'ra2a3ndom@gmail.com', '0876051412', 3, 1, '2022-04-11 23:24:21');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Dumping data for table vbehq9xh6ueil92g.vehicles: ~31 rows (approximately)
@@ -273,44 +287,51 @@ INSERT INTO `vehicle_models` (`id`, `make_id`, `name`) VALUES
 	(36, 33, 'Talisman');
 /*!40000 ALTER TABLE `vehicle_models` ENABLE KEYS */;
 
--- Dumping data for table vbehq9xh6ueil92g.visits: ~16 rows (approximately)
+-- Dumping data for table vbehq9xh6ueil92g.visits: ~20 rows (approximately)
 /*!40000 ALTER TABLE `visits` DISABLE KEYS */;
 INSERT INTO `visits` (`id`, `user_id`, `vehicle_id`, `status_id`, `start_date`, `end_date`, `is_deleted`) VALUES
-	(38, 1, 6, 6, '2022-01-07 00:00:00', '2022-01-09 00:00:00', 0),
-	(39, 3, 8, 6, '2022-01-05 00:00:00', '2022-01-13 00:00:00', 0),
-	(40, 1, 7, 6, '2022-01-16 00:00:00', '2022-01-21 00:00:00', 0),
-	(41, 1, 16, 6, '2022-01-18 00:00:00', '2022-01-20 00:00:00', 0),
-	(42, 15, 28, 6, '2022-02-10 00:00:00', '2022-02-15 00:00:00', 0),
-	(44, 12, 14, 6, '2022-02-17 00:00:00', '2022-02-19 00:00:00', 0),
-	(45, 3, 15, 6, '2022-02-18 00:00:00', '2022-02-20 00:00:00', 0),
-	(46, 3, 15, 6, '2022-03-06 00:00:00', '2022-03-09 00:00:00', 0),
-	(47, 3, 13, 5, '2022-03-07 00:00:00', '2022-03-11 00:00:00', 0),
-	(49, 3, 15, 5, '2022-04-06 00:00:00', NULL, 0),
-	(50, 3, 15, 5, '2022-04-06 00:00:00', NULL, 0),
+	(38, 1, 6, 5, '2022-01-07 00:00:00', NULL, 0),
+	(39, 3, 8, 7, '2022-01-05 00:00:00', '2022-01-13 00:00:00', 0),
+	(40, 1, 7, 5, '2022-01-16 00:00:00', NULL, 0),
+	(41, 1, 16, 5, '2022-01-18 00:00:00', NULL, 0),
+	(42, 15, 28, 7, '2022-02-10 00:00:00', '2022-02-15 00:00:00', 0),
+	(44, 12, 14, 7, '2022-02-17 00:00:00', '2022-02-19 00:00:00', 0),
+	(45, 3, 15, 7, '2022-02-18 00:00:00', '2022-02-20 00:00:00', 0),
+	(46, 3, 15, 7, '2022-03-06 00:00:00', '2022-03-09 00:00:00', 0),
+	(47, 3, 13, 6, '2022-03-07 00:00:00', '2022-03-11 00:00:00', 0),
+	(49, 3, 15, 6, '2022-04-06 00:00:00', NULL, 0),
+	(50, 3, 15, 6, '2022-04-06 00:00:00', NULL, 0),
 	(51, 12, 26, 5, '2022-04-06 00:00:00', NULL, 0),
-	(52, 15, 28, 4, '2022-04-06 00:00:00', NULL, 0),
-	(57, 12, 14, 4, '2022-04-06 00:00:00', NULL, 0),
+	(52, 15, 28, 5, '2022-04-06 00:00:00', NULL, 0),
+	(57, 12, 14, 5, '2022-04-06 00:00:00', NULL, 0),
 	(62, 32, 37, 4, '2022-04-10 00:00:00', NULL, 0),
 	(63, 33, 38, 4, '2022-04-15 00:00:00', NULL, 0),
-	(76, 3, 8, 2, '2022-04-19 00:00:00', NULL, 1),
-	(77, 3, 13, 3, '2022-04-23 00:00:00', NULL, 0),
-	(78, 3, 25, 3, '2022-04-20 00:00:00', NULL, 0);
+	(76, 3, 8, 6, '2022-04-19 00:00:00', NULL, 1),
+	(77, 3, 13, 5, '2022-04-23 00:00:00', NULL, 0),
+	(78, 3, 25, 4, '2022-04-20 00:00:00', NULL, 0),
+	(79, 3, 25, 3, '2022-04-21 00:00:00', NULL, 0),
+	(80, 3, 10, 3, '2022-04-27 00:00:00', NULL, 0);
 /*!40000 ALTER TABLE `visits` ENABLE KEYS */;
 
--- Dumping data for table vbehq9xh6ueil92g.visit_pictures: ~2 rows (approximately)
+-- Dumping data for table vbehq9xh6ueil92g.visit_pictures: ~0 rows (approximately)
 /*!40000 ALTER TABLE `visit_pictures` DISABLE KEYS */;
 INSERT INTO `visit_pictures` (`id`, `visit_id`, `photo`, `token`) VALUES
-	(6, 38, 'http://res.cloudinary.com/tddvjavaforum/image/upload/v1649339970/SmartGarage/VisitPhotos/visitID-38/token-9610297f-472a-4721-b61c-ff812fb13158.webp', '9610297f-472a-4721-b61c-ff812fb13158');
+	(11, 38, 'http://res.cloudinary.com/tddvjavaforum/image/upload/v1650392076/SmartGarage/VisitPhotos/visitID-38/token-23bbe9d2-e404-469a-96f1-cd85d03be417.jpg', '23bbe9d2-e404-469a-96f1-cd85d03be417'),
+	(12, 38, 'http://res.cloudinary.com/tddvjavaforum/image/upload/v1650392176/SmartGarage/VisitPhotos/visitID-38/token-62bc64ed-1090-4cad-b6bb-ee7b1b0d6a16.jpg', '62bc64ed-1090-4cad-b6bb-ee7b1b0d6a16'),
+	(13, 79, 'http://res.cloudinary.com/tddvjavaforum/image/upload/v1650449924/SmartGarage/VisitPhotos/visitID-79/token-fad11a00-bb3c-44f2-a906-c2baa5902d8d.jpg', 'fad11a00-bb3c-44f2-a906-c2baa5902d8d'),
+	(14, 79, 'http://res.cloudinary.com/tddvjavaforum/image/upload/v1650451736/SmartGarage/VisitPhotos/visitID-79/token-d6843d3f-3443-4946-bfe7-e2f429f00ae3.jpg', 'd6843d3f-3443-4946-bfe7-e2f429f00ae3'),
+	(15, 80, 'http://res.cloudinary.com/tddvjavaforum/image/upload/v1650539990/SmartGarage/VisitPhotos/visitID-80/token-298c5620-356f-435c-820b-9224ff1b61d7.jpg', '298c5620-356f-435c-820b-9224ff1b61d7');
 /*!40000 ALTER TABLE `visit_pictures` ENABLE KEYS */;
 
 -- Dumping data for table vbehq9xh6ueil92g.visit_status: ~6 rows (approximately)
 /*!40000 ALTER TABLE `visit_status` DISABLE KEYS */;
 INSERT INTO `visit_status` (`id`, `name`) VALUES
-	(6, 'Completed'),
+	(7, 'Completed'),
 	(2, 'Declined'),
 	(4, 'In Progress'),
 	(3, 'Not Started'),
-	(5, 'Ready for Pickup'),
+	(6, 'Ready (Settled)'),
+	(5, 'Ready (Unpaid)'),
 	(1, 'Requested');
 /*!40000 ALTER TABLE `visit_status` ENABLE KEYS */;
 

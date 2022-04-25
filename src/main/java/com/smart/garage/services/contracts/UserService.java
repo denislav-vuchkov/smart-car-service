@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-
-    List<User> getAll(User currentUser);
+    List<User> getAll(User requester);
 
     List<User> getAllFiltered(int roleId, User requester, Optional<String> username, Optional<String> email,
                               Optional<String> phoneNumber, Optional<String> licenseOrVIN, Optional<String> make,
@@ -21,15 +20,15 @@ public interface UserService {
 
     User updateContactDetails(User requester, User user);
 
-    void updatePassword(User requester, int id, String password);
+    void verifyFieldIsUnique(String field, String value);
 
-    void generateResetPasswordEmail(User user);
+    void updatePassword(User requester, int id, String password);
 
     void softDelete(User requester, int id);
 
     User getByField(String field, String value);
 
-    void verifyFieldIsUnique(String field, String value);
+    void generateResetPasswordEmail(User user);
 
     void confirmToken(String token);
 }

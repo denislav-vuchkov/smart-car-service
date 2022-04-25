@@ -4,7 +4,6 @@ import com.smart.garage.exceptions.EntityNotFoundException;
 import com.smart.garage.exceptions.InvalidParameter;
 import com.smart.garage.exceptions.UnauthorizedOperationException;
 import com.smart.garage.models.*;
-import com.smart.garage.models.dtos.PhotoDTO;
 import com.smart.garage.models.dtos.UserDTOOut;
 import com.smart.garage.models.dtos.VisitDTO;
 import com.smart.garage.models.dtos.VisitFilterDTO;
@@ -96,26 +95,6 @@ public class VisitsEmployeeMVCController {
         }
     }
 
-    @GetMapping("/{id}")
-    public String showVisitPage(@PathVariable int id, Model model) {
-        User currentUser = authenticationHelper.getCurrentUser();
-        try {
-            Visit visit = visitService.getById(currentUser, id);
-            model.addAttribute("visit", visit);
-            model.addAttribute("currencies", Currencies.values());
-            PhotoDTO photo = new PhotoDTO();
-            photo.setVisitId(id);
-            model.addAttribute("photoDTO", photo);
-            return "visit";
-        } catch (EntityNotFoundException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "not-found";
-        } catch (UnauthorizedOperationException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "unauthorised";
-        }
-    }
-
     @GetMapping("/new")
     public String create(Model model) {
         User currentUser = authenticationHelper.getCurrentUser();
@@ -151,6 +130,21 @@ public class VisitsEmployeeMVCController {
             errors.rejectValue("startDate", "invalid_date", e.getMessage());
             model.addAttribute("errorMessage", e.getMessage());
             return "visit-form";
+        }
+    }
+
+    @GetMapping("/{id}/accept")
+    public String accept(@PathVariable int id, Model model) {
+        User currentUser = authenticationHelper.getCurrentUser();
+        try {
+            visitService.accept(currentUser, id);
+            return "redirect:/visits";
+        } catch (UnauthorizedOperationException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "unauthorised";
+        } catch (EntityNotFoundException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "not-found";
         }
     }
 

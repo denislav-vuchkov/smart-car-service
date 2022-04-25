@@ -48,7 +48,6 @@ public class User implements UserDetails {
     @Column(name="registered_at")
     private LocalDateTime registeredAt;
 
-    //TODO to figure out if I can sort customers by vehicle VIN/License plate
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
