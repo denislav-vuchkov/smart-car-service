@@ -31,6 +31,7 @@ When the shop visit is created the employee creates a new user, new
 - If running locally you can access documentation at localhost:8080/swagger-ui/ 
 - The hosted website has the documentation at http://smartgarage.shop/swagger-ui/ (you have to be logged in)
 
+
 ## Installation
 
 ### Prerequisites
