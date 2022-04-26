@@ -7,6 +7,7 @@ import com.smart.garage.models.dtos.VehicleREST;
 import com.smart.garage.services.contracts.VehicleService;
 import com.smart.garage.utility.AuthenticationHelper;
 import com.smart.garage.utility.mappers.VehicleMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -24,6 +25,7 @@ public class VehicleController {
     private final VehicleMapper vehicleMapper;
     private final AuthenticationHelper authenticationHelper;
 
+    @Autowired
     public VehicleController(VehicleService vehicleService, VehicleMapper vehicleMapper,
                              AuthenticationHelper authenticationHelper) {
         this.vehicleService = vehicleService;

@@ -18,7 +18,8 @@ When the shop visit is created the employee creates a new user, new
  Both customers and employees can generate reports for a visit/s in one of 25 currencies which is generated in the backend
  as PDF and sent to their email. 
 
-- At the end of the project we achieved a good level of payment integration with both **Paypal** and **Stripe**.
+- At the end of the project we achieved a good level of payment integration with both **Paypal** and **Stripe** and 
+also incorporate SMS message confirmations when payment is successfully processed.
 
 
 ## Hosted Address:
@@ -71,6 +72,7 @@ as we develop the web application.
 - [**Cloudinary**](https://cloudinary.com/) (uploading and hosting multimedia as 3rd party provider)
 - [**FOREX API**](https://www.fastforex.io/) (for getting live data on currency exchange rates)
 - [**iText**](https://itextpdf.com/en) (external licensed library for generating PDF documents in Java)
+- [**Twilio**](https://www.twilio.com/docs) (used to send SMS message to our customers phone numbers)
 - [**PayPal Integration**](https://developer.paypal.com/home) 
 - [**Stripe Integration**](https://stripe.com/docs) 
 - **Amazon Web Services** (AWS) Relational Database

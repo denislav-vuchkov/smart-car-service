@@ -11,6 +11,7 @@ import com.smart.garage.services.contracts.*;
 import com.smart.garage.utility.AuthenticationHelper;
 import com.smart.garage.utility.ForexCurrencyExchange;
 import com.smart.garage.utility.ReportProducerHelper;
+import com.smart.garage.utility.SMSHelper;
 import com.smart.garage.utility.mappers.PaymentRecordsMapper;
 import com.smart.garage.utility.mappers.UserMapper;
 import com.smart.garage.utility.mappers.VehicleMapper;
@@ -59,6 +60,7 @@ public class VisitExtrasMVCController {
     private final PaymentServices paymentService;
     private final PaymentRecordsService paymentRecordsService;
     private final PaymentRecordsMapper paymentRecordsMapper;
+    private final SMSHelper smsHelper;
 
     @Autowired
     public VisitExtrasMVCController(VisitService visitService, VehicleMakeService vehicleMakeService,
@@ -70,7 +72,7 @@ public class VisitExtrasMVCController {
                                     ForexCurrencyExchange currencyExchange,
                                     PaymentServices paymentService,
                                     PaymentRecordsService paymentRecordsService,
-                                    PaymentRecordsMapper paymentRecordsMapper) {
+                                    PaymentRecordsMapper paymentRecordsMapper, SMSHelper smsHelper) {
         this.visitService = visitService;
         this.vehicleMakeService = vehicleMakeService;
         this.vehicleModelService = vehicleModelService;
@@ -86,6 +88,7 @@ public class VisitExtrasMVCController {
         this.paymentService = paymentService;
         this.paymentRecordsService = paymentRecordsService;
         this.paymentRecordsMapper = paymentRecordsMapper;
+        this.smsHelper = smsHelper;
     }
 
     @GetMapping("/new-customer")
@@ -221,6 +224,7 @@ public class VisitExtrasMVCController {
                     visit.getVehicle().makeName() + " " + visit.getVehicle().modelName());
             chargeRequest.setCurrency(Currencies.BGN);
             Charge charge = stripeServiceImpl.charge(chargeRequest);
+            smsHelper.sendConfirmationSMS(visit, charge.getId());
             PaymentRecord paymentRecord = paymentRecordsMapper.toObject(visit, STRIPE, charge.getId());
             paymentRecordsService.create(currentUser, paymentRecord);
             model.addAttribute("visit", visit);
@@ -230,7 +234,7 @@ public class VisitExtrasMVCController {
         } catch (UnauthorizedOperationException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "unauthorised";
-        } catch (EntityNotFoundException e) {
+        } catch (EntityNotFoundException | IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "not-found";
         } catch (InvalidParameter e) {
@@ -284,11 +288,16 @@ public class VisitExtrasMVCController {
             PaymentRecord paymentRecord = paymentRecordsMapper.toObject(visit, PAYPAL, paymentId);
             paymentRecordsService.create(currentUser, paymentRecord);
 
+            smsHelper.sendConfirmationSMS(visit, paymentId);
+
             return "redirect:/visits/payment-success";
-        } catch (PayPalRESTException ex) {
-            model.addAttribute("errorMessage", ex.getMessage());
-            ex.printStackTrace();
+        } catch (PayPalRESTException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            e.printStackTrace();
             return "unauthorised";
+        } catch (IllegalStateException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "not-found";
         }
     }
 
