@@ -33,12 +33,9 @@ public class PaymentServicesImplTests {
         Vehicle vehicle = new Vehicle(1, requester, "CA0000TD", "321321321321", 2000, new VehicleModel(), false);
         visit.setVehicle(vehicle);
         Set<ServiceRecord> serviceRecordsList = new HashSet<>();
-        serviceRecordsList.add(new ServiceRecord(1, 38, 1, "Engine", 300));
+        serviceRecordsList.add(new ServiceRecord(1, 38, 1, "Engine", 250));
         serviceRecordsList.add(new ServiceRecord(2, 38, 2, "Tires", 150));
         visit.setServices(serviceRecordsList);
-
-        Mockito.when(currencyExchange.convertPriceFromBGNToForeignCurrency(Mockito.any(Currencies.class), Mockito.anyInt()))
-                .thenReturn(200.0);
 
         Assertions.assertDoesNotThrow(() -> service.authorizePayment(paypalOrder, requester, visit));
     }

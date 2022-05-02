@@ -24,6 +24,6 @@ public class StripeServiceImplTests {
     @Test
     void charge_throws_when_chargeRequestNotValid() {
         stripeService.init();
-        Assertions.assertThrows(InvalidRequestException.class, () -> stripeService.charge(new ChargeRequest()));
+        Assertions.assertThrows(AuthenticationException.class, () -> stripeService.charge(new ChargeRequest()));
     }
 }

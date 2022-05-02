@@ -18,10 +18,10 @@ public class CloudinaryHelper {
     private final Cloudinary cloudinary;
 
     @Autowired
-    public CloudinaryHelper(Environment env) {
-        String cloudName = env.getProperty("cloud_name");
-        String apiKey = env.getProperty("api_key");
-        String apiSecret = env.getProperty("api_secret");
+    public CloudinaryHelper() {
+        String cloudName = System.getenv("CLOUD_NAME");
+        String apiKey = System.getenv("API_KEY");
+        String apiSecret = System.getenv("API_SECRET");
 
         cloudinary = new Cloudinary(ObjectUtils.asMap(
                 "cloud_name", cloudName,

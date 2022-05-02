@@ -18,6 +18,7 @@ import com.smart.garage.utility.mappers.VehicleMapper;
 import com.smart.garage.utility.mappers.VisitMapper;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
+import com.twilio.exception.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -295,7 +296,7 @@ public class VisitExtrasMVCController {
             model.addAttribute("errorMessage", e.getMessage());
             e.printStackTrace();
             return "unauthorised";
-        } catch (IllegalStateException e) {
+        } catch (IllegalStateException | ApiException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "not-found";
         }

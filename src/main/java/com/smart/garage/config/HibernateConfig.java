@@ -1,9 +1,7 @@
 package com.smart.garage.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -15,14 +13,9 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class HibernateConfig {
 
-    private final String dbUrl, dbUsername, dbPassword;
-
-    @Autowired
-    public HibernateConfig(Environment env) {
-        dbUrl = env.getProperty("db.url");
-        dbUsername = env.getProperty("db.user");
-        dbPassword = env.getProperty("db.pass");
-    }
+    private final String dbUrl = System.getenv("DB_URL");
+    private final String dbUsername = System.getenv("DB_USER");
+    private final String dbPassword = System.getenv("DB_PASS");
 
     @Bean(name="entityManagerFactory")
     public LocalSessionFactoryBean sessionFactory() {

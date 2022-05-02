@@ -21,13 +21,17 @@ When the shop visit is created the employee creates a new user, new
 - At the end of the project we achieved a good level of payment integration with both **Paypal** and **Stripe** and 
 also incorporate SMS message confirmations when payment is successfully processed.
 
+- **Disclaimer:** The majority of our authentication tokens, API keys, passwords and secrets are stored in environment variables 
+and outside the source code. This will unfortunately prevent you from running the code locally if you copy this project.
+However, you can find all our functionality on our deployed version, and we have provided log in details below.
+
 
 ## Hosted Address:
 
 - http://smartgarage.shop
 
 
-##Swagger
+## Swagger
 
 - If running locally you can access documentation at localhost:8080/swagger-ui/ 
 - The hosted website has the documentation at http://smartgarage.shop/swagger-ui/ (you have to be logged in)
@@ -54,8 +58,8 @@ Our backend generates user passwords and encrypts them before saving them in the
 which is why we are providing here details you can use to login. Passwords of these two users were 
 forcefully set to simple one (not complying to the rules for passwords in our backend) to make it easier for us to test and use
 as we develop the web application.
-- Customer: username - `Tihomir`,  passwords - `Test123`
-- Employee: username - `Denislav`,  passwords - `Test123` 
+- Customer: username - `Tihomir`,  password - `test123`
+- Employee: username - `Denislav`,  password - `test123` 
 
 ## Technologies
 
